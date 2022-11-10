@@ -30,9 +30,9 @@ class CounterFragment : Fragment(), CounterView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnCounter1.setOnClickListener{presenter.counter1Click()}
-        binding.btnCounter2.setOnClickListener{presenter.counter2Click()}
-        binding.btnCounter3.setOnClickListener{presenter.counter3Click()}
+        binding.btnCounter1.setOnClickListener { presenter.counter1Click() }
+        binding.btnCounter2.setOnClickListener { presenter.counter2Click() }
+        binding.btnCounter3.setOnClickListener { presenter.counter3Click() }
     }
 
 
