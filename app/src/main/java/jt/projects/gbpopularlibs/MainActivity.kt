@@ -19,14 +19,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, CounterFragment.newInstance())
-                .commitNow()
+            showFragment(CounterFragment.newInstance())
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
-            // true
         }
     }
 
