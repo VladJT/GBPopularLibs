@@ -2,19 +2,28 @@ package jt.projects.gbpopularlibs.presenter
 
 import jt.projects.gbpopularlibs.model.CountersModel
 import jt.projects.gbpopularlibs.ui.CounterView
+import moxy.InjectViewState
+import moxy.MvpPresenter
 
-class CounterPresenter(private val view: CounterView) {
-    private val model = CountersModel()
+class CounterPresenter() : MvpPresenter<CounterView>() {
+    val model = CountersModel()
+
+    override fun onFirstViewAttach() {
+
+    }
 
     fun counter1Click() {
-        view.setButton1Text(model.next(0).toString())
+        val nextValue = model.next(0)
+        viewState.setButton1Text(nextValue.toString())
     }
 
     fun counter2Click() {
-        view.setButton2Text(model.next(1).toString())
+        val nextValue = model.next(1)
+        viewState.setButton1Text(nextValue.toString())
     }
 
     fun counter3Click() {
-        view.setButton3Text(model.next(2).toString())
+        val nextValue = model.next(2)
+        viewState.setButton1Text(nextValue.toString())
     }
 }

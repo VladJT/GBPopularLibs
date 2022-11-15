@@ -2,14 +2,24 @@ package jt.projects.gbpopularlibs
 
 import android.os.Bundle
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
-import jt.projects.gbpopularlibs.ui.CounterFragment
-import jt.projects.gbpopularlibs.ui.SettingsFragment
-import jt.projects.gbpopularlibs.ui.utils.showFragment
+import jt.projects.gbpopularlibs.model.CountersModel
+import jt.projects.gbpopularlibs.presenter.CounterPresenter
+import jt.projects.gbpopularlibs.ui.CounterView
+import moxy.MvpAppCompatActivity
+import moxy.ktx.moxyPresenter
+import moxy.presenter.InjectPresenter
+import moxy.presenter.ProvidePresenter
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : MvpAppCompatActivity(), CounterView {
     private lateinit var binding: ActivityMainBinding
+
+    private val presenter by moxyPresenter { CounterPresenter() }
+//    @InjectPresenter
+//    lateinit var presenter: CounterPresenter
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,25 +29,39 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            showFragment(CounterFragment.newInstance())
+            //    showFragment(CounterFragment.newInstance())
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
         }
+
+        binding.btnCounter1.setOnClickListener { presenter.counter1Click() }
+        binding.btnCounter2.setOnClickListener { presenter.counter2Click() }
+        binding.btnCounter3.setOnClickListener { presenter.counter3Click() }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bottom_view_counters -> {
-                showFragment(CounterFragment.newInstance())
+                //     showFragment(CounterFragment.newInstance())
             }
             R.id.bottom_view_settings -> {
-                showFragment(SettingsFragment.newInstance())
+                //    showFragment(SettingsFragment.newInstance())
             }
         }
         return super.onOptionsItemSelected(item)
     }
 
+    override fun setButton1Text(text: String) {
+        binding.btnCounter1.text = text
+    }
 
+    override fun setButton2Text(text: String) {
+        binding.btnCounter2.text = text
+    }
+
+    override fun setButton3Text(text: String) {
+        binding.btnCounter3.text = text
+    }
 }
