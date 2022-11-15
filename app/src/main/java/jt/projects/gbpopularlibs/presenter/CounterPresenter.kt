@@ -3,6 +3,7 @@ package jt.projects.gbpopularlibs.presenter
 import jt.projects.gbpopularlibs.model.CountersModel
 import jt.projects.gbpopularlibs.ui.CounterView
 
+
 class CounterPresenter(private val view: CounterView) {
     private val model = CountersModel()
 

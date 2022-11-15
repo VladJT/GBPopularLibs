@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.model
 
+
 class CountersModel {
     private val counters = mutableListOf(0, 0, 0)
 

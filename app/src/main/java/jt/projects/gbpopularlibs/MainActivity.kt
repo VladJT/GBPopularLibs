@@ -8,6 +8,7 @@ import jt.projects.gbpopularlibs.ui.CounterFragment
 import jt.projects.gbpopularlibs.ui.SettingsFragment
 import jt.projects.gbpopularlibs.ui.utils.showFragment
 
+
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
 

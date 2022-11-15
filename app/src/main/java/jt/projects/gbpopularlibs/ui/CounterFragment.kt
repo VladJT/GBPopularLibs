@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import jt.projects.gbpopularlibs.databinding.FragmentCountersBinding
 import jt.projects.gbpopularlibs.presenter.CounterPresenter
 
+
 class CounterFragment : Fragment(), CounterView {
 
     private var _binding: FragmentCountersBinding? = null
