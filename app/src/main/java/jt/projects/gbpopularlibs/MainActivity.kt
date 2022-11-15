@@ -3,24 +3,17 @@ package jt.projects.gbpopularlibs
 import android.os.Bundle
 import android.view.MenuItem
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
-import jt.projects.gbpopularlibs.model.CountersModel
+
 import jt.projects.gbpopularlibs.presenter.CounterPresenter
 import jt.projects.gbpopularlibs.ui.CounterView
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
-import moxy.presenter.InjectPresenter
-import moxy.presenter.ProvidePresenter
 
 
 class MainActivity : MvpAppCompatActivity(), CounterView {
     private lateinit var binding: ActivityMainBinding
 
     private val presenter by moxyPresenter { CounterPresenter() }
-//    @InjectPresenter
-//    lateinit var presenter: CounterPresenter
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
