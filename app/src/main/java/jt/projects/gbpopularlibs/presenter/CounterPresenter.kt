@@ -1,7 +1,7 @@
 package jt.projects.gbpopularlibs.presenter
 
 import jt.projects.gbpopularlibs.model.CountersModel
-import jt.projects.gbpopularlibs.ui.CounterView
+import jt.projects.gbpopularlibs.ui.interfaces.CounterView
 import moxy.MvpPresenter
 
 class CounterPresenter() : MvpPresenter<CounterView>() {

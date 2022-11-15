@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui
+package jt.projects.gbpopularlibs.ui.interfaces
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
