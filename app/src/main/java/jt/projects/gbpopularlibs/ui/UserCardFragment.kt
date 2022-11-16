@@ -35,7 +35,7 @@ class UserCardFragment() : MvpAppCompatFragment(), UserCardView, BackButtonListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonBack.setOnClickListener { presenter.setTestLogin() }
+        binding.buttonBack.setOnClickListener { presenter.backPressed() }
     }
 
     override fun backPressed() = presenter.backPressed()

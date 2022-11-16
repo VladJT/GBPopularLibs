@@ -18,7 +18,7 @@ class UserCardPresenter(val router: Router) :
         super.onFirstViewAttach()
         router.setResultListener("USER_DATA", ResultListener { user ->
             (user as? GithubUser)?.let {
-           //     viewState.showLogin(it.login)
+                //     viewState.showLogin(it.login)
             }
         })
         val user = App.LOGIN_GLOBAL
@@ -27,7 +27,7 @@ class UserCardPresenter(val router: Router) :
     }
 
 
-    fun setTestLogin(){
+    fun setTestLogin() {
         viewState.showLogin("TEST LOGIN")
     }
 
