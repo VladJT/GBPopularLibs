@@ -1,14 +1,15 @@
 package jt.projects.gbpopularlibs.presenter
 
+import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.model.CountersModel
 import jt.projects.gbpopularlibs.ui.interfaces.CounterView
 import moxy.MvpPresenter
 
-class CounterPresenter() : MvpPresenter<CounterView>() {
+class CounterPresenter(val router: Router) : MvpPresenter<CounterView>() {
     val model = CountersModel()
 
     override fun onFirstViewAttach() {
-
+        super.onFirstViewAttach()
     }
 
     fun counter1Click() {
@@ -24,5 +25,10 @@ class CounterPresenter() : MvpPresenter<CounterView>() {
     fun counter3Click() {
         val nextValue = model.next(2)
         viewState.setButton3Text(nextValue.toString())
+    }
+
+    fun backPressed(): Boolean {
+        router.exit()
+        return true
     }
 }

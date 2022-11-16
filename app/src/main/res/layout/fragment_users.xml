@@ -9,8 +9,8 @@
         android:id="@+id/rv_users"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="16dp"
         android:clipToPadding="false"
+        android:paddingTop="16dp"
         android:paddingBottom="16dp" />
 
 </LinearLayout>

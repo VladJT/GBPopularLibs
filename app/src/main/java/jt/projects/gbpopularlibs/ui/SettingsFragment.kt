@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import jt.projects.gbpopularlibs.databinding.FragmentSettingsBinding
+import moxy.MvpAppCompatFragment
 
-class SettingsFragment : Fragment() {
+class SettingsFragment : MvpAppCompatFragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
@@ -24,10 +24,8 @@ class SettingsFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
     }
-
 }

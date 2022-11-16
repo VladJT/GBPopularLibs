@@ -1,10 +1,5 @@
 package jt.projects.gbpopularlibs.ui.utils
 
-import android.widget.FrameLayout
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import jt.projects.gbpopularlibs.R
-
 //fun AppCompatActivity.showFragment(fragment: Fragment) {
 //    this.supportFragmentManager
 //        .beginTransaction()

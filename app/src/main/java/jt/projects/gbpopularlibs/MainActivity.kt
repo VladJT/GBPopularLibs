@@ -3,6 +3,7 @@ package jt.projects.gbpopularlibs
 import android.os.Bundle
 import android.view.MenuItem
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.MainPresenter
 
@@ -16,7 +17,8 @@ import moxy.ktx.moxyPresenter
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
     val navigator = AppNavigator(this, R.id.fragment_container)
-    val presenter by moxyPresenter { MainPresenter(App.instance.router, AndroidScreens()) }
+    private val screens = AndroidScreens()
+    val presenter by moxyPresenter { MainPresenter(App.instance.router, screens) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,24 +57,43 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     }
 
     override fun onBackPressed() {
-        supportFragmentManager.fragments.forEach {
-            if (it is BackButtonListener && it.backPressed()) {
-                return
+        if (supportFragmentManager.backStackEntryCount == 0) {
+            showExitDialog()
+        } else {
+            supportFragmentManager.fragments.forEach {
+                if (it is BackButtonListener && it.backPressed()) {
+                    return
+                }
             }
+            presenter.backClicked()
         }
-        presenter.backClicked()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.bottom_view_users -> {
+                App.instance.router.navigateTo(screens.users())
+            }
             R.id.bottom_view_counters -> {
-                //     showFragment(CounterFragment.newInstance())
+                App.instance.router.navigateTo(screens.counters())
             }
             R.id.bottom_view_settings -> {
-                //    showFragment(SettingsFragment.newInstance())
+                App.instance.router.navigateTo(screens.settings())
             }
         }
-        return super.onOptionsItemSelected(item)
+        return true
     }
 
+
+    private fun showExitDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle("Выход")
+            .setMessage("Вы уверены, что хотите выйти?")
+            .setPositiveButton(
+                android.R.string.yes
+            ) { _, _ -> finish() }//иначе Activity переходит в "спящий режим" и остается в стеке
+            .setNegativeButton(android.R.string.no, null)
+            .setIcon(R.drawable.ic_baseline_settings_24)
+            .show()
+    }
 }

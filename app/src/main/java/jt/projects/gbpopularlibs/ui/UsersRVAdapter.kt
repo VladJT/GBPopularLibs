@@ -32,12 +32,12 @@ class UsersRVAdapter(val presenter: IUserListPresenter) :
     override fun getItemCount(): Int = presenter.getCount()
 
 
-    inner class ViewHolder(val vb: ItemUserBinding) : RecyclerView.ViewHolder(vb.root),
-        UserItemView {
+    inner class ViewHolder(val binding: ItemUserBinding) :
+        RecyclerView.ViewHolder(binding.root), UserItemView {
         override var pos = -1
 
         override fun setLogin(text: String) {
-            vb.tvLogin.text = text
+            binding.tvLogin.text = text
         }
 
     }

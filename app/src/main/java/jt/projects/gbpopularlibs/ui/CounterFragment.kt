@@ -4,17 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentCountersBinding
 import jt.projects.gbpopularlibs.presenter.CounterPresenter
+import jt.projects.gbpopularlibs.ui.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.ui.interfaces.CounterView
+import moxy.MvpAppCompatFragment
+import moxy.ktx.moxyPresenter
 
-class CounterFragment : Fragment(), CounterView {
+class CounterFragment : MvpAppCompatFragment(), BackButtonListener, CounterView {
 
     private var _binding: FragmentCountersBinding? = null
     private val binding get() = _binding!!
 
-    private val presenter = CounterPresenter()
+    val presenter by moxyPresenter {
+        CounterPresenter(
+            App.instance.router
+        )
+    }
 
     companion object {
         fun newInstance() = CounterFragment()
@@ -31,6 +38,7 @@ class CounterFragment : Fragment(), CounterView {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding.btnCounter1.setOnClickListener { presenter.counter1Click() }
         binding.btnCounter2.setOnClickListener { presenter.counter2Click() }
         binding.btnCounter3.setOnClickListener { presenter.counter3Click() }
@@ -48,6 +56,8 @@ class CounterFragment : Fragment(), CounterView {
     override fun setButton3Text(text: String) {
         binding.btnCounter3.text = text
     }
+
+    override fun backPressed() = presenter.backPressed()
 
     override fun onDestroy() {
         super.onDestroy()

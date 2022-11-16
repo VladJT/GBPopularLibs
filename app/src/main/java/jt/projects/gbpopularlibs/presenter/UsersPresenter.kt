@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.presenter
 
+import android.util.Log
 import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.model.GithubUser
 import jt.projects.gbpopularlibs.model.interfaces.GithubUsersRepository
@@ -13,8 +14,10 @@ import moxy.MvpPresenter
  */
 class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
     MvpPresenter<UsersView>() {
+
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<GithubUser>()
+
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
         override fun getCount() = users.size
@@ -32,20 +35,17 @@ class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
         viewState.init()
         loadData()
         usersListPresenter.itemClickListener = { itemView ->//TODO
-            //переход на экран пользователя
+            Log.i("@@@", itemView.pos.toString())
         }
     }
 
     fun loadData() {
-        val users = usersRepo.getUsers()
-        usersListPresenter.users.addAll(users)
+        usersListPresenter.users.addAll(usersRepo.getUsers())
         viewState.updateList()
     }
 
-    fun backPressed() : Boolean{
+    fun backPressed(): Boolean {
         router.exit()
         return true
     }
-
-
 }

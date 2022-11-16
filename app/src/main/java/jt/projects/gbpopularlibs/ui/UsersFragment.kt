@@ -56,5 +56,4 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         super.onDestroy()
         _binding = null
     }
-
 }

@@ -10,8 +10,7 @@ import jt.projects.gbpopularlibs.ui.interfaces.IScreens
 В дальнейшем функтор вызывается внутри навигатора при получении навигационных команд
  */
 class AndroidScreens : IScreens {
-    override fun users(): Screen {
-        return FragmentScreen { UsersFragment.newInstance() }
-    }
-
+    override fun users(): Screen = FragmentScreen { UsersFragment.newInstance() }
+    override fun counters(): Screen = FragmentScreen { CounterFragment.newInstance() }
+    override fun settings(): Screen = FragmentScreen { SettingsFragment.newInstance() }
 }
