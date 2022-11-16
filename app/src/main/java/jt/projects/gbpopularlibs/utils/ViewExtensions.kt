@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui.utils
+package jt.projects.gbpopularlibs.utils
 
 //fun AppCompatActivity.showFragment(fragment: Fragment) {
 //    this.supportFragmentManager
@@ -6,7 +6,7 @@ package jt.projects.gbpopularlibs.ui.utils
 //        .replace(this.findViewById<FrameLayout>(R.id.fragment_container).id, fragment)
 //        .commit()
 //}
-//
+
 //fun AppCompatActivity.showFragmentWithBS(fragment: Fragment, fragmentTag: String) {
 //    val f = supportFragmentManager.findFragmentByTag(fragmentTag)
 //    if (f == null) {
