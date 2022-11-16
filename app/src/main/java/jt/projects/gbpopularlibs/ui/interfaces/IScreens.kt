@@ -6,4 +6,5 @@ interface IScreens {
     fun users(): Screen
     fun counters(): Screen
     fun settings(): Screen
+    fun userCard(): Screen
 }

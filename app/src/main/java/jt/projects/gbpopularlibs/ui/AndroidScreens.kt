@@ -13,4 +13,5 @@ class AndroidScreens : IScreens {
     override fun users(): Screen = FragmentScreen { UsersFragment.newInstance() }
     override fun counters(): Screen = FragmentScreen { CounterFragment.newInstance() }
     override fun settings(): Screen = FragmentScreen { SettingsFragment.newInstance() }
+    override fun userCard(): Screen = FragmentScreen { UserCardFragment.newInstance() }
 }

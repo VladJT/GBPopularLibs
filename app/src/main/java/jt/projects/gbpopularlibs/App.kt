@@ -8,6 +8,7 @@ class App : Application() {
 
     companion object {
         lateinit var instance: App
+        var LOGIN_GLOBAL: String = "---"
     }
 
     private val cicerone: Cicerone<Router> by lazy {
