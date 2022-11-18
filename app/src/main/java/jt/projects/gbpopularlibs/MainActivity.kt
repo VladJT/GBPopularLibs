@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.AppNavigator
-import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.MainPresenter
-
 import jt.projects.gbpopularlibs.ui.AndroidScreens
 import jt.projects.gbpopularlibs.ui.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.ui.interfaces.MainView
-import jt.projects.gbpopularlibs.utils.COUNTERS_SCREEN
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -30,7 +27,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-        //    showScreen(screens.users())
+            //    showScreen(screens.users())
         }
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
@@ -75,9 +72,15 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.bottom_view_users -> { showScreen(screens.users()) }
-            R.id.bottom_view_counters -> { showScreen(screens.counters()) }
-            R.id.bottom_view_settings -> { showScreen(screens.settings()) }
+            R.id.bottom_view_users -> {
+                showScreen(screens.users())
+            }
+            R.id.bottom_view_counters -> {
+                showScreen(screens.counters())
+            }
+            R.id.bottom_view_settings -> {
+                showScreen(screens.settings())
+            }
         }
         return true
     }
@@ -91,7 +94,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 android.R.string.yes
             ) { _, _ -> finish() }//иначе Activity переходит в "спящий режим" и остается в стеке
             .setNegativeButton(android.R.string.no, null)
-            .setIcon(R.drawable.ic_baseline_settings_24)
+            .setIcon(R.drawable.ic_baseline_exit_to_app_24)
             .show()
     }
 

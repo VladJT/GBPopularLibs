@@ -5,11 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
 import jt.projects.gbpopularlibs.model.GithubUsersRepositoryLocalImpl
 import jt.projects.gbpopularlibs.presenter.UsersPresenter
@@ -45,7 +42,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun init() {
         adapter = UsersRVAdapter(presenter.usersListPresenter)
-        binding?.rvUsers?.let { rv->
+        binding?.rvUsers?.let { rv ->
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = adapter
 

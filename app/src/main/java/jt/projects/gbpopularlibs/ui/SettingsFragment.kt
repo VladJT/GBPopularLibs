@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import jt.projects.gbpopularlibs.databinding.FragmentSettingsBinding
-import moxy.MvpAppCompatFragment
 
-class SettingsFragment : MvpAppCompatFragment() {
+class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
