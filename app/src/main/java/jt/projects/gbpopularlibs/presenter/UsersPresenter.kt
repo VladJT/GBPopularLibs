@@ -2,7 +2,7 @@ package jt.projects.gbpopularlibs.presenter
 
 import android.util.Log
 import com.github.terrakok.cicerone.Router
-import jt.projects.gbpopularlibs.model.GithubUser
+import jt.projects.gbpopularlibs.model.UserEntity
 import jt.projects.gbpopularlibs.model.interfaces.GithubUsersRepository
 import jt.projects.gbpopularlibs.presenter.interfaces.IUserListPresenter
 import jt.projects.gbpopularlibs.ui.AndroidScreens
@@ -17,11 +17,11 @@ class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
     MvpPresenter<UsersView>() {
 
     companion object {
-        var currentUser = GithubUser("current user")
+        var currentUser = UserEntity("current user")
     }
 
     class UsersListPresenter : IUserListPresenter {
-        val users = mutableListOf<GithubUser>()
+        val users = mutableListOf<UserEntity>()
 
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
@@ -29,7 +29,7 @@ class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
 
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]
-            view.setLogin(user.login)
+            view.bind(user)
         }
     }
 

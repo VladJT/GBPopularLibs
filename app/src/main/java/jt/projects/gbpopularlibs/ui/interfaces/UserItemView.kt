@@ -1,5 +1,7 @@
 package jt.projects.gbpopularlibs.ui.interfaces
 
+import jt.projects.gbpopularlibs.model.UserEntity
+
 interface UserItemView : IItemView {
-    fun setLogin(text: String)
+    fun bind(userEntity: UserEntity)
 }

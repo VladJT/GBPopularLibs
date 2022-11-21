@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
-import jt.projects.gbpopularlibs.model.GithubUsersRepositoryLocalImpl
+import jt.projects.gbpopularlibs.model.UsersRepositoryLocalImpl
 import jt.projects.gbpopularlibs.presenter.UsersPresenter
 import jt.projects.gbpopularlibs.ui.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.ui.interfaces.UsersView
@@ -21,7 +21,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private val binding get() = _binding!!
     val presenter by moxyPresenter {
         UsersPresenter(
-            GithubUsersRepositoryLocalImpl(),
+            UsersRepositoryLocalImpl(),
             App.instance.router
         )
     }

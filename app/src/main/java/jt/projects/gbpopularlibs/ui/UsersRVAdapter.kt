@@ -3,7 +3,9 @@ package jt.projects.gbpopularlibs.ui
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import jt.projects.gbpopularlibs.databinding.ItemUserBinding
+import jt.projects.gbpopularlibs.model.UserEntity
 
 import jt.projects.gbpopularlibs.presenter.interfaces.IUserListPresenter
 import jt.projects.gbpopularlibs.ui.interfaces.UserItemView
@@ -31,13 +33,16 @@ class UsersRVAdapter(val presenter: IUserListPresenter) :
 
     override fun getItemCount(): Int = presenter.getCount()
 
-
     inner class ViewHolder(val binding: ItemUserBinding) :
         RecyclerView.ViewHolder(binding.root), UserItemView {
         override var pos = -1
 
-        override fun setLogin(text: String) {
-            binding.tvLogin.text = text
+        override fun bind(userEntity: UserEntity) {
+            binding.tvLogin.text = userEntity.login
+            binding.tvUid.text = userEntity.id.toString()
+            userEntity.avatar_url?.let {
+                binding.ivAvatar.load(it)
+            }
         }
 
     }

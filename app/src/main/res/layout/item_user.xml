@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:padding="8dp">
 
-    <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:id="@+id/iv_avatar"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:src="@drawable/user" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="Test login"
-        android:textSize="@dimen/rv_item_text_size" />
+        android:paddingHorizontal="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Test login"
+            android:textSize="@dimen/rv_item_text_size" />
+
+        <TextView
+            android:id="@+id/tv_uid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user id"
+            android:alpha="0.7"
+            android:textSize="@dimen/rv_item_text_size" />
+    </LinearLayout>
 </LinearLayout>

@@ -2,7 +2,7 @@ package jt.projects.gbpopularlibs.presenter
 
 import com.github.terrakok.cicerone.ResultListener
 import com.github.terrakok.cicerone.Router
-import jt.projects.gbpopularlibs.model.GithubUser
+import jt.projects.gbpopularlibs.model.UserEntity
 import jt.projects.gbpopularlibs.ui.interfaces.UserCardView
 import moxy.MvpPresenter
 
@@ -14,7 +14,7 @@ class UserCardPresenter(val router: Router) :
 
     init {
         router.setResultListener("USER_DATA", ResultListener { user ->
-            (user as? GithubUser)?.let {
+            (user as? UserEntity)?.let {
                 // ПОЧЕМУ ТО НЕ РАБОТАЕТ =(
                 viewState.showLogin(it.login + "@@@")
             }

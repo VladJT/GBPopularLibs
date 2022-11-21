@@ -1,7 +1,7 @@
 package jt.projects.gbpopularlibs.model.interfaces
 
-import jt.projects.gbpopularlibs.model.GithubUser
+import jt.projects.gbpopularlibs.model.UserEntity
 
 interface GithubUsersRepository {
-    fun getUsers(): List<GithubUser>
+    fun getUsers(): List<UserEntity>
 }
