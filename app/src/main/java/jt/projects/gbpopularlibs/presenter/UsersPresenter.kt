@@ -3,7 +3,8 @@ package jt.projects.gbpopularlibs.presenter
 import android.util.Log
 import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.model.UserEntity
-import jt.projects.gbpopularlibs.model.interfaces.GithubUsersRepository
+import jt.projects.gbpopularlibs.model.interfaces.CommonCallback
+import jt.projects.gbpopularlibs.model.interfaces.UsersRepository
 import jt.projects.gbpopularlibs.presenter.interfaces.IUserListPresenter
 import jt.projects.gbpopularlibs.ui.AndroidScreens
 import jt.projects.gbpopularlibs.ui.interfaces.UserItemView
@@ -13,7 +14,7 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
+class UsersPresenter(val usersRepo: UsersRepository, val router: Router) :
     MvpPresenter<UsersView>() {
 
     companion object {
@@ -35,24 +36,29 @@ class UsersPresenter(val usersRepo: GithubUsersRepository, val router: Router) :
 
     val usersListPresenter = UsersListPresenter()
 
+    private val callback = object : CommonCallback<List<UserEntity>> {
+        override fun onSuccess(data: List<UserEntity>) {
+            usersListPresenter.users.addAll(data)
+        }
+
+        override fun onFailure(e: Throwable) {
+            TODO("Not yet implemented")
+        }
+    }
+
     /***
      * открытие карточки пользователя
      */
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
-        loadData()
+        usersRepo.getUsers(callback)
         usersListPresenter.itemClickListener = { itemView ->
             Log.i("@@@", itemView.pos.toString())
             currentUser = usersListPresenter.users[itemView.pos]
             router.sendResult("USER_DATA", usersListPresenter.users[itemView.pos])
             router.navigateTo(AndroidScreens().userCard())
         }
-    }
-
-    fun loadData() {
-        usersListPresenter.users.addAll(usersRepo.getUsers())
-        viewState.updateList()
     }
 
     fun backPressed(): Boolean {
