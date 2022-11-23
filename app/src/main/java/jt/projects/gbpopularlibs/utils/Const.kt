@@ -8,3 +8,6 @@ const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
 
 // анимации VIEW
 const val DURATION_ITEM_ANIMATOR: Long = 300
+
+// URLS
+const val BASE_URL = "https://api.github.com/"
