@@ -25,12 +25,12 @@ open class RetrofitImpl(val baseUrl: String, private val apiKey: String = "") {
         return podRetrofit.create(T::class.java)
     }
 
-    fun <T> isApiKeyGood(callback: CommonCallback<T>): Boolean {
-        return if (apiKey.isBlank()) {
+    fun <T> isApiKeyGood(callback: CommonCallback<T>): Boolean =
+        if (apiKey.isBlank()) {
             callback.onFailure(Throwable("You need API key"))
             false
         } else true
-    }
+
 
     fun <T> getCallbackFromRetrofit(callback: CommonCallback<T>): Callback<T> {
         return object : Callback<T> {
