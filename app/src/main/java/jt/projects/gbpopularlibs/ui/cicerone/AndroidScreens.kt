@@ -1,16 +1,13 @@
-package jt.projects.gbpopularlibs.ui.main
+package jt.projects.gbpopularlibs.ui.cicerone
 
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import jt.projects.gbpopularlibs.ui.counters.CounterFragment
-import jt.projects.gbpopularlibs.ui.main.IScreens
 import jt.projects.gbpopularlibs.ui.profile.UserCardFragment
+import jt.projects.gbpopularlibs.ui.rxjava.RxJavaFragment
 import jt.projects.gbpopularlibs.ui.settings.SettingsFragment
 import jt.projects.gbpopularlibs.ui.users.UsersFragment
-import jt.projects.gbpopularlibs.utils.COUNTERS_SCREEN
-import jt.projects.gbpopularlibs.utils.SETTINGS_SCREEN
-import jt.projects.gbpopularlibs.utils.USERS_SCREEN
-import jt.projects.gbpopularlibs.utils.USER_CARD_SCREEN
+import jt.projects.gbpopularlibs.utils.*
 
 /**
  * Классы Screen и FragmentScreen — часть Cicerone, причём второй — наследник первого. В его
@@ -23,6 +20,9 @@ class AndroidScreens : IScreens {
 
     override fun counters(): Screen =
         FragmentScreen(COUNTERS_SCREEN) { CounterFragment.newInstance() }
+
+    override fun rxjava(): Screen =
+        FragmentScreen(RXJAVA_SCREEN) { RxJavaFragment.newInstance() }
 
     override fun settings(): Screen =
         FragmentScreen(SETTINGS_SCREEN) { SettingsFragment.newInstance() }

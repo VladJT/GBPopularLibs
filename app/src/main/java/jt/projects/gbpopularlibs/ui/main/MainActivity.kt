@@ -9,6 +9,7 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.MainPresenter
+import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -76,6 +77,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
             R.id.bottom_view_counters -> {
                 showScreen(screens.counters())
+            }
+            R.id.bottom_view_rxjava -> {
+                showScreen(screens.rxjava())
             }
             R.id.bottom_view_settings -> {
                 showScreen(screens.settings())

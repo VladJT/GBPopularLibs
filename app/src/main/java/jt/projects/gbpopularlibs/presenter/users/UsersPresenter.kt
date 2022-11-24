@@ -6,7 +6,7 @@ import jt.projects.gbnasaapp.model.mars.UsersRepoRetrofitImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.interfaces.CommonCallback
 import jt.projects.gbpopularlibs.domain.interfaces.UsersRepository
-import jt.projects.gbpopularlibs.ui.main.AndroidScreens
+import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
 import moxy.MvpPresenter

@@ -1,7 +1,7 @@
 package jt.projects.gbpopularlibs.presenter
 
 import com.github.terrakok.cicerone.Router
-import jt.projects.gbpopularlibs.ui.main.IScreens
+import jt.projects.gbpopularlibs.ui.cicerone.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
 

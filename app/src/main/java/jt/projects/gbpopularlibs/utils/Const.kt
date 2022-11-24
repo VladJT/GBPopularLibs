@@ -4,6 +4,7 @@ package jt.projects.gbpopularlibs.utils
 const val USERS_SCREEN = "USERS_SCREEN"
 const val USER_CARD_SCREEN = "USER_CARD_SCREEN"
 const val COUNTERS_SCREEN = "COUNTERS_SCREEN"
+const val RXJAVA_SCREEN = "RXJAVA_SCREEN"
 const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
 
 // анимации VIEW

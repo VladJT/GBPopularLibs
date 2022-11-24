@@ -64,7 +64,7 @@ dependencies {
     implementation 'me.relex:circleindicator:2.1.6'
 
     // tab layout
-    implementation 'com.google.android.material:material:1.8.0-alpha02'
+    implementation 'com.google.android.material:material:1.8.0-alpha03'
 
     // MOXY
     implementation "com.github.moxy-community:moxy:2.2.2"
@@ -74,6 +74,10 @@ dependencies {
 
     // CICERONE
     implementation 'com.github.terrakok:cicerone:6.6'
+
+    // RXJAVA
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.0'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.0'
 
 
 }
