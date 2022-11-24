@@ -1,10 +1,11 @@
 package jt.projects.gbpopularlibs.ui.profile
 
+import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserCardView : MvpView {
-    fun showLogin(text: String)
+    fun showUserProfile(user: UserEntity)
 }

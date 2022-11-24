@@ -4,8 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import coil.load
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentUserCardBinding
+import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserCardPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
 import moxy.MvpAppCompatFragment
@@ -39,8 +41,10 @@ class UserCardFragment() : MvpAppCompatFragment(), UserCardView, BackButtonListe
 
     override fun backPressed() = presenter.backPressed()
 
-    override fun showLogin(text: String) {
-        binding.textViewLogin.text = text
+    override fun showUserProfile(user: UserEntity) {
+        binding.tvLogin.text = user.login
+        binding.tvUid.text = user.id.toString()
+        user.avatar_url?.let { binding.imageViewUserPhoto.load(it) }
     }
 
     override fun onDestroy() {

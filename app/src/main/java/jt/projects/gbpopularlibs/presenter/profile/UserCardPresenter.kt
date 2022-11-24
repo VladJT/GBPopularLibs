@@ -17,14 +17,14 @@ class UserCardPresenter(val router: Router) :
         router.setResultListener("USER_DATA", ResultListener { user ->
             (user as? UserEntity)?.let {
                 // ПОЧЕМУ ТО НЕ РАБОТАЕТ =(
-                viewState.showLogin(it.login + "@@@")
+                viewState.showUserProfile(it)
             }
         })
     }
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.showLogin(UsersPresenter.currentUser.login)
+        viewState.showUserProfile(UsersPresenter.currentUser)
     }
 
     fun backPressed(): Boolean {
