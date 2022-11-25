@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
@@ -19,11 +18,7 @@ import moxy.ktx.moxyPresenter
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
-    val presenter by moxyPresenter {
-        UsersPresenter(
-            App.instance.router
-        )
-    }
+    val presenter by moxyPresenter { UsersPresenter() }
     var adapter: UsersRVAdapter? = null
 
     companion object {

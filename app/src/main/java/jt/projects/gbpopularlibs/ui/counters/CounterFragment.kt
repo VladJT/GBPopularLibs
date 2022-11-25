@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentCountersBinding
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
@@ -16,11 +15,7 @@ class CounterFragment : MvpAppCompatFragment(), BackButtonListener, CounterView 
     private var _binding: FragmentCountersBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter {
-        CounterPresenter(
-            App.instance.router
-        )
-    }
+    val presenter by moxyPresenter { CounterPresenter() }
 
     companion object {
         fun newInstance() = CounterFragment()

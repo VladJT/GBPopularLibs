@@ -2,13 +2,12 @@ package jt.projects.gbpopularlibs.ui.main
 
 import android.os.Bundle
 import android.view.MenuItem
-import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
-import jt.projects.gbpopularlibs.presenter.MainPresenter
+import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
@@ -18,7 +17,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
     val navigator = AppNavigator(this, R.id.fragment_container)
     private val screens = AndroidScreens()
-    val presenter by moxyPresenter { MainPresenter(App.instance.router, screens) }
+    val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager, screens) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,25 +68,23 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bottom_view_users -> {
-                showScreen(screens.users())
+                presenter.showScreen(screens.users())
             }
             R.id.bottom_view_counters -> {
-                showScreen(screens.counters())
+                presenter.showScreen(screens.counters())
             }
             R.id.bottom_view_rxjava -> {
-                showScreen(screens.rxjava())
+                presenter.showScreen(screens.rxjava())
             }
             R.id.bottom_view_settings -> {
-                showScreen(screens.settings())
+                presenter.showScreen(screens.settings())
             }
         }
         return true
     }
-
 
     private fun showExitDialog() {
         MaterialAlertDialogBuilder(this)
@@ -99,12 +96,5 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             .setNegativeButton(android.R.string.no, null)
             .setIcon(R.drawable.ic_baseline_exit_to_app_24)
             .show()
-    }
-
-    fun showScreen(screen: Screen) {
-        val f = supportFragmentManager.findFragmentByTag(screen.screenKey)
-        if (f == null) {
-            App.instance.router.navigateTo(screen)
-        } else App.instance.router.backTo(screen)
     }
 }

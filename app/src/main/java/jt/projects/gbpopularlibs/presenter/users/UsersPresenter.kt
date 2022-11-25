@@ -1,8 +1,8 @@
 package jt.projects.gbpopularlibs.presenter.users
 
 import android.util.Log
-import com.github.terrakok.cicerone.Router
 import jt.projects.gbnasaapp.model.mars.UsersRepoRetrofitImpl
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.interfaces.CommonCallback
 import jt.projects.gbpopularlibs.domain.interfaces.UsersRepository
@@ -14,7 +14,7 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter(val router: Router) : MvpPresenter<UsersView>() {
+class UsersPresenter() : MvpPresenter<UsersView>() {
 
     //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
     private val usersRepo: UsersRepository = UsersRepoRetrofitImpl()
@@ -48,8 +48,8 @@ class UsersPresenter(val router: Router) : MvpPresenter<UsersView>() {
         usersListPresenter.itemClickListener = { itemView ->
             Log.i("@@@", itemView.pos.toString())
             currentUser = usersListPresenter.users[itemView.pos]
-            router.sendResult("USER_DATA", usersListPresenter.users[itemView.pos])
-            router.navigateTo(AndroidScreens().userCard())
+            App.instance.router.sendResult("USER_DATA", usersListPresenter.users[itemView.pos])
+            App.instance.router.navigateTo(AndroidScreens().userCard())
         }
     }
 
@@ -70,7 +70,7 @@ class UsersPresenter(val router: Router) : MvpPresenter<UsersView>() {
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+        App.instance.router.exit()
         return true
     }
 }

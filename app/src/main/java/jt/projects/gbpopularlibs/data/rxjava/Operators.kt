@@ -41,7 +41,6 @@ class Operators {
     }
 
 
-
     class Consumer(val producer: Producer) {
         //Оператор take(count) берёт первые count элементов цепочки
         fun execTake() {
@@ -149,8 +148,8 @@ class Operators {
                 })
                 .subscribeOn(Schedulers.computation())
                 .subscribe({
-                    println("Zip result: $it" )
-                },{
+                    println("Zip result: $it")
+                }, {
                     println("onError: ${it.message}")
                 })
         }

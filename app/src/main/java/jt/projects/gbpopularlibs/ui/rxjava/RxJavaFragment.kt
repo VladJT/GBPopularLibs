@@ -5,14 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import io.reactivex.rxjava3.core.Observable
-import io.reactivex.rxjava3.core.Observer
-import io.reactivex.rxjava3.disposables.Disposable
-import jt.projects.gbpopularlibs.data.rxjava.Creation
 import jt.projects.gbpopularlibs.data.rxjava.Operators
 import jt.projects.gbpopularlibs.databinding.FragmentRxjavaBinding
-import java.util.concurrent.TimeUnit
-import kotlin.random.Random
 
 class RxJavaFragment : Fragment() {
     private var _binding: FragmentRxjavaBinding? = null

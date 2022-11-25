@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import coil.load
-import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentUserCardBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserCardPresenter
@@ -17,9 +16,7 @@ class UserCardFragment() : MvpAppCompatFragment(), UserCardView, BackButtonListe
     private var _binding: FragmentUserCardBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter {
-        UserCardPresenter(App.instance.router)
-    }
+    val presenter by moxyPresenter { UserCardPresenter() }
 
     companion object {
         fun newInstance() = UserCardFragment()

@@ -1,11 +1,11 @@
 package jt.projects.gbpopularlibs.presenter.counters
 
-import com.github.terrakok.cicerone.Router
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.data.counters.CountersModel
 import jt.projects.gbpopularlibs.ui.counters.CounterView
 import moxy.MvpPresenter
 
-class CounterPresenter(val router: Router) : MvpPresenter<CounterView>() {
+class CounterPresenter() : MvpPresenter<CounterView>() {
     val model = CountersModel()
 
     override fun onFirstViewAttach() {
@@ -28,7 +28,7 @@ class CounterPresenter(val router: Router) : MvpPresenter<CounterView>() {
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+        App.instance.router.exit()
         return true
     }
 }

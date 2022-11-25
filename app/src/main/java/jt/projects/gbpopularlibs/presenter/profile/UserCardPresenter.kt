@@ -1,7 +1,7 @@
 package jt.projects.gbpopularlibs.presenter.profile
 
 import com.github.terrakok.cicerone.ResultListener
-import com.github.terrakok.cicerone.Router
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.profile.UserCardView
@@ -10,11 +10,10 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UserCardPresenter(val router: Router) :
-    MvpPresenter<UserCardView>() {
+class UserCardPresenter() : MvpPresenter<UserCardView>() {
 
     init {
-        router.setResultListener("USER_DATA", ResultListener { user ->
+        App.instance.router.setResultListener("USER_DATA", ResultListener { user ->
             (user as? UserEntity)?.let {
                 // ПОЧЕМУ ТО НЕ РАБОТАЕТ =(
                 viewState.showUserProfile(it)
@@ -28,7 +27,7 @@ class UserCardPresenter(val router: Router) :
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+        App.instance.router.exit()
         return true
     }
 }
