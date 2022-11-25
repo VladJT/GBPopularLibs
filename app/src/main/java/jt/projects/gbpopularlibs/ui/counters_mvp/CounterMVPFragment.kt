@@ -1,24 +1,24 @@
-package jt.projects.gbpopularlibs.ui.counters
+package jt.projects.gbpopularlibs.ui.counters_mvp
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import jt.projects.gbpopularlibs.databinding.FragmentCountersBinding
+import jt.projects.gbpopularlibs.databinding.FragmentCountersMvpBinding
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class CounterFragment : MvpAppCompatFragment(), BackButtonListener, CounterView {
+class CounterMVPFragment : MvpAppCompatFragment(), BackButtonListener, CounterView {
 
-    private var _binding: FragmentCountersBinding? = null
+    private var _binding: FragmentCountersMvpBinding? = null
     private val binding get() = _binding!!
 
     val presenter by moxyPresenter { CounterPresenter() }
 
     companion object {
-        fun newInstance() = CounterFragment()
+        fun newInstance() = CounterMVPFragment()
     }
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class CounterFragment : MvpAppCompatFragment(), BackButtonListener, CounterView 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCountersBinding.inflate(inflater, container, false)
+        _binding = FragmentCountersMvpBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -74,7 +74,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 presenter.showScreen(screens.users())
             }
             R.id.bottom_view_counters -> {
-                presenter.showScreen(screens.counters())
+                presenter.showScreen(screens.countersMvp())
+            }
+            R.id.bottom_view_countersVM -> {
+                presenter.showScreen(screens.countersMvvm())
             }
             R.id.bottom_view_rxjava -> {
                 presenter.showScreen(screens.rxjava())

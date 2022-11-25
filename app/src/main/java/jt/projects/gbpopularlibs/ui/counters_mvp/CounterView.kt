@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui.counters
+package jt.projects.gbpopularlibs.ui.counters_mvp
 
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
