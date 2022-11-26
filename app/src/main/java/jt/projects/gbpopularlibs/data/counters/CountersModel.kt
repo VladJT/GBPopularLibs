@@ -15,4 +15,6 @@ class CountersModel {
     fun set(index: Int, value: Int) {
         counters[index] = value
     }
+
+    fun getData(): List<Int> = counters
 }

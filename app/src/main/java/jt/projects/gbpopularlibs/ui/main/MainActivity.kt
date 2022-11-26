@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import com.github.terrakok.cicerone.androidx.AppNavigator
@@ -9,6 +10,7 @@ import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
+import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 
@@ -77,7 +79,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 presenter.showScreen(screens.countersMvp())
             }
             R.id.bottom_view_countersVM -> {
-                presenter.showScreen(screens.countersMvvm())
+                val myIntent = Intent(this, CounterMVVMActivity::class.java)
+                startActivity(myIntent)
             }
             R.id.bottom_view_rxjava -> {
                 presenter.showScreen(screens.rxjava())
