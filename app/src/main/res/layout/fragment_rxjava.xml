@@ -2,14 +2,39 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="top|center_horizontal"
     android:orientation="vertical">
 
-    <TextView
+    <Button
+        android:id="@+id/btn_creation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RXJAVA 2"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:text="Creation" />
+
+    <Button
+        android:id="@+id/btn_operators"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Operators" />
+
+    <Button
+        android:id="@+id/btn_sources"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sources" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#EDE5D0">
+
+        <TextView
+            android:id="@+id/tv_log"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RXJAVA 2"
+            android:textSize="10sp" />
+    </ScrollView>
+
 
 </LinearLayout>
