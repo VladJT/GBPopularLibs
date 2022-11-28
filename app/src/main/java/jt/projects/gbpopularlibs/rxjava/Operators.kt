@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.data.rxjava
+package jt.projects.gbpopularlibs.rxjava
 
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers

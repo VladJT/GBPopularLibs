@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import jt.projects.gbpopularlibs.data.rxjava.Operators
+import jt.projects.gbpopularlibs.rxjava.Operators
 import jt.projects.gbpopularlibs.databinding.FragmentRxjavaBinding
 
 class RxJavaFragment : Fragment() {
