@@ -154,7 +154,7 @@ class Sources {
                     println("😶️ observer - $it")
                 }
             Thread.sleep(3000)
-            hotObservable.reset()
+
         }
 
         fun execPublishSubject() {

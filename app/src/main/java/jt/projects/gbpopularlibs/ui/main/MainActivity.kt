@@ -40,11 +40,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             onOptionsItemSelected(item)
         }
 
-        checkNetwork()
+
     }
 
-    private fun checkNetwork() {
-    }
 
     /**
      * Навигатор отсоединяется в onPause и присоединяется в onResumeFragments, чтобы при переходе в

@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import jt.projects.gbpopularlibs.databinding.FragmentRxjavaBinding
+import jt.projects.gbpopularlibs.rxjava.CompositeDisposableEx
+import jt.projects.gbpopularlibs.rxjava.Flowable
 import jt.projects.gbpopularlibs.rxjava.Operators
 import jt.projects.gbpopularlibs.rxjava.Sources
-import jt.projects.gbpopularlibs.viewmodel.CounterIViewModel
+import jt.projects.gbpopularlibs.utils.NetworkStatus
 
 class RxJavaFragment : Fragment() {
     private var _binding: FragmentRxjavaBinding? = null
@@ -16,6 +19,8 @@ class RxJavaFragment : Fragment() {
 
     private var vmOperators = Operators()
     private var vmSources = Sources()
+    private var networkStatus: NetworkStatus? = null
+
 
     companion object {
         fun newInstance() = RxJavaFragment()
@@ -34,12 +39,22 @@ class RxJavaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vmOperators.log.observe(viewLifecycleOwner) {
-            binding.tvLog.text = it
-        }
-
         binding.btnOperators.setOnClickListener { vmOperators.exec() }
         binding.btnSources.setOnClickListener { vmSources.exec() }
+        binding.btnFlowable.setOnClickListener { Flowable.BackPressure().exec() }
+        binding.btnCompDisp.setOnClickListener { CompositeDisposableEx().execComposite() }
+
+        networkStatus = NetworkStatus(requireContext())
+        val subject = networkStatus!!.status()
+
+        subject
+            .subscribe({
+                requireActivity().runOnUiThread {binding.tvLog.text = "Network: $it" }
+
+            }, {
+                requireActivity().runOnUiThread {binding.tvLog.text = "onError: ${it.message}"}
+            })
+
     }
 
     override fun onDestroy() {
