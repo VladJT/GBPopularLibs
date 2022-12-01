@@ -1,24 +1,32 @@
 package jt.projects.gbpopularlibs.rxjava
 
-import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.CompletableObserver
-import io.reactivex.rxjava3.core.Maybe
-import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.core.*
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.subjects.PublishSubject
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
+
 
 class Sources {
     fun exec() {
         val observable = Producer()
-        val observer = Consumer(observable)
-    //    println("\n--execCompletable--")
-    //    observer.execCompletable()
+        val observers = Consumer(observable)
+        //    println("\n--execCompletable--")
+        //    observer.execCompletable()
 
-    //    println("\n--execSingle--")
-   //     observer.execSingle()
+        //    println("\n--execSingle--")
+        //     observer.execSingle()
 
         println("\n--execMaybe--")
-        observer.execMaybe()
+        observers.execMaybe()
+
+//        println("\n--execHotObservable--")
+//        observers.execHotObservable()
+
+        println("\n--execPublishSubject--")
+        observers.execPublishSubject()
+
     }
 
     class Producer {
@@ -70,10 +78,28 @@ class Sources {
             }
         }
 
+        //Горячий Observable отправляет данные независимо от того, подписан кто-нибудь на него или нет
+        fun hotObservable() =
+            Observable.interval(1, TimeUnit.SECONDS)
+                .publish()
+                //Отличие в том, что метод кэширует данные, и каждый новый подписчик получает полный набор
+                //данных, например, все сообщения чата, пришедшие до подписки, когда бы он ни подключился. Можно
+                //подумать, что таким образом мы получаем обычный холодный Observable, но это не так. Наш
+                //источник всё ещё горячий и его работа начнётся только после вызова метода connect().
+               // .replay()
+
+        fun publishSubject() = PublishSubject.create<String>().apply {
+            Observable.timer(2, TimeUnit.SECONDS)
+                .subscribe {
+                    onNext("Value from subject")
+                }
+        }
     }//Producer
 
 
     class Consumer(val producer: Producer) {
+        private val disposables = CompositeDisposable()
+
         fun exec() {
         }
 
@@ -114,6 +140,32 @@ class Sources {
                 }, {
                     println("onComplete")
                 })
+        }
+
+        fun execHotObservable() {
+            val hotObservable = producer.hotObservable()
+            hotObservable.subscribe {
+                println("🐨‍ observer - $it")
+            }
+            hotObservable.connect()//этот метод запускает работу Observable. При этом не имеет значения, есть подписчики или нет
+            Thread.sleep(3000)
+            hotObservable
+                .subscribe {
+                    println("😶️ observer - $it")
+                }
+            Thread.sleep(3000)
+            hotObservable.reset()
+        }
+
+        fun execPublishSubject() {
+            val subject = producer.publishSubject()
+            subject
+                .subscribe({
+                    println("onNext: $it")
+                }, {
+                    println("onError: ${it.message}")
+                })
+            subject.onNext("from exec")
         }
     }//Consumer
 }

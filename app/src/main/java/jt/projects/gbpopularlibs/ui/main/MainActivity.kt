@@ -1,8 +1,13 @@
 package jt.projects.gbpopularlibs.ui.main
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import jt.projects.gbpopularlibs.App
@@ -34,6 +39,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
         }
+
+        checkNetwork()
+    }
+
+    private fun checkNetwork() {
     }
 
     /**
