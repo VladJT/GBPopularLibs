@@ -1,6 +1,7 @@
 package jt.projects.gbpopularlibs.data.users
 
 import android.os.Looper
+import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.interfaces.CommonCallback
 import jt.projects.gbpopularlibs.domain.interfaces.UsersRepository
@@ -23,6 +24,10 @@ class UsersRepositoryLocalImpl : UsersRepository {
             callback.onSuccess(users)
         }, DATA_LOADING_DELAY)
 
+    }
+
+    override fun getUsers(): Single<List<UserEntity>> {
+        return Single.just(users)
     }
 
 
