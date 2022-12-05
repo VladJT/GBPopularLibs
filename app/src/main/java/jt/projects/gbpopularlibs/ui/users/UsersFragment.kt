@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
@@ -18,7 +19,7 @@ import moxy.ktx.moxyPresenter
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
-    val presenter by moxyPresenter { UsersPresenter() }
+    val presenter by moxyPresenter { UsersPresenter(AndroidSchedulers.mainThread()) }
     var adapter: UsersRVAdapter? = null
 
     companion object {

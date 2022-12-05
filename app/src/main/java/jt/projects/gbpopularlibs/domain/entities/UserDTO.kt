@@ -1,8 +1,10 @@
 package jt.projects.gbpopularlibs.domain.entities
 
+import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
 data class UserDTO(
+    @Expose
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,
@@ -11,7 +13,9 @@ data class UserDTO(
     val gravatar_id: String,
     val html_url: String,
     @SerializedName("id")
+    @Expose
     val id: Int,
+    @Expose
     val login: String,
     val node_id: String,
     val organizations_url: String,
@@ -22,4 +26,6 @@ data class UserDTO(
     val subscriptions_url: String,
     val type: String,
     val url: String
-)
+) {
+    fun toUserEntity(): UserEntity = UserEntity(login = login, id = id, avatar_url = avatar_url)
+}

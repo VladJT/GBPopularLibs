@@ -1,6 +1,7 @@
 package jt.projects.gbnasaapp.model.mars
 
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import jt.projects.gbpopularlibs.data.users.GithubUsersAPIRetrofit
 import jt.projects.gbpopularlibs.data.users.GithubUsersAPIrx
 import jt.projects.gbpopularlibs.domain.entities.UserDTO
@@ -25,8 +26,7 @@ class UsersRepoRetrofitImpl : RetrofitImpl(baseUrl = BASE_URL), UsersRepository 
         retrofitImplStd.getUsers()
             .enqueue(getCallbackFromRetrofit(object : CommonCallback<List<UserDTO>> {
                 override fun onSuccess(data: List<UserDTO>) {
-                    val users = convertUsersDTOtoEntities(data)
-                    callback.onSuccess(users)
+                    callback.onSuccess(data.map { it.toUserEntity() })
                 }
 
                 override fun onFailure(e: Throwable) {
@@ -44,21 +44,15 @@ class UsersRepoRetrofitImpl : RetrofitImpl(baseUrl = BASE_URL), UsersRepository 
 //            })
     }
 
+    //Таким образом, мы позволяем репозиторию самостоятельно следить за тем, чтобы сетевые вызовы
+    //выполнялись именно в io-потоке. Лучше поступать именно таким образом, даже когда речь не идёт о
+    //сети, чтобы избежать выполнения операций в неверном потоке в вызывающем коде
     override fun getUsers(): Single<List<UserEntity>> =
-        retrofitRxImpl.getUsers().map { x -> convertUsersDTOtoEntities(x) }
+        retrofitRxImpl.getUsers().map { users ->
+            users.map {
+                it.toUserEntity()
+            }
+        }.subscribeOn(Schedulers.io())
 
 
-    private fun convertUsersDTOtoEntities(data: List<UserDTO>): List<UserEntity> {
-        val result = mutableListOf<UserEntity>()
-        for (userDto in data) {
-            result.add(
-                UserEntity(
-                    id = userDto.id,
-                    login = userDto.login,
-                    avatar_url = userDto.avatar_url
-                )
-            )
-        }
-        return result
-    }
 }

@@ -12,14 +12,14 @@ import jt.projects.gbpopularlibs.ui.main.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserCardFragment() : MvpAppCompatFragment(), UserCardView, BackButtonListener {
+class UserCardFragment(val currentUser : UserEntity) : MvpAppCompatFragment(), UserCardView, BackButtonListener {
     private var _binding: FragmentUserCardBinding? = null
     private val binding get() = _binding!!
 
     val presenter by moxyPresenter { UserCardPresenter() }
 
     companion object {
-        fun newInstance() = UserCardFragment()
+        fun newInstance() = UserCardFragment(currentUser : User)
     }
 
     override fun onCreateView(
