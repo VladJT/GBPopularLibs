@@ -1,29 +1,22 @@
 package jt.projects.gbpopularlibs.presenter.profile
 
-import com.github.terrakok.cicerone.ResultListener
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
-import jt.projects.gbpopularlibs.ui.profile.UserCardView
+import jt.projects.gbpopularlibs.ui.profile.UserProfileView
 import moxy.MvpPresenter
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UserCardPresenter() : MvpPresenter<UserCardView>() {
-
-    init {
-        App.instance.router.setResultListener("USER_DATA", ResultListener { user ->
-            (user as? UserEntity)?.let {
-                // ПОЧЕМУ ТО НЕ РАБОТАЕТ =(
-                viewState.showUserProfile(it)
-            }
-        })
-    }
+class UserCardPresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        viewState.showUserProfile(UsersPresenter.currentUser)
+        showProfile()
+    }
+
+    fun showProfile(){
+        viewState.showUserProfile(userEntity)
     }
 
     fun backPressed(): Boolean {

@@ -1,12 +1,12 @@
 package jt.projects.gbpopularlibs.presenter.counters
 
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.data.counters.CountersModel
+import jt.projects.gbpopularlibs.data.counters.CountersData
 import jt.projects.gbpopularlibs.ui.counters_mvp.CounterView
 import moxy.MvpPresenter
 
 class CounterPresenter() : MvpPresenter<CounterView>() {
-    val model = CountersModel()
+    val model = CountersData()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

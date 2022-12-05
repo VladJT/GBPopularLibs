@@ -6,6 +6,6 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface UserCardView : MvpView {
+interface UserProfileView : MvpView {
     fun showUserProfile(user: UserEntity)
 }

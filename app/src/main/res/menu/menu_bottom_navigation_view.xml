@@ -17,9 +17,9 @@
         android:id="@+id/bottom_view_rxjava"
         android:icon="@drawable/ic_baseline_javascript_24"
         android:title="RxJava 2" />
-    <item
+    <!--item
         android:id="@+id/bottom_view_settings"
         android:icon="@drawable/ic_baseline_settings_24"
-        android:title="Настройки" />
+        android:title="Настройки" /-->
 
 </menu>

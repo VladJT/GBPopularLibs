@@ -4,8 +4,7 @@ import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.counters_mvp.CounterMVPFragment
-import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
-import jt.projects.gbpopularlibs.ui.profile.UserCardFragment
+import jt.projects.gbpopularlibs.ui.profile.UserProfileFragment
 import jt.projects.gbpopularlibs.ui.rxjava.RxJavaFragment
 import jt.projects.gbpopularlibs.ui.settings.SettingsFragment
 import jt.projects.gbpopularlibs.ui.users.UsersFragment
@@ -23,9 +22,6 @@ class AndroidScreens : IScreens {
     override fun countersMvp(): Screen =
         FragmentScreen(COUNTERS_MVP_SCREEN) { CounterMVPFragment.newInstance() }
 
-//    override fun countersMvvm(): Screen =
-//        FragmentScreen(COUNTERS_MVVM_SCREEN) { CounterMVVMActivity.newInstance() }
-
     override fun rxjava(): Screen =
         FragmentScreen(RXJAVA_SCREEN) { RxJavaFragment.newInstance() }
 
@@ -33,5 +29,5 @@ class AndroidScreens : IScreens {
         FragmentScreen(SETTINGS_SCREEN) { SettingsFragment.newInstance() }
 
     override fun userCard(user: UserEntity): Screen =
-        FragmentScreen(USER_CARD_SCREEN) { UserCardFragment.newInstance(user) }
+        FragmentScreen(USER_CARD_SCREEN) { UserProfileFragment.newInstance(user) }
 }

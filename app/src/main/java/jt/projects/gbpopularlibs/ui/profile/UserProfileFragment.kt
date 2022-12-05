@@ -5,21 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import coil.load
-import jt.projects.gbpopularlibs.databinding.FragmentUserCardBinding
+import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserCardPresenter
 import jt.projects.gbpopularlibs.ui.main.BackButtonListener
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UserCardFragment(val currentUser : UserEntity) : MvpAppCompatFragment(), UserCardView, BackButtonListener {
-    private var _binding: FragmentUserCardBinding? = null
+class UserProfileFragment(private val currentUser: UserEntity = UserEntity("default")) : MvpAppCompatFragment(), UserProfileView,
+    BackButtonListener {
+    private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter { UserCardPresenter() }
+    val presenter by moxyPresenter { UserCardPresenter(currentUser) }
 
     companion object {
-        fun newInstance() = UserCardFragment(currentUser : User)
+        fun newInstance(currentUser: UserEntity) = UserProfileFragment(currentUser)
     }
 
     override fun onCreateView(
@@ -27,7 +28,7 @@ class UserCardFragment(val currentUser : UserEntity) : MvpAppCompatFragment(), U
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentUserCardBinding.inflate(inflater, container, false)
+        _binding = FragmentUserProfileBinding.inflate(inflater, container, false)
         return binding.root
     }
 

@@ -23,8 +23,7 @@ import moxy.ktx.moxyPresenter
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
     val navigator = AppNavigator(this, R.id.fragment_container)
-    private val screens = AndroidScreens()
-    val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager, screens) }
+    val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,21 +80,21 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.bottom_view_users -> {
-                presenter.showScreen(screens.users())
+                presenter.showUsers()
             }
             R.id.bottom_view_counters -> {
-                presenter.showScreen(screens.countersMvp())
+                presenter.showCountersMvp()
             }
             R.id.bottom_view_countersVM -> {
                 val myIntent = Intent(this, CounterMVVMActivity::class.java)
                 startActivity(myIntent)
             }
             R.id.bottom_view_rxjava -> {
-                presenter.showScreen(screens.rxjava())
+                presenter.showRxJava()
             }
-            R.id.bottom_view_settings -> {
-                presenter.showScreen(screens.settings())
-            }
+//            R.id.bottom_view_settings -> {
+//                presenter.showSettings()
+//            }
         }
         return true
     }

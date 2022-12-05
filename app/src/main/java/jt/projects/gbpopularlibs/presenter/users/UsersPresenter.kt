@@ -14,14 +14,10 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter(val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
+class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
 
     //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
     private val usersRepo: UsersRepository = UsersRepoRetrofitImpl()
-
-    companion object {
-        var currentUser = UserEntity("current user")
-    }
 
     class UsersListPresenter : IUserListPresenter {
         val users = mutableListOf<UserEntity>()
@@ -47,9 +43,8 @@ class UsersPresenter(val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
         loadData()
         usersListPresenter.itemClickListener = { itemView ->
             Log.i("@@@", itemView.pos.toString())
-            currentUser = usersListPresenter.users[itemView.pos]
-            App.instance.router.sendResult("USER_DATA", usersListPresenter.users[itemView.pos])
-            App.instance.router.navigateTo(AndroidScreens().userCard(usersListPresenter.users[itemView.pos]))
+            val currentUser = usersListPresenter.users[itemView.pos]
+            App.instance.router.navigateTo(AndroidScreens().userCard(currentUser))
         }
     }
 
@@ -65,7 +60,7 @@ class UsersPresenter(val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
                 viewState.showLoading(false)
             }, { e ->
                 e.message?.let { viewState.showInfo(it) }
-//                viewState.showLoading(false)
+                viewState.showLoading(false)
             })
 
 
