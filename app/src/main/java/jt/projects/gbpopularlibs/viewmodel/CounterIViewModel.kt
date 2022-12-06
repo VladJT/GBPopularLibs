@@ -3,10 +3,10 @@ package jt.projects.gbpopularlibs.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.data.counters.CountersData
+import jt.projects.gbpopularlibs.data.counters.CountersRepository
 
 class CounterIViewModel() : IViewModel {
-    val model = CountersData()
+    val model = CountersRepository()
     val countersData: LiveData<List<Int>> = MutableLiveData()
     val singleEventData: LiveData<String> = SingleEventLiveData()
 

@@ -1,6 +1,6 @@
 package jt.projects.gbpopularlibs.data.counters
 
-class CountersData {
+class CountersRepository {
     private val counters = mutableListOf(0, 0, 0)
 
     private fun getCurrent(index: Int): Int {

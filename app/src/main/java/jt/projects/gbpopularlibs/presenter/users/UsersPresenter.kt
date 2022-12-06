@@ -1,15 +1,17 @@
 package jt.projects.gbpopularlibs.presenter.users
 
-import android.util.Log
+import android.os.Bundle
 import io.reactivex.rxjava3.core.Scheduler
 import jt.projects.gbnasaapp.model.mars.UsersRepoRetrofitImpl
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.interfaces.UsersRepository
-import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
+import jt.projects.gbpopularlibs.ui.main.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
+import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY
 import moxy.MvpPresenter
+
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
@@ -20,7 +22,7 @@ class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersVie
     private val usersRepo: UsersRepository = UsersRepoRetrofitImpl()
 
     class UsersListPresenter : IUserListPresenter {
-        val users = mutableListOf<UserEntity>()
+        var users = mutableListOf<UserEntity>()
 
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
@@ -41,10 +43,12 @@ class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersVie
         super.onFirstViewAttach()
         viewState.init()
         loadData()
+
         usersListPresenter.itemClickListener = { itemView ->
-            Log.i("@@@", itemView.pos.toString())
             val currentUser = usersListPresenter.users[itemView.pos]
-            App.instance.router.navigateTo(AndroidScreens().userCard(currentUser))
+            val bundle = Bundle()
+            bundle.putParcelable(USER_ENTITY_BUNDLE_KEY, currentUser)
+            App.instance.router.navigateTo(AndroidScreens().userCard(bundle))
         }
     }
 
@@ -62,21 +66,7 @@ class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersVie
                 e.message?.let { viewState.showInfo(it) }
                 viewState.showLoading(false)
             })
-
-
-//        usersRepo.getUsers(object : CommonCallback<List<UserEntity>> {
-//            override fun onSuccess(data: List<UserEntity>) {
-//                usersListPresenter.users.addAll(data)
-//                viewState.updateList()
-//                viewState.showLoading(false)
-//            }
-//
-//            override fun onFailure(e: Throwable) {
-//                e.message?.let { viewState.showInfo(it) }
-//                viewState.showLoading(false)
-//            }
-//        })
-    }
+     }
 
     fun backPressed(): Boolean {
         App.instance.router.exit()

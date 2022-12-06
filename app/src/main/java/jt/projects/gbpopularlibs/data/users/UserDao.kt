@@ -8,7 +8,6 @@ import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
 @Dao
 interface UserDao {
-
     @Query("Select * from UserEntity")
     fun getAll():List<UserEntity>
 
@@ -23,5 +22,4 @@ interface UserDao {
 
     @Delete
     fun delete(user: UserEntity)
-
 }

@@ -1,8 +1,8 @@
-package jt.projects.gbpopularlibs.ui.cicerone
+package jt.projects.gbpopularlibs.ui.main
 
+import android.os.Bundle
 import com.github.terrakok.cicerone.Screen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
-import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.counters_mvp.CounterMVPFragment
 import jt.projects.gbpopularlibs.ui.profile.UserProfileFragment
 import jt.projects.gbpopularlibs.ui.rxjava.RxJavaFragment
@@ -28,6 +28,8 @@ class AndroidScreens : IScreens {
     override fun settings(): Screen =
         FragmentScreen(SETTINGS_SCREEN) { SettingsFragment.newInstance() }
 
-    override fun userCard(user: UserEntity): Screen =
-        FragmentScreen(USER_CARD_SCREEN) { UserProfileFragment.newInstance(user) }
+    override fun userCard(bundle: Bundle): Screen =
+        FragmentScreen(USER_CARD_SCREEN) {
+            UserProfileFragment.newInstance().apply { arguments = bundle }
+        }
 }

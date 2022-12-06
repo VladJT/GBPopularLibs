@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.ui.users
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -37,16 +38,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
     override fun init() {
         adapter = UsersRVAdapter(presenter.usersListPresenter)
-        binding?.rvUsers?.let { rv ->
+        binding.rvUsers.let { rv ->
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = adapter
 
-//            DividerItemDecoration(requireContext(), GridLayoutManager.HORIZONTAL).also {
-//                it.setDrawable(resources.getDrawable(R.drawable.separator, null))
-//                rv.addItemDecoration(it)
-//            }
-
-            // Установим анимацию. А чтобы было хорошо заметно, сделаем анимацию долгой
+            // Установим анимацию
             rv.itemAnimator = DefaultItemAnimator().apply {
                 addDuration = DURATION_ITEM_ANIMATOR
                 changeDuration = DURATION_ITEM_ANIMATOR
@@ -56,6 +52,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun updateList() {
         adapter?.notifyDataSetChanged()
     }

@@ -39,15 +39,15 @@ class CounterMVPFragment : MvpAppCompatFragment(), BackButtonListener, CounterVi
 
     }
 
-    override fun setButton1Text(text: String) {
+    override fun setFirstCounterText(text: String) {
         binding.btnCounter1.text = text
     }
 
-    override fun setButton2Text(text: String) {
+    override fun setSecondCounterText(text: String) {
         binding.btnCounter2.text = text
     }
 
-    override fun setButton3Text(text: String) {
+    override fun setThirdCounterText(text: String) {
         binding.btnCounter3.text = text
     }
 

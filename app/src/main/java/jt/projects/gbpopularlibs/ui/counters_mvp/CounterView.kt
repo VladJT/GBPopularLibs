@@ -19,8 +19,8 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface CounterView : MvpView {
-    fun setButton1Text(text: String)
-    fun setButton2Text(text: String)
-    fun setButton3Text(text: String)
+    fun setFirstCounterText(text: String)
+    fun setSecondCounterText(text: String)
+    fun setThirdCounterText(text: String)
 }
 

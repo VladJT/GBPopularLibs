@@ -1,14 +1,10 @@
 package jt.projects.gbpopularlibs.presenter.main
 
-import android.content.Context
-import android.content.Intent
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.FragmentManager
 import com.github.terrakok.cicerone.Screen
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.ui.cicerone.AndroidScreens
-import jt.projects.gbpopularlibs.ui.cicerone.IScreens
-import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
+import jt.projects.gbpopularlibs.ui.main.AndroidScreens
+import jt.projects.gbpopularlibs.ui.main.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
 
