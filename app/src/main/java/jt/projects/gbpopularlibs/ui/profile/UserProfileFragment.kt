@@ -17,31 +17,23 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
+@RequiresApi(Build.VERSION_CODES.TIRAMISU)
 class UserProfileFragment() : MvpAppCompatFragment(), UserProfileView,
     BackButtonListener {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter { UserCardPresenter(currentUser) }
-    private var currentUser: UserEntity = UserEntity("noname")
+    val presenter by moxyPresenter {
+        UserCardPresenter(
+            this.arguments?.getParcelable(
+                USER_ENTITY_BUNDLE_KEY,
+                UserEntity::class.java
+            ) ?: UserEntity("no_name")
+        )
+    }
 
     companion object {
         fun newInstance() = UserProfileFragment()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        val bundle = this.arguments
-        try {
-            if (bundle != null) {
-                currentUser = bundle.getParcelable(USER_ENTITY_BUNDLE_KEY, UserEntity::class.java)
-                    ?: UserEntity("noname")
-            }
-        }
-        catch (e:java.lang.Exception){
-            Log.e("@@@",e.message.toString())
-        }
     }
 
     override fun onCreateView(
