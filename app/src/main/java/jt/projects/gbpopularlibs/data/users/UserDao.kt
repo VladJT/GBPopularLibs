@@ -9,7 +9,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserEntity
 @Dao
 interface UserDao {
     @Query("Select * from UserEntity")
-    fun getAll():List<UserEntity>
+    fun getAll(): List<UserEntity>
 
     @Query("select * from UserEntity where id in (:uids)")
     fun getAllById(uids: IntArray): List<UserEntity>

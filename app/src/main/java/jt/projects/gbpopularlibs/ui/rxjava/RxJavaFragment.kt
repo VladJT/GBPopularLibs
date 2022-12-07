@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.MainThread
 import androidx.fragment.app.Fragment
 import jt.projects.gbpopularlibs.databinding.FragmentRxjavaBinding
 import jt.projects.gbpopularlibs.rxjava.CompositeDisposableEx
@@ -49,10 +48,10 @@ class RxJavaFragment : Fragment() {
 
         subject
             .subscribe({
-                requireActivity().runOnUiThread {binding.tvLog.text = "Network: $it" }
+                requireActivity().runOnUiThread { binding.tvLog.text = "Network: $it" }
 
             }, {
-                requireActivity().runOnUiThread {binding.tvLog.text = "onError: ${it.message}"}
+                requireActivity().runOnUiThread { binding.tvLog.text = "onError: ${it.message}" }
             })
 
     }

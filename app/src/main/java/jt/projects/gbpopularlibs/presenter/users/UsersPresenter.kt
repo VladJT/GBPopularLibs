@@ -2,10 +2,10 @@ package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
 import io.reactivex.rxjava3.core.Scheduler
-import jt.projects.gbnasaapp.model.mars.UsersRepoRetrofitImpl
+import jt.projects.gbnasaapp.model.mars.UsersRepoBaseRetrofit
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.domain.interfaces.UsersRepository
+import jt.projects.gbpopularlibs.interfaces.UsersRepository
 import jt.projects.gbpopularlibs.ui.main.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
@@ -19,7 +19,7 @@ import moxy.MvpPresenter
 class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
 
     //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
-    private val usersRepo: UsersRepository = UsersRepoRetrofitImpl()
+    private val usersRepo: UsersRepository = UsersRepoBaseRetrofit()
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()
@@ -66,7 +66,7 @@ class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersVie
                 e.message?.let { viewState.showInfo(it) }
                 viewState.showLoading(false)
             })
-     }
+    }
 
     fun backPressed(): Boolean {
         App.instance.router.exit()

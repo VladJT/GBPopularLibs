@@ -38,6 +38,6 @@ class NetworkStatus(context: Context) {
         })
     }
 
-    fun status():Observable<Boolean> = statusSubject
+    fun status(): Observable<Boolean> = statusSubject
 
 }

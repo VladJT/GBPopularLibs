@@ -11,33 +11,26 @@ import moxy.MvpPresenter
 class MainPresenter(val fragmentManager: FragmentManager) :
     MvpPresenter<MainView>() {
 
-    val screens: IScreens = AndroidScreens()
+    private val screens: IScreens = AndroidScreens()
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         App.instance.router.replaceScreen(screens.users())
     }
 
-    fun showScreen(screen: Screen) {
-        val f = fragmentManager.findFragmentByTag(screen.screenKey)
-        if (f == null) {
-            App.instance.router.navigateTo(screen, true)
-        } else App.instance.router.backTo(screen)
-    }
-
-    fun showUsers(){
+    fun showUsers() {
         showScreen(screens.users())
     }
 
-    fun showCountersMvp(){
+    fun showCountersMvp() {
         showScreen(screens.countersMvp())
     }
 
-    fun showRxJava(){
+    fun showRxJava() {
         showScreen(screens.rxjava())
     }
 
-    fun showSettings(){
+    fun showSettings() {
         showScreen(screens.settings())
     }
 
@@ -45,5 +38,10 @@ class MainPresenter(val fragmentManager: FragmentManager) :
         App.instance.router.exit()
     }
 
-
+    private fun showScreen(screen: Screen) {
+        val f = fragmentManager.findFragmentByTag(screen.screenKey)
+        if (f == null) {
+            App.instance.router.navigateTo(screen, true)
+        } else App.instance.router.backTo(screen)
+    }
 }

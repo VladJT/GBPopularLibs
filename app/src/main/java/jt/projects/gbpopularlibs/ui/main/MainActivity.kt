@@ -8,6 +8,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
+import jt.projects.gbpopularlibs.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
 import moxy.MvpAppCompatActivity
@@ -16,7 +17,7 @@ import moxy.ktx.moxyPresenter
 
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
-    val navigator = AppNavigator(this, R.id.fragment_container)
+    private val navigator = AppNavigator(this, R.id.fragment_container)
     val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,15 +26,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (savedInstanceState == null) {
-            //    showScreen(screens.users())
-        }
-
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
         }
-
-
     }
 
 
@@ -62,8 +57,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         if (supportFragmentManager.backStackEntryCount == 0) {
             showExitDialog()
         } else {
-            supportFragmentManager.fragments.forEach {
-                if (it is BackButtonListener && it.backPressed()) {
+            supportFragmentManager.fragments.forEach { f ->
+                if (f is BackButtonListener && f.backPressed()) {
                     return
                 }
             }

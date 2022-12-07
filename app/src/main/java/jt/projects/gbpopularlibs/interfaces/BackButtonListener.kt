@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui.main
+package jt.projects.gbpopularlibs.interfaces
 
 interface BackButtonListener {
     fun backPressed(): Boolean

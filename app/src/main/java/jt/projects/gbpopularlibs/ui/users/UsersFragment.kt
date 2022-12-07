@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
+import jt.projects.gbpopularlibs.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
-import jt.projects.gbpopularlibs.ui.main.BackButtonListener
 import jt.projects.gbpopularlibs.utils.DURATION_ITEM_ANIMATOR
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

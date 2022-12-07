@@ -1,7 +1,7 @@
-package jt.projects.gbpopularlibs.domain.retrofit
+package jt.projects.gbpopularlibs.data.users
 
 import com.google.gson.GsonBuilder
-import jt.projects.gbpopularlibs.domain.interfaces.CommonCallback
+import jt.projects.gbpopularlibs.interfaces.CommonCallback
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,7 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-open class RetrofitImpl(val baseUrl: String, private val apiKey: String = "") {
+open class BaseRetrofit(val baseUrl: String, private val apiKey: String = "") {
 
     inline fun <reified T> getRetrofitImpl(): T {
         val podRetrofit = Retrofit.Builder()

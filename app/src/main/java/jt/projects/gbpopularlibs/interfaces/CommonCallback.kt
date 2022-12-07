@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.domain.interfaces
+package jt.projects.gbpopularlibs.interfaces
 
 interface CommonCallback<T> {
     fun onSuccess(data: T)
