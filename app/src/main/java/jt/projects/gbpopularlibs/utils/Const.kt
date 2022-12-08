@@ -16,3 +16,6 @@ const val BASE_URL = "https://api.github.com/"
 
 // Bundle
 const val USER_ENTITY_BUNDLE_KEY = "USER_ENTITY_BUNDLE_KEY"
+
+// DATABASE
+const val DB_NAME = "users.db"

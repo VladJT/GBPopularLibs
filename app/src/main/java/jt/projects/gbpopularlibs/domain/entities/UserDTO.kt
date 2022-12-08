@@ -27,5 +27,5 @@ data class UserDTO(
     val type: String,
     val url: String
 ) {
-    fun toUserEntity(): UserEntity = UserEntity(login = login, id = id, avatar_url = avatar_url)
+    fun toUserEntity(): UserEntity = UserEntity(login = login, id = id, avatar_url = avatar_url, repos_url = repos_url)
 }

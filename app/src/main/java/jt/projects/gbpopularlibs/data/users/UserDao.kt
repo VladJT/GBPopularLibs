@@ -1,11 +1,12 @@
 package jt.projects.gbpopularlibs.data.users
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
+/**
+ * Теперь разберёмся с Dao. Dao — это интерфейс, содержащий методы для взаимодействия с
+конкретной таблицей.
+ */
 @Dao
 interface UserDao {
     @Query("Select * from UserEntity")
@@ -14,12 +15,15 @@ interface UserDao {
     @Query("select * from UserEntity where id in (:uids)")
     fun getAllById(uids: IntArray): List<UserEntity>
 
-    @Query("SELECT * FROM UserEntity WHERE login LIKE :first LIMIT 1")
-    fun findByName(first: String, last: String): UserEntity
+    @Query("SELECT * FROM UserEntity WHERE login LIKE :login LIMIT 1")
+    fun findByLogin(login: String): UserEntity
 
-    @Insert
-    fun insertAll(vararg users: UserEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(vararg users: UserEntity)
+
+    @Update
+    fun update(vararg users: UserEntity)
 
     @Delete
-    fun delete(user: UserEntity)
+    fun delete(vararg user: UserEntity)
 }

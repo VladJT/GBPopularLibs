@@ -50,6 +50,7 @@ class UserProfileFragment() : MvpAppCompatFragment(), UserProfileView,
     override fun showUserProfile(user: UserEntity) {
         binding.tvLogin.text = user.login
         binding.tvUid.text = user.id.toString()
+        binding.tvRepos.text = user.repos_url
         user.avatar_url?.let { binding.imageViewUserPhoto.load(it) }
     }
 

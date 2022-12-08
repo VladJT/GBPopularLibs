@@ -2,7 +2,7 @@ package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
 import io.reactivex.rxjava3.core.Scheduler
-import jt.projects.gbnasaapp.model.mars.UsersRepoBaseRetrofit
+import jt.projects.gbnasaapp.model.mars.UsersRepoRetrofitImpl
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.interfaces.UsersRepository
@@ -19,7 +19,7 @@ import moxy.MvpPresenter
 class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
 
     //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
-    private val usersRepo: UsersRepository = UsersRepoBaseRetrofit()
+    private val usersRepo: UsersRepository = UsersRepoRetrofitImpl()
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()

@@ -43,6 +43,16 @@
             app:layout_constraintStart_toStartOf="@+id/guideline"
             app:layout_constraintTop_toBottomOf="@+id/tv_login" />
 
+        <TextView
+            android:id="@+id/tv_repos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="repos..."
+            android:textSize="@dimen/rv_item_text_size"
+            app:layout_constraintStart_toStartOf="@+id/guideline"
+            app:layout_constraintTop_toBottomOf="@+id/tv_uid" />
+
         <Button
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
