@@ -43,6 +43,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     привести к IllegalStateException. Во время реализации onResumeFragments все фрагменты уже
     восстановлены и находятся в правильном состоянии.
      */
+
     override fun onResumeFragments() {
         super.onResumeFragments()
         App.instance.navigatorHolder.setNavigator(navigator)

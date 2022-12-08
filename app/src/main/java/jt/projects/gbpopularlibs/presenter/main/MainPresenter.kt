@@ -13,6 +13,7 @@ class MainPresenter(val fragmentManager: FragmentManager) :
 
     private val screens: IScreens = AndroidScreens()
 
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         App.instance.router.replaceScreen(screens.users())

@@ -5,6 +5,7 @@ import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType
 
 
+
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UsersView : MvpView {
     fun init()//init() — для первичной инициализации списка, который мы будем вызывать при присоединении View к Presenter

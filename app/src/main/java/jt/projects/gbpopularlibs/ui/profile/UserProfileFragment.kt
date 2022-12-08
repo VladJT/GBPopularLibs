@@ -15,6 +15,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
+
 class UserProfileFragment() : MvpAppCompatFragment(), UserProfileView,
     BackButtonListener {
     private var _binding: FragmentUserProfileBinding? = null

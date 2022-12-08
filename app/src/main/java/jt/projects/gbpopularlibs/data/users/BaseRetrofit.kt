@@ -12,6 +12,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
+
 open class BaseRetrofit(val baseUrl: String, private val apiKey: String = "") {
 
     inline fun <reified T> getRetrofitImpl(): T {

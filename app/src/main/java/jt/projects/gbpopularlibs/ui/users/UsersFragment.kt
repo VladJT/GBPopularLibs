@@ -17,6 +17,7 @@ import jt.projects.gbpopularlibs.utils.DURATION_ITEM_ANIMATOR
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
+
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!

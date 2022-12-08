@@ -4,7 +4,7 @@ import android.os.Looper
 import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.interfaces.CommonCallback
-import jt.projects.gbpopularlibs.interfaces.UsersRepository
+import jt.projects.gbpopularlibs.domain.UsersRepository
 
 
 private const val DATA_LOADING_DELAY = 1_000L

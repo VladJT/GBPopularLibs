@@ -11,6 +11,7 @@ interface GithubUsersAPIRetrofit {
     fun getUsers(): Call<List<UserDTO>>
 }
 
+
 interface GithubUsersAPIrx {
     @GET("users")
     fun getUsers(): Single<List<UserDTO>>

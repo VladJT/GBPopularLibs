@@ -8,6 +8,7 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
+
 class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
 
     override fun onFirstViewAttach() {

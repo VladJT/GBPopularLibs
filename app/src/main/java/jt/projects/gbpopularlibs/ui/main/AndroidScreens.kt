@@ -15,6 +15,7 @@ import jt.projects.gbpopularlibs.utils.*
 конструктор мы передаём функтор, создающий фрагмент. Такой фрагмент представляет собой экран.
 В дальнейшем функтор вызывается внутри навигатора при получении навигационных команд
  */
+
 class AndroidScreens : IScreens {
     override fun users(): Screen =
         FragmentScreen(USERS_SCREEN) { UsersFragment.newInstance() }

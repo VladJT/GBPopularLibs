@@ -8,11 +8,12 @@ import jt.projects.gbpopularlibs.data.users.GithubUsersAPIrx
 import jt.projects.gbpopularlibs.domain.entities.UserDTO
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.interfaces.CommonCallback
-import jt.projects.gbpopularlibs.interfaces.UsersRepository
+import jt.projects.gbpopularlibs.domain.UsersRepository
 import jt.projects.gbpopularlibs.utils.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+
 
 class UsersRepoBaseRetrofit : BaseRetrofit(baseUrl = BASE_URL), UsersRepository {
     private val retrofitImplStd = getRetrofitImpl<GithubUsersAPIRetrofit>()

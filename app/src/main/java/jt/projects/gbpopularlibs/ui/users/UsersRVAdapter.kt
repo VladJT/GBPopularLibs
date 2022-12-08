@@ -24,6 +24,7 @@ class UsersRVAdapter(val presenter: IUserListPresenter) :
         }
     }
 
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         presenter.bindView(holder.apply { pos = position })
     }
