@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import coil.load
-import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
+import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
 import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY

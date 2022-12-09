@@ -3,12 +3,17 @@ package jt.projects.gbpopularlibs.presenter.users
 import android.os.Bundle
 import io.reactivex.rxjava3.core.Scheduler
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.data.users.IUserRepository
+import jt.projects.gbpopularlibs.data.retrofit.IDataSource
+import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
+import jt.projects.gbpopularlibs.data.room.IUsersCache
+import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
+import jt.projects.gbpopularlibs.data.users.IUsersRepository
 import jt.projects.gbpopularlibs.data.users.UsersRepositoryImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.main.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
+import jt.projects.gbpopularlibs.utils.INetworkStatus
 import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY
 import moxy.MvpPresenter
 
@@ -19,8 +24,12 @@ import moxy.MvpPresenter
 class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
 
     //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
-    private val usersRepo: IUserRepository =
-        UsersRepositoryImpl(App.instance.getNetworkStatus(), App.instance.getDatabase())
+    private val dataSource: IDataSource = RetrofitDataSourceImpl()
+    private val cacheSource: IUsersCache = UsersCacheRoomImpl(App.instance.getDatabase())
+    private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
+
+    private val usersRepo: IUsersRepository =
+        UsersRepositoryImpl(dataSource, networkStatus, cacheSource)
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()

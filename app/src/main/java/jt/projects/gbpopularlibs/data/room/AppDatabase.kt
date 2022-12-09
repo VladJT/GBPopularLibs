@@ -2,8 +2,6 @@ package jt.projects.gbpopularlibs.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import jt.projects.gbpopularlibs.data.room.UserDao
-import jt.projects.gbpopularlibs.data.room.UserGHRepoDao
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 
@@ -17,5 +15,6 @@ import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 @Database(entities = [UserEntity::class, UserGHRepo::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
-    abstract fun repositoryDao() : UserGHRepoDao
+    abstract fun repositoryDao(): UserGHRepoDao
 }
+
