@@ -44,7 +44,7 @@ class RxJavaFragment : Fragment() {
         binding.btnCompDisp.setOnClickListener { CompositeDisposableEx().execComposite() }
 
         networkStatus = NetworkStatus(requireContext())
-        val subject = networkStatus!!.status()
+        val subject = networkStatus!!.isOnline()
 
         subject
             .subscribe({

@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.data.users
+package jt.projects.gbpopularlibs.data.room
 
 import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
@@ -19,7 +19,12 @@ interface UserDao {
     fun findByLogin(login: String): UserEntity
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(user: UserEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg users: UserEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(users: List<UserEntity>)
+
 
     @Update
     fun update(vararg users: UserEntity)

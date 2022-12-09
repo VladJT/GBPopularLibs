@@ -1,15 +1,13 @@
 package jt.projects.gbpopularlibs.data.users
 
 import android.os.Looper
-import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.interfaces.CommonCallback
-import jt.projects.gbpopularlibs.interfaces.UsersRepository
 
 
 private const val DATA_LOADING_DELAY = 1_000L
 
-class UsersRepositoryLocalImpl : UsersRepository {
+class UsersRepoLocalImpl {
 
     private val users = listOf(
         UserEntity("Vlad", 1, avatar_url = "https://avatars.githubusercontent.com/u/1?v=4"),
@@ -19,16 +17,10 @@ class UsersRepositoryLocalImpl : UsersRepository {
     )
 
 
-    override fun getUsers(callback: CommonCallback<List<UserEntity>>) {
+    fun getUsers(callback: CommonCallback<List<UserEntity>>) {
         android.os.Handler(Looper.getMainLooper()).postDelayed({
             callback.onSuccess(users)
         }, DATA_LOADING_DELAY)
 
     }
-
-    override fun getUsers(): Single<List<UserEntity>> {
-        return Single.just(users)
-    }
-
-
 }

@@ -1,8 +1,9 @@
-package jt.projects.gbpopularlibs.data.users
+package jt.projects.gbpopularlibs.data.room
 
 import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 
+@Dao
 interface UserGHRepoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(repo: UserGHRepo)
