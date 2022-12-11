@@ -7,6 +7,7 @@ import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.utils.INetworkStatus
 
+
 class UsersRepoRetrofitImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IUsersCache

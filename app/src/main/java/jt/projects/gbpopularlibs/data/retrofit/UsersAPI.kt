@@ -6,6 +6,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+
 interface UsersAPI {
     @GET("users")
     fun getUsers(): Single<List<UserDTO>>

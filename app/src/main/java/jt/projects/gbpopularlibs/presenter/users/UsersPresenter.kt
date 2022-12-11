@@ -20,6 +20,7 @@ import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY
 import moxy.MvpPresenter
 
 
+
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
