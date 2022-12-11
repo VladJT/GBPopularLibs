@@ -2,9 +2,10 @@ package jt.projects.gbpopularlibs.data.users
 
 import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
+import java.util.concurrent.TimeUnit
 
 
-private const val DATA_LOADING_DELAY = 1_000L
+private const val DATA_LOADING_DELAY = 2_000L
 
 class UsersRepoLocalImpl : IUsersRepository {
 
@@ -23,5 +24,5 @@ class UsersRepoLocalImpl : IUsersRepository {
 //
 //    }
 
-    override fun getUsers(): Single<List<UserEntity>> = Single.fromCallable { users }
+    override fun getUsers(): Single<List<UserEntity>> = Single.fromCallable { users }.delay(DATA_LOADING_DELAY,TimeUnit.MILLISECONDS)
 }

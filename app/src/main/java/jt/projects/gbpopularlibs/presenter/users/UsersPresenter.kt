@@ -7,12 +7,10 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.data.retrofit.IDataSource
-import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.data.users.UsersRepositoryImpl
+import jt.projects.gbpopularlibs.data.users.UsersRepoRetrofitImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.main.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
@@ -27,13 +25,12 @@ import moxy.MvpPresenter
  */
 class UsersPresenter() : MvpPresenter<UsersView>() {
 
-    private val dataSource: IDataSource = RetrofitDataSourceImpl()
     private val cacheSource: IUsersCache = UsersCacheRoomImpl(App.instance.getDatabase())
     private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
     private val compositeDisposable = CompositeDisposable()
 
-    private val usersRepo: IUsersRepository =
-        UsersRepositoryImpl(dataSource, networkStatus, cacheSource)
+    private val usersRepo: IUsersRepository = //UsersRepoLocalImpl()
+        UsersRepoRetrofitImpl(networkStatus, cacheSource)
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()

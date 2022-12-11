@@ -2,16 +2,17 @@ package jt.projects.gbpopularlibs.data.users
 
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import jt.projects.gbpopularlibs.data.retrofit.IDataSource
+import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.utils.INetworkStatus
 
-class UsersRepositoryImpl(
-    private val api: IDataSource,
+class UsersRepoRetrofitImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IUsersCache
 ) : IUsersRepository {
+
+    private val api = RetrofitDataSourceImpl().getApi()
 
     // мы позволяем репозиторию самостоятельно следить за тем, чтобы сетевые вызовы
     //выполнялись именно в io-потоке. Лучше поступать именно таким образом, даже когда речь не идёт о
@@ -19,10 +20,9 @@ class UsersRepositoryImpl(
     override fun getUsers(): Single<List<UserEntity>> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
-                api.getUsersApi()
-                    .getUsers().map {
-                        it.map { user -> user.toUserEntity() }
-                    }
+                api.getUsers().map {
+                    it.map { user -> user.toUserEntity() }
+                }
                     .flatMap { users ->
                         Single.fromCallable {
                             cacheImpl.saveUsers(users)
@@ -34,5 +34,5 @@ class UsersRepositoryImpl(
                     cacheImpl.getUsers()
                 }
             }
-        }.subscribeOn(Schedulers.io())
+        }
 }
