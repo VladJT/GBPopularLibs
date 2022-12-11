@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 @Entity
 @Parcelize
 data class UserEntity(
-    val login: String = "noname",
+    val login: String = "no_name",
     @PrimaryKey val id: Int = -1,
     val avatar_url: String? = null,
     val repos_url: String? = null

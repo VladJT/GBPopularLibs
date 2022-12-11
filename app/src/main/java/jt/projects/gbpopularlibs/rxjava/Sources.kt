@@ -21,8 +21,8 @@ class Sources {
         println("\n--execMaybe--")
         observers.execMaybe()
 
-//        println("\n--execHotObservable--")
-//        observers.execHotObservable()
+        println("\n--execHotObservable--")
+        observers.execHotObservable()
 
         println("\n--execPublishSubject--")
         observers.execPublishSubject()

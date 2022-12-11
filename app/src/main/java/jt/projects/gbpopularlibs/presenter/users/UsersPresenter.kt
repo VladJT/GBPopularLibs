@@ -1,7 +1,11 @@
 package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
-import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.data.retrofit.IDataSource
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
@@ -21,12 +25,12 @@ import moxy.MvpPresenter
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersView>() {
+class UsersPresenter() : MvpPresenter<UsersView>() {
 
-    //  val usersRepo: UsersRepository = UsersRepositoryLocalImpl()
     private val dataSource: IDataSource = RetrofitDataSourceImpl()
     private val cacheSource: IUsersCache = UsersCacheRoomImpl(App.instance.getDatabase())
     private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
+    private val compositeDisposable = CompositeDisposable()
 
     private val usersRepo: IUsersRepository =
         UsersRepositoryImpl(dataSource, networkStatus, cacheSource)
@@ -66,20 +70,46 @@ class UsersPresenter(private val uiScheduler: Scheduler) : MvpPresenter<UsersVie
         viewState.showLoading(true)
 
         usersRepo.getUsers()
-            .observeOn(uiScheduler)
+            .subscribeByDefault()
             .subscribe({ data ->
-                usersListPresenter.users.clear()
-                usersListPresenter.users.addAll(data)
-                viewState.updateList()
-                viewState.showLoading(false)
+                onSuccess(data)
             }, { e ->
-                e.message?.let { viewState.showInfo(it) }
-                viewState.showLoading(false)
+                onError(e)
             })
+            .disposeBy(compositeDisposable)
+    }
+
+    private fun onError(e: Throwable) {
+        e.message?.let { viewState.showInfo(it) }
+        viewState.showLoading(false)
+    }
+
+    private fun onSuccess(data: List<UserEntity>) {
+        usersListPresenter.users.clear()
+        usersListPresenter.users.addAll(data)
+        viewState.updateList()
+        viewState.showLoading(false)
     }
 
     fun backPressed(): Boolean {
         App.instance.router.exit()
         return true
     }
+
+    /**
+     * EXTENSIONS
+     */
+    private fun <T> Single<T>.subscribeByDefault(): Single<T> {
+        return this.subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())// для ANDROID
+    }
+
+    private fun Disposable.disposeBy(bag: CompositeDisposable) {
+        bag.add(this)
+    }
+
+    fun clear() {
+        compositeDisposable.dispose()
+    }
+
 }

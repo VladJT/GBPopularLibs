@@ -9,6 +9,5 @@ interface IScreens {
 
     //  fun countersMvvm(): Screen
     fun settings(): Screen
-    fun rxjava(): Screen
     fun userCard(bundle: Bundle): Screen
 }

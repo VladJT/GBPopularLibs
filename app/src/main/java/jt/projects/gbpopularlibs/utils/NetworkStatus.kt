@@ -9,6 +9,8 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
+const val MESSAGE_LENGTH = Toast.LENGTH_LONG
+
 class NetworkStatus(context: Context) : INetworkStatus {
     //    BehaviorSubject хранит только последнее значение.
     //    Это то же самое, что и ReplaySubject, но с буфером размером 1.
@@ -26,21 +28,20 @@ class NetworkStatus(context: Context) : INetworkStatus {
             object : ConnectivityManager.NetworkCallback() {
                 override fun onAvailable(network: Network) {
                     statusSubject.onNext(true)
-                    Toast.makeText(context, "onAvailable", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Internet Available", MESSAGE_LENGTH).show()
                 }
 
                 override fun onUnavailable() {
                     statusSubject.onNext(false)
-                    Toast.makeText(context, "onUnavailable", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Internet Unavailable", MESSAGE_LENGTH).show()
                 }
 
                 override fun onLost(network: Network) {
                     statusSubject.onNext(false)
-                    Toast.makeText(context, "onLost", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Internet Lost", MESSAGE_LENGTH).show()
                 }
 
             })
-
     }
 
     override fun isOnline(): Observable<Boolean> = statusSubject

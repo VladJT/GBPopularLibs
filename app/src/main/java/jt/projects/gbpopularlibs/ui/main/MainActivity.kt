@@ -78,9 +78,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 val myIntent = Intent(this, CounterMVVMActivity::class.java)
                 startActivity(myIntent)
             }
-            R.id.bottom_view_rxjava -> {
-                presenter.showRxJava()
-            }
 //            R.id.bottom_view_settings -> {
 //                presenter.showSettings()
 //            }

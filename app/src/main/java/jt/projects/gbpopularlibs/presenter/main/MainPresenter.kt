@@ -26,10 +26,6 @@ class MainPresenter(val fragmentManager: FragmentManager) :
         showScreen(screens.countersMvp())
     }
 
-    fun showRxJava() {
-        showScreen(screens.rxjava())
-    }
-
     fun showSettings() {
         showScreen(screens.settings())
     }

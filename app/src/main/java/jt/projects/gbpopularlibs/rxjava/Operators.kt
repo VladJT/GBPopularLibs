@@ -1,6 +1,5 @@
 package jt.projects.gbpopularlibs.rxjava
 
-import androidx.lifecycle.MutableLiveData
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -8,7 +7,6 @@ import kotlin.random.Random
 
 //перейдём к операторам манипуляции над потоком
 class Operators {
-    var log: MutableLiveData<String> = MutableLiveData()
 
     fun exec() {
 
