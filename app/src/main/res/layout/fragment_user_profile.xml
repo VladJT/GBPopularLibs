@@ -55,7 +55,6 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:cardCornerRadius="4dp"
         app:rippleColor="@color/cardview_shadow_end_color"
         app:checkedIcon="@drawable/ic_baseline_javascript_24"
         android:clickable="true"
@@ -86,7 +85,8 @@
                 android:id="@+id/tv_repos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="repos..."
+                android:background="#EFEDED"
+                android:text="...no data..."
                 android:textSize="14sp" />
         </androidx.core.widget.NestedScrollView>
     </com.google.android.material.card.MaterialCardView>
