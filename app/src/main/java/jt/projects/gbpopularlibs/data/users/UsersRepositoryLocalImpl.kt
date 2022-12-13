@@ -17,5 +17,6 @@ class UsersRepoLocalImpl : IUsersRepository {
     )
 
 
-    override fun getUsers(): Single<List<UserEntity>> = Single.fromCallable { users }.delay(DATA_LOADING_DELAY,TimeUnit.MILLISECONDS)
+    override fun getUsers(): Single<List<UserEntity>> =
+        Single.fromCallable { users }.delay(DATA_LOADING_DELAY, TimeUnit.MILLISECONDS)
 }

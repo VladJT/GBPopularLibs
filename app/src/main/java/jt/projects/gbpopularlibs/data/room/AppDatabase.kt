@@ -2,8 +2,8 @@ package jt.projects.gbpopularlibs.data.room
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 
 //Это абстрактный класс, у которого должна быть определена аннотация @Database со всеми
 //табличными объектами. В нашем случае это массив всего с одной таблицей. Версию БД указываем в
@@ -12,9 +12,9 @@ import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 //совершенно необязательно, но в коммерческих проектах — практика хорошая. В классе также
 //требуется определить метод, возвращающий объект доступа к данным
 // arrayOf(WeatherEntity::class, WeatherHistoryEntity::class)
-@Database(entities = [UserEntity::class, UserGHRepo::class], version = 2)
+@Database(entities = [UserEntity::class, GhRepoEntity::class], version = 3)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
-    abstract fun repositoryDao(): UserGHRepoDao
+    abstract fun usersDao(): UsersDao
+    abstract fun ghReposDao(): GhReposDao
 }
 

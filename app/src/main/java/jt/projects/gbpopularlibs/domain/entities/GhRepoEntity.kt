@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
         onDelete = ForeignKey.CASCADE
     )]
 )
-data class UserGHRepo(
+data class GhRepoEntity(
     @PrimaryKey var id: String,
     var name: String,
     var forksCount: Int,

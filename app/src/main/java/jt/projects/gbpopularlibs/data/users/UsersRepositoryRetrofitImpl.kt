@@ -1,13 +1,12 @@
 package jt.projects.gbpopularlibs.data.users
 
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.schedulers.Schedulers
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.utils.INetworkStatus
 
-class UsersRepoRetrofitImpl(
+class UsersRepositoryRetrofitImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IUsersCache
 ) : IUsersRepository {
@@ -31,7 +30,10 @@ class UsersRepoRetrofitImpl(
                     }
             } else {
                 Single.fromCallable {
-                    cacheImpl.getUsers()
+                    val users = cacheImpl.getUsers()
+                    if (users.isEmpty()) {
+                        throw RuntimeException("Данных в локальном хранилище не найдено")
+                    } else return@fromCallable users
                 }
             }
         }

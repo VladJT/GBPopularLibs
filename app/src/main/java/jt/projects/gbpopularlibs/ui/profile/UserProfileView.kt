@@ -1,7 +1,6 @@
 package jt.projects.gbpopularlibs.ui.profile
 
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 import moxy.MvpView
 import moxy.viewstate.strategy.AddToEndSingleStrategy
 import moxy.viewstate.strategy.StateStrategyType

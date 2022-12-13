@@ -6,7 +6,7 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.data.users.UsersRepoRetrofitImpl
+import jt.projects.gbpopularlibs.data.users.UsersRepositoryRetrofitImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.main.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
@@ -28,7 +28,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     private val compositeDisposable = CompositeDisposable()
 
     private val usersRepo: IUsersRepository = //UsersRepoLocalImpl()
-        UsersRepoRetrofitImpl(networkStatus, cacheSource)
+        UsersRepositoryRetrofitImpl(networkStatus, cacheSource)
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()

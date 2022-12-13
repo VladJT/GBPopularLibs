@@ -4,11 +4,10 @@ import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
 /**
- * Теперь разберёмся с Dao. Dao — это интерфейс, содержащий методы для взаимодействия с
-конкретной таблицей.
+ *  Dao — это интерфейс, содержащий методы для взаимодействия с конкретной таблицей.
  */
 @Dao
-interface UserDao {
+interface UsersDao {
     @Query("Select * from UserEntity")
     fun getAll(): List<UserEntity>
 

@@ -1,7 +1,5 @@
 package jt.projects.gbpopularlibs.utils
 
-import androidx.fragment.app.Fragment
-import com.google.android.material.snackbar.Snackbar
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.CompositeDisposable
