@@ -17,17 +17,23 @@ class GHReposRepository(
     override fun getUserGHRepos(user: UserEntity): Single<List<UserGHRepo>> =
         networkStatus.isOnlineSingle().flatMap { isOnline ->
             if (isOnline) {
-                api.getRepos(user.login)
+                api.getRepos(user.login).map { repos->
+                    repos.map { it.userId = user.id }
+                    repos
+                }
                     .flatMap { repos ->
                         Single.fromCallable {
-                        //    cacheImpl.saveUsers(users)
+                            cacheImpl.saveRepos(repos)
                             repos
                         }
                     }
             } else {
                 Single.fromCallable {
-                  //  cacheImpl.()
-                    listOf<UserGHRepo>(UserGHRepo("id","no_name", 4, "uid"))
+                    val repos = cacheImpl.getReposByUserId(user.id)
+                 //   val repos = cacheImpl.getAllRepos()
+                    if (repos.isEmpty()) {
+                        return@fromCallable listOf<UserGHRepo>(UserGHRepo("*", "no_data_from_cache", 0, -1))
+                    }else  return@fromCallable repos
                 }
             }
         }

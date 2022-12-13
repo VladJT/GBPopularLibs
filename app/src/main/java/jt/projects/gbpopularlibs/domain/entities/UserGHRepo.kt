@@ -19,5 +19,5 @@ data class UserGHRepo(
     @PrimaryKey var id: String,
     var name: String,
     var forksCount: Int,
-    var userId: String
+    var userId: Int
 )

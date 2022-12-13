@@ -36,6 +36,6 @@ interface UserGHRepoDao {
     fun getAll(): List<UserGHRepo>
 
     @Query("SELECT * FROM UserGHRepo WHERE userId = :userId")
-    fun findReposByUser(userId: String): List<UserGHRepo>
+    fun findReposByUserId(userId: Int): List<UserGHRepo>
 
 }

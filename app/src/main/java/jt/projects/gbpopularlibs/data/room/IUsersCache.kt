@@ -6,6 +6,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 interface IUsersCache {
     fun getUsers(): List<UserEntity>
     fun saveUsers(users: List<UserEntity>)
-//    fun getsReposByUser(login: String): List<UserGHRepo>
-//    fun saveRepos(repos: List<UserEntity>)
+    fun getReposByUserId(id: Int): List<UserGHRepo>
+    fun getAllRepos(): List<UserGHRepo>
+    fun saveRepos(repos: List<UserGHRepo>)
 }

@@ -17,12 +17,5 @@ class UsersRepoLocalImpl : IUsersRepository {
     )
 
 
-//    fun getUsers(callback: CommonCallback<List<UserEntity>>) {
-//        android.os.Handler(Looper.getMainLooper()).postDelayed({
-//            callback.onSuccess(users)
-//        }, DATA_LOADING_DELAY)
-//
-//    }
-
     override fun getUsers(): Single<List<UserEntity>> = Single.fromCallable { users }.delay(DATA_LOADING_DELAY,TimeUnit.MILLISECONDS)
 }

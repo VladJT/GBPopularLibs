@@ -12,7 +12,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 //совершенно необязательно, но в коммерческих проектах — практика хорошая. В классе также
 //требуется определить метод, возвращающий объект доступа к данным
 // arrayOf(WeatherEntity::class, WeatherHistoryEntity::class)
-@Database(entities = [UserEntity::class, UserGHRepo::class], version = 1)
+@Database(entities = [UserEntity::class, UserGHRepo::class], version = 2)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
     abstract fun repositoryDao(): UserGHRepoDao

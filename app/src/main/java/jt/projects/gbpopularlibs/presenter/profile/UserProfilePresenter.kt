@@ -6,8 +6,6 @@ import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.GHReposRepository
 import jt.projects.gbpopularlibs.data.users.IUserGHReposRepository
-import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.data.users.UsersRepoRetrofitImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
@@ -52,12 +50,13 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     private fun onSuccess(data: List<UserGHRepo>) {
         val sb = StringBuilder()
         data.forEach {
-            sb.append("repo: ${it.name} fork: ${it.forksCount} [id:${it.id}]\n")
+            sb.append("repo: ${it.name} forks: ${it.forksCount} [id:${it.id}]\n")
         }
         viewState.showUserRepos(sb.toString())
         viewState.showLoading(false)
 
     }
+
     fun backPressed(): Boolean {
         App.instance.router.exit()
         return true
