@@ -5,9 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import coil.load
+import com.google.android.material.snackbar.Snackbar
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
+import jt.projects.gbpopularlibs.domain.entities.UserGHRepo
 import jt.projects.gbpopularlibs.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
 import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY
@@ -15,7 +19,7 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
 
-class UserProfileFragment() : MvpAppCompatFragment(), UserProfileView,
+class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     BackButtonListener {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
@@ -50,12 +54,25 @@ class UserProfileFragment() : MvpAppCompatFragment(), UserProfileView,
     override fun showUserProfile(user: UserEntity) {
         binding.tvLogin.text = user.login
         binding.tvUid.text = user.id.toString()
-        binding.tvRepos.text = user.repos_url
+
         user.avatar_url?.let { binding.imageViewUserPhoto.load(it) }
+    }
+
+    override fun showUserRepos(text: String) {
+        binding.tvRepos.text = text
+    }
+
+    override fun showLoading(isLoading: Boolean) {
+        binding.uvLoadingBar.isVisible = isLoading
+    }
+
+    override fun showInfo(text: String) {
+        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        presenter.clear()
     }
 }

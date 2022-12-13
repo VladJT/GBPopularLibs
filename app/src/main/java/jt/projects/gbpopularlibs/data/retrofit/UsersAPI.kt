@@ -14,5 +14,5 @@ interface UsersAPI {
     fun loadUser(@Path("login") login: String): Single<UserDTO>
 
     @GET("users/{login}/repos")
-    fun getRepos(@Path("login") login: String): Single<UserGHRepo>
+    fun getRepos(@Path("login") login: String): Single<List<UserGHRepo>>
 }

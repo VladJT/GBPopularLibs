@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:background="@color/material_dynamic_neutral_variant70"
     android:elevation="12dp"
     app:cardCornerRadius="4dp">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
 
         <ImageView
             android:id="@+id/image_view_user_photo"
@@ -37,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0.7"
+            android:textStyle="bold"
             android:text="uid"
             android:textSize="@dimen/text_size_user_profile"
 
@@ -44,22 +48,61 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_login" />
 
         <TextView
-            android:id="@+id/tv_repos"
+            android:id="@+id/tv_repos_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="repos..."
-            android:textSize="@dimen/rv_item_text_size"
-            app:layout_constraintStart_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/tv_uid" />
+            android:layout_marginTop="8dp"
+            android:alpha="0.7"
+            android:text="Repositories on GitHub:"
+            android:textSize="@dimen/text_size_user_profile"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_user_photo" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/button_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repos_label">
+
+            <FrameLayout
+                android:id="@+id/uv_loading_bar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.7"
+                android:background="#C2DCE8"
+                android:visibility="gone">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical">
+
+                <TextView
+                    android:id="@+id/tv_repos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#60CFCECE"
+                    android:text="repos..."
+                    android:textSize="14sp" />
+            </androidx.core.widget.NestedScrollView>
+        </FrameLayout>
+        >
 
         <Button
             android:id="@+id/button_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Назад"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
