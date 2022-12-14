@@ -1,6 +1,8 @@
 package jt.projects.gbpopularlibs
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import androidx.room.Room
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
@@ -49,7 +51,9 @@ class App : Application() {
     private var networkStatus: INetworkStatus? = null
     fun getNetworkStatus(): INetworkStatus {
         if (networkStatus == null) {
-            networkStatus = NetworkStatus(instance.applicationContext)
+            val connectivityManager =
+                applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            networkStatus = NetworkStatus(connectivityManager)
         }
         return networkStatus as INetworkStatus
     }

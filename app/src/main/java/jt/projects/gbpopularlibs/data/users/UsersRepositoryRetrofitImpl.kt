@@ -27,7 +27,7 @@ class UsersRepositoryRetrofitImpl(
                             cacheImpl.saveUsers(users)
                             users
                         }
-                    }
+                    }.onErrorReturn { throw RuntimeException("Ошибка получения данных по http") }
             } else {
                 Single.fromCallable {
                     val users = cacheImpl.getUsers()
@@ -35,6 +35,7 @@ class UsersRepositoryRetrofitImpl(
                         throw RuntimeException("Данных в локальном хранилище не найдено")
                     } else return@fromCallable users
                 }
+                    .onErrorReturn { throw RuntimeException("Ошибка получения данных из локального хранилища") }
             }
         }
 }

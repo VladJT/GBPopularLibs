@@ -3,6 +3,10 @@ package jt.projects.gbpopularlibs.rxjava
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
+fun main(){
+    CompositeDisposableEx().execComposite()
+}
+
 class CompositeDisposableEx {
     fun observable1() = Observable.just("1")
     fun observable2() = Observable.just("2")

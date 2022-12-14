@@ -3,8 +3,11 @@ package jt.projects.gbpopularlibs.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.reactivex.rxjava3.exceptions.UndeliverableException
+import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
@@ -28,6 +31,15 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
+        }
+
+        App.instance.getNetworkStatus().isOnline().subscribe(){
+            Toast.makeText(this,"Internet available: $it", Toast.LENGTH_LONG).show()
+        }
+
+        // для ошибки с dispose (UndeliverableException)!!
+        RxJavaPlugins.setErrorHandler {
+            Toast.makeText(this,"RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
         }
     }
 
