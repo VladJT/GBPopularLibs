@@ -48,6 +48,11 @@ fun main() {
     //  println("SOURCES")
     //  Sources().exec()
 
+    testDisposable()
+    readln()
+}
+
+fun testDisposable() {
     println("DISPOSABLE")
     val disposable: Disposable = Observable.interval(1, TimeUnit.SECONDS)
         .subscribe({ println("next: $it") },//on next
@@ -55,7 +60,6 @@ fun main() {
             { println("==Готово==") })//on complete
     Thread.sleep(5000)
     disposable.dispose()
-    readln()
 }
 
 
