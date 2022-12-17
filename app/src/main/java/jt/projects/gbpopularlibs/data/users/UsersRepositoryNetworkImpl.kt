@@ -1,12 +1,13 @@
 package jt.projects.gbpopularlibs.data.users
 
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.utils.INetworkStatus
 
-class UsersRepositoryRetrofitImpl(
+class UsersRepositoryNetworkImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IUsersCache
 ) : IUsersRepository {
@@ -38,4 +39,6 @@ class UsersRepositoryRetrofitImpl(
                     .onErrorReturn { throw RuntimeException("Ошибка получения данных из локального хранилища") }
             }
         }
+            .subscribeOn(Schedulers.io())
+
 }

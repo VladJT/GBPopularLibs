@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui.main
+package jt.projects.gbpopularlibs.core.nav
 
 import android.os.Bundle
 import com.github.terrakok.cicerone.Screen
@@ -7,10 +7,10 @@ import jt.projects.gbpopularlibs.ui.counters_mvp.CounterMVPFragment
 import jt.projects.gbpopularlibs.ui.profile.UserProfileFragment
 import jt.projects.gbpopularlibs.ui.settings.SettingsFragment
 import jt.projects.gbpopularlibs.ui.users.UsersFragment
-import jt.projects.gbpopularlibs.utils.COUNTERS_MVP_SCREEN
-import jt.projects.gbpopularlibs.utils.SETTINGS_SCREEN
-import jt.projects.gbpopularlibs.utils.USERS_SCREEN
-import jt.projects.gbpopularlibs.utils.USER_CARD_SCREEN
+import jt.projects.gbpopularlibs.core.utils.COUNTERS_MVP_SCREEN
+import jt.projects.gbpopularlibs.core.utils.SETTINGS_SCREEN
+import jt.projects.gbpopularlibs.core.utils.USERS_SCREEN
+import jt.projects.gbpopularlibs.core.utils.USER_CARD_SCREEN
 
 /**
  * Классы Screen и FragmentScreen — часть Cicerone, причём второй — наследник первого. В его

@@ -7,9 +7,9 @@ import androidx.room.Room
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.data.room.AppDatabase
-import jt.projects.gbpopularlibs.utils.DB_NAME
-import jt.projects.gbpopularlibs.utils.INetworkStatus
-import jt.projects.gbpopularlibs.utils.NetworkStatus
+import jt.projects.gbpopularlibs.core.utils.DB_NAME
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 
 class App : Application() {
     companion object {

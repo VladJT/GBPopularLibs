@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.utils
+package jt.projects.gbpopularlibs.core.utils
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single

@@ -6,15 +6,15 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.data.users.UsersRepositoryRetrofitImpl
+import jt.projects.gbpopularlibs.data.users.UsersRepositoryNetworkImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.ui.main.AndroidScreens
+import jt.projects.gbpopularlibs.core.nav.AndroidScreens
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
-import jt.projects.gbpopularlibs.utils.INetworkStatus
-import jt.projects.gbpopularlibs.utils.USER_ENTITY_BUNDLE_KEY
-import jt.projects.gbpopularlibs.utils.disposeBy
-import jt.projects.gbpopularlibs.utils.subscribeByDefault
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
+import jt.projects.gbpopularlibs.core.utils.disposeBy
+import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import moxy.MvpPresenter
 
 
@@ -28,7 +28,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     private val compositeDisposable = CompositeDisposable()
 
     private val usersRepo: IUsersRepository = //UsersRepoLocalImpl()
-        UsersRepositoryRetrofitImpl(networkStatus, cacheSource)
+        UsersRepositoryNetworkImpl(networkStatus, cacheSource)
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()

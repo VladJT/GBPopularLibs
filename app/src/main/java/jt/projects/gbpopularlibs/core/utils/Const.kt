@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.utils
+package jt.projects.gbpopularlibs.core.utils
 
 // SCREENS
 const val USERS_SCREEN = "USERS_SCREEN"
@@ -10,9 +10,6 @@ const val SETTINGS_SCREEN = "SETTINGS_SCREEN"
 
 // анимации VIEW
 const val DURATION_ITEM_ANIMATOR: Long = 300
-
-// URLS
-const val BASE_URL = "https://api.github.com/"
 
 // Bundle
 const val USER_ENTITY_BUNDLE_KEY = "USER_ENTITY_BUNDLE_KEY"

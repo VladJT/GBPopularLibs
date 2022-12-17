@@ -11,8 +11,8 @@ import jt.projects.gbpopularlibs.data.users.IGhReposRepository
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
-import jt.projects.gbpopularlibs.utils.INetworkStatus
-import jt.projects.gbpopularlibs.utils.subscribeByDefault
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import moxy.MvpPresenter
 
 /**

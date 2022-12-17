@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.ui.main
+package jt.projects.gbpopularlibs.core.nav
 
 import android.os.Bundle
 import com.github.terrakok.cicerone.Screen

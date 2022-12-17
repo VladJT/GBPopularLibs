@@ -3,8 +3,8 @@ package jt.projects.gbpopularlibs.presenter.main
 import androidx.fragment.app.FragmentManager
 import com.github.terrakok.cicerone.Screen
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.ui.main.AndroidScreens
-import jt.projects.gbpopularlibs.ui.main.IScreens
+import jt.projects.gbpopularlibs.core.nav.AndroidScreens
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
 

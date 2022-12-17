@@ -11,7 +11,7 @@ interface GithubAPI {
     fun getUsers(): Single<List<UserDTO>>
 
     @GET("users/{login}")
-    fun loadUser(@Path("login") login: String): Single<UserDTO>
+    fun getUser(@Path("login") login: String): Single<UserDTO>
 
     @GET("users/{login}/repos")
     fun getRepos(@Path("login") login: String): Single<List<GhRepoEntity>>

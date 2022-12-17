@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import jt.projects.gbpopularlibs.databinding.FragmentCountersMvpBinding
-import jt.projects.gbpopularlibs.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter

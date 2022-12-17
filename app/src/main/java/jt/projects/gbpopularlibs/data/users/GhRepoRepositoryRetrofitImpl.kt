@@ -5,7 +5,7 @@ import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IGhReposCache
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 
 class GhRepoRepositoryRetrofitImpl(
     private val networkStatus: INetworkStatus,

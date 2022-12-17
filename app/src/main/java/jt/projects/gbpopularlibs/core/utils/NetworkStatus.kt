@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.utils
+package jt.projects.gbpopularlibs.core.utils
 
 import android.net.ConnectivityManager
 import android.net.Network
