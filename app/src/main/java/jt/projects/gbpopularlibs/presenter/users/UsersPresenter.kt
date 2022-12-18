@@ -4,10 +4,7 @@ import android.os.Bundle
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.nav.AndroidScreens
-import jt.projects.gbpopularlibs.core.utils.INetworkStatus
-import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
-import jt.projects.gbpopularlibs.core.utils.disposeBy
-import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
+import jt.projects.gbpopularlibs.core.utils.*
 import jt.projects.gbpopularlibs.data.room.IUsersCache
 import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
@@ -75,7 +72,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     }
 
     private fun onError(e: Throwable) {
-        e.message?.let { viewState.showInfo(it) }
+        e.message?.let { viewState.showInfo(it.addTime()) }
         viewState.showLoading(false)
     }
 
@@ -84,6 +81,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
         usersListPresenter.users.addAll(data)
         viewState.updateList()
         viewState.showLoading(false)
+        viewState.showInfo("User list успешно загружен".addTime())
     }
 
     fun backPressed(): Boolean {

@@ -7,7 +7,7 @@ import jt.projects.gbpopularlibs.data.room.IGhReposCache
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
-class GhRepoRepositoryRetrofitImpl(
+class GhRepoRepositoryNetworkImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IGhReposCache
 ) : IGhReposRepository {
@@ -32,7 +32,7 @@ class GhRepoRepositoryRetrofitImpl(
                     val repos = cacheImpl.getReposByUserId(user.id)
                     if (repos.isEmpty()) {
                         throw RuntimeException("Данных в локальном хранилище не найдено")
-                        // return@fromCallable listOf<UserGHRepo>(UserGHRepo("*", "no_data_from_cache", 0, -1))
+                        //return@fromCallable listOf<UserGHRepo>(UserGHRepo("*", "no_data_from_cache", 0, -1))
                     } else return@fromCallable repos
                 }
             }

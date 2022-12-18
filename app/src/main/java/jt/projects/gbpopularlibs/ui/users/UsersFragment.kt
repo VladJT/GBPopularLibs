@@ -5,10 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.snackbar.Snackbar
+import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
@@ -61,7 +62,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     override fun showInfo(text: String) {
-        Snackbar.make(binding.root, text, Snackbar.LENGTH_SHORT).show()
+        requireActivity().findViewById<TextView>(R.id.tv_info).text = text
     }
 
     override fun backPressed() = presenter.backPressed()

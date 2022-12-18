@@ -3,10 +3,11 @@ package jt.projects.gbpopularlibs.presenter.profile
 import io.reactivex.rxjava3.disposables.Disposable
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import jt.projects.gbpopularlibs.data.room.GhReposCacheRoomImpl
 import jt.projects.gbpopularlibs.data.room.IGhReposCache
-import jt.projects.gbpopularlibs.data.users.GhRepoRepositoryRetrofitImpl
+import jt.projects.gbpopularlibs.data.users.GhRepoRepositoryNetworkImpl
 import jt.projects.gbpopularlibs.data.users.IGhReposRepository
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
@@ -35,7 +36,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     var itemClickListener: ((RepoItemView) -> Unit)? = null
 
     private val usersGHReposRepo: IGhReposRepository =
-        GhRepoRepositoryRetrofitImpl(networkStatus, cacheSource)
+        GhRepoRepositoryNetworkImpl(networkStatus, cacheSource)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -63,7 +64,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
 
 
     private fun onError(e: Throwable) {
-        e.message?.let { viewState.showInfo(it) }
+        e.message?.let { viewState.showInfo(it.addTime()) }
         viewState.showLoading(false)
     }
 
@@ -71,6 +72,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
         repos.clear()
         repos.addAll(data)
         viewState.showLoading(false)
+        viewState.showInfo("Список репозиториев успешно загружен".addTime())
         viewState.updateList()
     }
 

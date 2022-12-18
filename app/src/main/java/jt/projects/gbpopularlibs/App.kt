@@ -39,7 +39,7 @@ class App : Application() {
     fun getDatabase(): AppDatabase {
         if (db == null) {
             db = Room.databaseBuilder(instance.applicationContext, AppDatabase::class.java, DB_NAME)
-                .fallbackToDestructiveMigration()
+        //        .fallbackToDestructiveMigration()
                 .build()
         }
         return db!!

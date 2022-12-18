@@ -33,7 +33,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
 
         App.instance.getNetworkStatus().isOnline().subscribe() {
-            Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
+           // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
+            binding.tvNetworkStatus.text = "🗝️ Internet available: $it"
         }
 
         // для ошибки с dispose (UndeliverableException)!!

@@ -7,12 +7,33 @@
     <FrameLayout
         android:id="@+id/fragment_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="?actionBarSize"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_info"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_network_status" />
+
+    <TextView
+        android:id="@+id/tv_network_status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DEE4E4"
+        android:padding="2dp"
+        android:text="network: "
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F1D99D"
+        android:padding="2dp"
+        android:textStyle="italic"
+        android:text="info: [ ]"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <!--
