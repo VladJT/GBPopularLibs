@@ -18,4 +18,4 @@ fun Disposable.disposeBy(bag: CompositeDisposable) {
     bag.add(this)
 }
 
-fun String.addTime(): String = "${SimpleDateFormat("hh:mm:ss").format(Date())} $this"
+fun String.addTime(): String = "🗒️ ${SimpleDateFormat("hh:mm:ss").format(Date())} $this"

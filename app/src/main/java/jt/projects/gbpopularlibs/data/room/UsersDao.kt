@@ -17,13 +17,13 @@ interface UsersDao {
     @Query("SELECT * FROM UserEntity WHERE login LIKE :login LIMIT 1")
     fun findByLogin(login: String): UserEntity
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(user: UserEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(vararg users: UserEntity)
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insert(users: List<UserEntity>)
 
 
