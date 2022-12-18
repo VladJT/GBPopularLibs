@@ -26,5 +26,8 @@ data class GhRepoEntity(
     @SerializedName("forks_count")
     var forksCount: Int,
 
+    @SerializedName("language")
+    var language: String? = "",
+
     var userId: Int
 )

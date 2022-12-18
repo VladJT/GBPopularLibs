@@ -7,9 +7,11 @@ import moxy.viewstate.strategy.StateStrategyType
 
 @StateStrategyType(AddToEndSingleStrategy::class)
 interface UserProfileView : MvpView {
-    fun showUserProfile(user: UserEntity)
-    fun showUserRepos(text: String)
+    fun init()
+    fun updateList()
 
     fun showLoading(isLoading: Boolean)//show loading frame
     fun showInfo(text: String)//snackbar or toast
+
+    fun showUserProfile(user: UserEntity)
 }

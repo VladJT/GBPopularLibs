@@ -14,7 +14,8 @@ class RetrofitDataSourceImpl {
     fun getApi(): GithubAPI = Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
         .addConverterFactory(GsonConverterFactory.create())
         .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-        .client(createOkHttpClient(MyInterceptor())).build().create(GithubAPI::class.java)
+        //  .client(createOkHttpClient(MyInterceptor()))
+        .build().create(GithubAPI::class.java)
 
 
     /**
@@ -24,10 +25,10 @@ class RetrofitDataSourceImpl {
      */
     private fun createOkHttpClient(interceptor: Interceptor) =
         OkHttpClient.Builder().addInterceptor(interceptor).addInterceptor(
-                HttpLoggingInterceptor().setLevel(
-                    HttpLoggingInterceptor.Level.BODY
-                )
-            ).build()
+            HttpLoggingInterceptor().setLevel(
+                HttpLoggingInterceptor.Level.BODY
+            )
+        ).build()
 
     inner class MyInterceptor : Interceptor {
         @Throws(IOException::class)

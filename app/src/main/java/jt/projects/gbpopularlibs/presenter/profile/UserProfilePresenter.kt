@@ -2,17 +2,17 @@ package jt.projects.gbpopularlibs.presenter.profile
 
 import io.reactivex.rxjava3.disposables.Disposable
 import jt.projects.gbpopularlibs.App
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import jt.projects.gbpopularlibs.data.room.GhReposCacheRoomImpl
 import jt.projects.gbpopularlibs.data.room.IGhReposCache
-import jt.projects.gbpopularlibs.data.room.IUsersCache
-import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.GhRepoRepositoryRetrofitImpl
 import jt.projects.gbpopularlibs.data.users.IGhReposRepository
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
+import jt.projects.gbpopularlibs.ui.profile.RepoItemView
+import jt.projects.gbpopularlibs.ui.profile.UserProfileRVAdapter
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
-import jt.projects.gbpopularlibs.core.utils.INetworkStatus
-import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import moxy.MvpPresenter
 
 /**
@@ -23,15 +23,33 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
     private var disposable: Disposable? = null
 
+
+    private val repos = mutableListOf<GhRepoEntity>()
+
+    fun getCount(): Int = repos.size
+
+    fun bindView(view: UserProfileRVAdapter.ViewHolder) {
+        view.bind(repos[view.pos])
+    }
+
+    var itemClickListener: ((RepoItemView) -> Unit)? = null
+
     private val usersGHReposRepo: IGhReposRepository =
         GhRepoRepositoryRetrofitImpl(networkStatus, cacheSource)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+
+        viewState.init()
         loadProfile()
+
+        itemClickListener = { itemView ->
+            val currentRepo = repos[itemView.pos]
+            viewState.showInfo(currentRepo.name)
+        }
     }
 
-    fun loadProfile() {
+    private fun loadProfile() {
         viewState.showLoading(true)
         viewState.showUserProfile(userEntity)
         disposable = usersGHReposRepo.getUserGHRepos(userEntity)
@@ -50,13 +68,10 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     }
 
     private fun onSuccess(data: List<GhRepoEntity>) {
-        val sb = StringBuilder()
-        data.forEach {
-            sb.append("repo: ${it.name} forks: ${it.forksCount} [id:${it.id}]\n")
-        }
-        viewState.showUserRepos(sb.toString())
+        repos.clear()
+        repos.addAll(data)
         viewState.showLoading(false)
-
+        viewState.updateList()
     }
 
     fun backPressed(): Boolean {

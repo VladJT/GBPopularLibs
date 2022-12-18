@@ -1,18 +1,20 @@
 package jt.projects.gbpopularlibs.ui.profile
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.google.android.material.snackbar.Snackbar
+import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
-import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -21,6 +23,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     BackButtonListener {
     private var _binding: FragmentUserProfileBinding? = null
     private val binding get() = _binding!!
+    private var adapter: UserProfileRVAdapter? = null
 
     val presenter by moxyPresenter { UserProfilePresenter(getUserEntity()) }
 
@@ -47,6 +50,14 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
         binding.buttonBack.setOnClickListener { presenter.backPressed() }
     }
 
+    override fun init() {
+        adapter = UserProfileRVAdapter(presenter)
+        binding.rvRepos.let { rv ->
+            rv.layoutManager = LinearLayoutManager(context)
+            rv.adapter = adapter
+        }
+    }
+
     override fun backPressed() = presenter.backPressed()
 
     override fun showUserProfile(user: UserEntity) {
@@ -55,8 +66,9 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
         user.avatar_url?.let { binding.imageViewUserPhoto.load(it) }
     }
 
-    override fun showUserRepos(text: String) {
-        binding.tvRepos.text = text
+    @SuppressLint("NotifyDataSetChanged")
+    override fun updateList() {
+        adapter?.notifyDataSetChanged()
     }
 
     override fun showLoading(isLoading: Boolean) {

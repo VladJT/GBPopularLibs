@@ -3,6 +3,7 @@
 
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="4dp">
@@ -55,12 +56,22 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:rippleColor="@color/cardview_shadow_end_color"
-        app:checkedIcon="@drawable/ic_baseline_javascript_24"
         android:clickable="true"
+        app:checkedIcon="@drawable/ic_baseline_javascript_24"
         app:layout_constraintBottom_toTopOf="@id/button_back"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_repos_label">
+        app:layout_constraintTop_toBottomOf="@+id/tv_repos_label"
+        app:rippleColor="@color/cardview_shadow_end_color">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_repos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#D3D1D1"
+            android:clipToPadding="false"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp"
+            tools:listitem="@layout/item_repo" />
 
         <FrameLayout
             android:id="@+id/uv_loading_bar"
@@ -76,19 +87,6 @@
                 android:layout_gravity="center" />
         </FrameLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical">
-
-            <TextView
-                android:id="@+id/tv_repos"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#EFEDED"
-                android:text="...no data..."
-                android:textSize="14sp" />
-        </androidx.core.widget.NestedScrollView>
     </com.google.android.material.card.MaterialCardView>
 
 

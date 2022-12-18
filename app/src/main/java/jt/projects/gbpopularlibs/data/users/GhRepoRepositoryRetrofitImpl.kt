@@ -1,11 +1,11 @@
 package jt.projects.gbpopularlibs.data.users
 
 import io.reactivex.rxjava3.core.Single
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.data.room.IGhReposCache
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
-import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 
 class GhRepoRepositoryRetrofitImpl(
     private val networkStatus: INetworkStatus,

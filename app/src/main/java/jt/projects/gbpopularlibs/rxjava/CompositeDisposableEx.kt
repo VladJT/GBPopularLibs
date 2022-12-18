@@ -3,7 +3,7 @@ package jt.projects.gbpopularlibs.rxjava
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
-fun main(){
+fun main() {
     CompositeDisposableEx().execComposite()
 }
 

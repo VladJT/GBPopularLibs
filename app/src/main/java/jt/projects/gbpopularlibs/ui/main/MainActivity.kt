@@ -6,12 +6,11 @@ import android.view.MenuItem
 import android.widget.Toast
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
-import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
 import moxy.MvpAppCompatActivity
@@ -33,13 +32,13 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             onOptionsItemSelected(item)
         }
 
-        App.instance.getNetworkStatus().isOnline().subscribe(){
-            Toast.makeText(this,"Internet available: $it", Toast.LENGTH_LONG).show()
+        App.instance.getNetworkStatus().isOnline().subscribe() {
+            Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
         }
 
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
-            Toast.makeText(this,"RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
         }
     }
 
