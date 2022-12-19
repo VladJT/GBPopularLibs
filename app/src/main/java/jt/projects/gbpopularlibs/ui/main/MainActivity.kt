@@ -10,17 +10,29 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.dagger.IDependency
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
     private val navigator = AppNavigator(this, R.id.fragment_container)
     val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager) }
+
+    class AppNavHolder() {
+        //@Inject указывает на метод, конструктор или поле класса, которые (или в которые) надо внедрить
+        @Inject
+        lateinit var dependency: IDependency
+
+        fun doSomethingWithDependency() {
+            dependency.doSomething()
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

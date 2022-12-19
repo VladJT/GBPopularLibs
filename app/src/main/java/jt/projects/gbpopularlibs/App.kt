@@ -6,10 +6,13 @@ import android.net.ConnectivityManager
 import androidx.room.Room
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.Router
+import dagger.Module
+import dagger.Provides
 import jt.projects.gbpopularlibs.core.utils.DB_NAME
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import jt.projects.gbpopularlibs.data.room.AppDatabase
+
 
 class App : Application() {
     companion object {
@@ -20,16 +23,6 @@ class App : Application() {
         super.onCreate()
         instance = this
     }
-
-
-    /**
-     * CICERONE
-     */
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
-    val navigatorHolder get() = cicerone.getNavigatorHolder()
-    val router get() = cicerone.router
 
 
     /**
