@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.data.users
+package jt.projects.gbpopularlibs.data.ghrepos
 
 import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity

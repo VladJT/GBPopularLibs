@@ -1,5 +1,6 @@
-package jt.projects.gbpopularlibs.data.room
+package jt.projects.gbpopularlibs.data.users
 
+import jt.projects.gbpopularlibs.data.room.AppDatabase
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
 class UsersCacheRoomImpl(private val db: AppDatabase) : IUsersCache {

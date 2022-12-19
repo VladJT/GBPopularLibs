@@ -1,9 +1,8 @@
-package jt.projects.gbpopularlibs.data.users
+package jt.projects.gbpopularlibs.data.ghrepos
 
 import io.reactivex.rxjava3.core.Single
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
-import jt.projects.gbpopularlibs.data.room.IGhReposCache
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 

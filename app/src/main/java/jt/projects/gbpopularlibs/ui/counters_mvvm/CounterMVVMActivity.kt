@@ -3,14 +3,17 @@ package jt.projects.gbpopularlibs.ui.counters_mvvm
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentCountersMvvmBinding
-import jt.projects.gbpopularlibs.viewmodel.CounterIViewModel
+import jt.projects.gbpopularlibs.viewmodel.CounterViewModel
 
 class CounterMVVMActivity : AppCompatActivity() {
 
     private lateinit var binding: FragmentCountersMvvmBinding
 
-    private var viewModel: CounterIViewModel = CounterIViewModel()
+    private var viewModel: CounterViewModel = CounterViewModel().apply {
+        App.instance.appComponent.inject(this)
+    }
 
     companion object {
         fun newInstance() = CounterMVVMActivity()
@@ -36,11 +39,11 @@ class CounterMVVMActivity : AppCompatActivity() {
         binding.btnCounter3.setOnClickListener { viewModel.counter3Click() }
     }
 
-    private fun extractViewModel(): CounterIViewModel {
-        return lastCustomNonConfigurationInstance as? CounterIViewModel ?: CounterIViewModel()
+    private fun extractViewModel(): CounterViewModel {
+        return lastCustomNonConfigurationInstance as? CounterViewModel ?: CounterViewModel()
     }
 
-    override fun onRetainCustomNonConfigurationInstance(): CounterIViewModel {
+    override fun onRetainCustomNonConfigurationInstance(): CounterViewModel {
         return viewModel
     }
 

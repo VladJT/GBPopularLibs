@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
-import com.google.android.material.snackbar.Snackbar
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
@@ -27,7 +27,11 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     private val binding get() = _binding!!
     private var adapter: UserProfileRVAdapter? = null
 
-    val presenter by moxyPresenter { UserProfilePresenter(getUserEntity()) }
+    val presenter by moxyPresenter {
+        UserProfilePresenter(getUserEntity()).apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
 
     private fun getUserEntity(): UserEntity {
         val user = this.arguments?.getParcelable(USER_ENTITY_BUNDLE_KEY) as? UserEntity

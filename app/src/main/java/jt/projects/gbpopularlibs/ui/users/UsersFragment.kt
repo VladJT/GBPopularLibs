@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
@@ -20,7 +21,12 @@ import moxy.ktx.moxyPresenter
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
-    val presenter by moxyPresenter { UsersPresenter() }
+    val presenter by moxyPresenter {
+        UsersPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
+
     var adapter: UsersRVAdapter? = null
 
     companion object {

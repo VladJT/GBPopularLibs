@@ -6,8 +6,5 @@ import com.github.terrakok.cicerone.Screen
 interface IScreens {
     fun users(): Screen
     fun countersMvp(): Screen
-
-    //  fun countersMvvm(): Screen
-    fun settings(): Screen
     fun userCard(bundle: Bundle): Screen
 }

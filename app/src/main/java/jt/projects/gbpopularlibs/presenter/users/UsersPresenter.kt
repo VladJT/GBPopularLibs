@@ -1,28 +1,33 @@
 package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
+import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.nav.AndroidScreens
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.*
-import jt.projects.gbpopularlibs.data.room.IUsersCache
-import jt.projects.gbpopularlibs.data.room.UsersCacheRoomImpl
+import jt.projects.gbpopularlibs.data.users.IUsersCache
+import jt.projects.gbpopularlibs.data.users.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
 import jt.projects.gbpopularlibs.data.users.UsersRepositoryNetworkImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
 class UsersPresenter : MvpPresenter<UsersView>() {
-
     private val cacheSource: IUsersCache = UsersCacheRoomImpl(App.instance.getDatabase())
     private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
     private val compositeDisposable = CompositeDisposable()
+
+    @Inject    lateinit var router: Router
+    @Inject lateinit var screens: IScreens
 
     private val usersRepo: IUsersRepository = //UsersRepoLocalImpl()
         UsersRepositoryNetworkImpl(networkStatus, cacheSource)
@@ -54,7 +59,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
             val currentUser = usersListPresenter.users[itemView.pos]
             val bundle = Bundle()
             bundle.putParcelable(USER_ENTITY_BUNDLE_KEY, currentUser)
-            App.instance.router.navigateTo(AndroidScreens().userCard(bundle))
+            router.navigateTo(screens.userCard(bundle))
         }
     }
 
@@ -85,7 +90,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     }
 
     fun backPressed(): Boolean {
-        App.instance.router.exit()
+        router.exit()
         return true
     }
 

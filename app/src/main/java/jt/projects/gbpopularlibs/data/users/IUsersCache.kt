@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.data.room
+package jt.projects.gbpopularlibs.data.users
 
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 

@@ -1,21 +1,24 @@
 package jt.projects.gbpopularlibs.presenter.main
 
 import androidx.fragment.app.FragmentManager
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.Screen
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.nav.AndroidScreens
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 class MainPresenter(val fragmentManager: FragmentManager) :
     MvpPresenter<MainView>() {
 
-    private val screens: IScreens = AndroidScreens()
+    @Inject lateinit var router : Router
+    @Inject lateinit var  screens: IScreens
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        App.instance.router.replaceScreen(screens.users())
+        router.replaceScreen(screens.users())
     }
 
     fun showUsers() {
@@ -26,18 +29,14 @@ class MainPresenter(val fragmentManager: FragmentManager) :
         showScreen(screens.countersMvp())
     }
 
-    fun showSettings() {
-        showScreen(screens.settings())
-    }
-
     fun backClicked() {
-        App.instance.router.exit()
+       router.exit()
     }
 
     private fun showScreen(screen: Screen) {
         val f = fragmentManager.findFragmentByTag(screen.screenKey)
         if (f == null) {
-            App.instance.router.navigateTo(screen, true)
-        } else App.instance.router.backTo(screen)
+            router.navigateTo(screen, true)
+        } else router.backTo(screen)
     }
 }

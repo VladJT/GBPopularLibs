@@ -1,6 +1,7 @@
 package jt.projects.gbpopularlibs.core.nav
 
 import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.Module
 import dagger.Provides
@@ -8,7 +9,6 @@ import javax.inject.Singleton
 
 @Module
 class CiceroneModule {
-
     val cicerone: Cicerone<Router> = Cicerone.create()
 
     @Provides
@@ -16,7 +16,7 @@ class CiceroneModule {
 
     @Singleton
     @Provides
-    fun navigatorHolder() = cicerone.getNavigatorHolder()
+    fun navigatorHolder(): NavigatorHolder = cicerone.getNavigatorHolder()
 
     @Singleton
     @Provides

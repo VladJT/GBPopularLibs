@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.Toast
+import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
-import jt.projects.gbpopularlibs.dagger.IDependency
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
@@ -21,18 +21,16 @@ import javax.inject.Inject
 
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
+
+    @Inject
+    lateinit var navHolder: NavigatorHolder
     private val navigator = AppNavigator(this, R.id.fragment_container)
-    val presenter by moxyPresenter { MainPresenter(this.supportFragmentManager) }
-
-    class AppNavHolder() {
-        //@Inject указывает на метод, конструктор или поле класса, которые (или в которые) надо внедрить
-        @Inject
-        lateinit var dependency: IDependency
-
-        fun doSomethingWithDependency() {
-            dependency.doSomething()
+    val presenter by moxyPresenter {
+        MainPresenter(this.supportFragmentManager).apply {
+            App.instance.appComponent.inject(this)
         }
     }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +43,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
 
         App.instance.getNetworkStatus().isOnline().subscribe() {
-           // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
+            // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
             binding.tvNetworkStatus.text = "🗝️ Internet available: $it"
         }
 
@@ -53,6 +51,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         RxJavaPlugins.setErrorHandler {
             Toast.makeText(this, "RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
         }
+
+        App.instance.appComponent.inject(this)
     }
 
 
@@ -69,12 +69,12 @@ class MainActivity : MvpAppCompatActivity(), MainView {
      */
     override fun onResumeFragments() {
         super.onResumeFragments()
-        App.instance.navigatorHolder.setNavigator(navigator)
+        navHolder.setNavigator(navigator)
     }
 
     override fun onPause() {
         super.onPause()
-        App.instance.navigatorHolder.removeNavigator()
+        navHolder.removeNavigator()
     }
 
     override fun onBackPressed() {
@@ -102,9 +102,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
                 val myIntent = Intent(this, CounterMVVMActivity::class.java)
                 startActivity(myIntent)
             }
-//            R.id.bottom_view_settings -> {
-//                presenter.showSettings()
-//            }
         }
         return true
     }

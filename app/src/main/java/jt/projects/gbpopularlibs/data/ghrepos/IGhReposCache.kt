@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.data.room
+package jt.projects.gbpopularlibs.data.ghrepos
 
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 

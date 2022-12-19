@@ -46,7 +46,7 @@ class DependencyModule() {
 //определяется, куда что-либо внедрять, а также методы для прямого доступа к зависимостям
 @Singleton
 @Component(modules = [DependencyModule::class])
-interface AppComponent {
+interface MyComponent {
     fun inject(exampleClass: ExampleClass)
 }
 
@@ -63,7 +63,7 @@ class ExampleClass() {
 
 
 fun main() {
-    val appComponent = DaggerAppComponent.builder().build()
+    val appComponent = DaggerMyComponent.builder().build()
     val instance1 = ExampleClass()
     appComponent.inject(instance1)
 

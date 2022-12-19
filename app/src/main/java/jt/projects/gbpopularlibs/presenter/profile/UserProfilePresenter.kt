@@ -1,29 +1,32 @@
 package jt.projects.gbpopularlibs.presenter.profile
 
+import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.Disposable
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
-import jt.projects.gbpopularlibs.data.room.GhReposCacheRoomImpl
-import jt.projects.gbpopularlibs.data.room.IGhReposCache
-import jt.projects.gbpopularlibs.data.users.GhRepoRepositoryNetworkImpl
-import jt.projects.gbpopularlibs.data.users.IGhReposRepository
+import jt.projects.gbpopularlibs.data.ghrepos.GhReposCacheRoomImpl
+import jt.projects.gbpopularlibs.data.ghrepos.IGhReposCache
+import jt.projects.gbpopularlibs.data.ghrepos.GhRepoRepositoryNetworkImpl
+import jt.projects.gbpopularlibs.data.ghrepos.IGhReposRepository
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.profile.RepoItemView
 import jt.projects.gbpopularlibs.ui.profile.UserProfileRVAdapter
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
 import moxy.MvpPresenter
+import javax.inject.Inject
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
+class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>(){
     private val cacheSource: IGhReposCache = GhReposCacheRoomImpl(App.instance.getDatabase())
     private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
     private var disposable: Disposable? = null
 
+    @Inject lateinit var router: Router
 
     private val repos = mutableListOf<GhRepoEntity>()
 
@@ -77,7 +80,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     }
 
     fun backPressed(): Boolean {
-        App.instance.router.exit()
+        router.exit()
         return true
     }
 
