@@ -6,6 +6,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+
 interface GithubAPI {
     @GET("users")
     fun getUsers(): Single<List<UserDTO>>

@@ -16,6 +16,7 @@ import jt.projects.gbpopularlibs.ui.profile.UserProfileRVAdapter
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
 import moxy.MvpPresenter
 
+
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */

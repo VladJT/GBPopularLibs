@@ -5,6 +5,7 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+
 // Поведение дочерних сущностей при удалении родительской в onDelete. В нашем случае мы
 //передаём CASCADE, чтобы дочерние сущности исчезали при удалении родительской, так как
 //репозитории без пользователя сюда не подходят.

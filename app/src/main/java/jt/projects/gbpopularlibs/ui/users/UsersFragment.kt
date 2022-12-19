@@ -36,6 +36,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         return binding.root
     }
 
+
     override fun init() {
         adapter = UsersRVAdapter(presenter.usersListPresenter)
         binding.rvUsers.let { rv ->

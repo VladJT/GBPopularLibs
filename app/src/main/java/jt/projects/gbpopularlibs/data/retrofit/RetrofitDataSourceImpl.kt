@@ -9,6 +9,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
+
 class RetrofitDataSourceImpl {
 
     fun getApi(): GithubAPI = Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
