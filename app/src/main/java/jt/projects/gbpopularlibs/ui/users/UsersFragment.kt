@@ -15,6 +15,7 @@ import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
+import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -68,9 +69,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         binding.uvLoadingBar.isVisible = isLoading
     }
 
-    override fun showInfo(text: String) {
-        requireActivity().findViewById<TextView>(R.id.tv_info).text = text
-    }
+    override fun showInfo(text: String) = (requireActivity() as MainActivity).printLog(text)
+
 
     override fun backPressed() = presenter.backPressed()
 

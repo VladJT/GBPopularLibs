@@ -17,6 +17,7 @@ import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
+import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
@@ -81,9 +82,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
         binding.uvLoadingBar.isVisible = isLoading
     }
 
-    override fun showInfo(text: String) {
-        requireActivity().findViewById<TextView>(R.id.tv_info).text = text
-    }
+    override fun showInfo(text: String) = (requireActivity() as MainActivity).printLog(text)
 
     override fun onDestroy() {
         super.onDestroy()

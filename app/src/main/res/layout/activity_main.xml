@@ -12,7 +12,7 @@
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/tv_info"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_network_status" />
@@ -28,18 +28,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/tv_info"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#2E3030"
-            android:padding="2dp"
-            android:text="info: [ ]"
-            android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-            app:layout_constraintStart_toStartOf="parent" />
-
-
         <!--
        LABEL_VISIBILITY=SELECTED — подпись появляется только под выбранным элементом;
        LABEL_VISIBILITY=LABELED — подпись видна всегда;
@@ -51,6 +39,7 @@
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
             app:itemHorizontalTranslationEnabled="true"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"

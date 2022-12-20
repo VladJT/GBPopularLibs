@@ -16,7 +16,7 @@
         <item name="android:layout_width">25dp</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:layout_marginTop">5dp</item>
-        <item name="android:background">#663b4351</item>
+        <item name="android:background">#661A1C1E</item>
     </style>
 
 </resources>

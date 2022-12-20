@@ -4,6 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -12,6 +15,7 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
@@ -31,6 +35,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     lateinit var networkStatus: INetworkStatus
 
     private val navigator = AppNavigator(this, R.id.fragment_container)
+
+    private val logAdapter: LogRVAdaper by lazy { LogRVAdaper() }
+    private var logRecView: RecyclerView? = null
 
     val presenter by moxyPresenter {
         MainPresenter(this.supportFragmentManager).apply {
@@ -56,13 +63,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             onOptionsItemSelected(item)
         }
 
-        bottomSheetBehavior =
-            BottomSheetBehavior.from(findViewById<ConstraintLayout>(R.id.bottom_sheet_container))
-                .apply { state = BottomSheetBehavior.STATE_COLLAPSED }
+        initBottomSheet()
 
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
-            binding.tvNetworkStatus.text = "RxJavaPlugins error: ${it.message}"
+            printLog("RxJavaPlugins error: ${it.message}")
         }
 
         App.instance.appComponent.inject(this)
@@ -70,6 +75,29 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         networkStatus.isOnline().subscribe() {
             binding.tvNetworkStatus.text = "⚡ Internet available: $it"
         }
+    }
+
+    fun initBottomSheet() {
+        bottomSheetBehavior =
+            BottomSheetBehavior.from(findViewById<ConstraintLayout>(R.id.bottom_sheet_container))
+                .apply { state = BottomSheetBehavior.STATE_COLLAPSED }
+
+        logRecView = findViewById<RecyclerView>(R.id.rv_log).apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = logAdapter
+            // Установим анимацию
+            itemAnimator = DefaultItemAnimator().apply {
+                addDuration = DURATION_ITEM_ANIMATOR
+                changeDuration = DURATION_ITEM_ANIMATOR
+                removeDuration = DURATION_ITEM_ANIMATOR
+                moveDuration = DURATION_ITEM_ANIMATOR
+            }
+        }
+    }
+
+    fun printLog(text: String) {
+        logAdapter.addLog(text)
+        logRecView?.smoothScrollToPosition(0)
     }
 
 
