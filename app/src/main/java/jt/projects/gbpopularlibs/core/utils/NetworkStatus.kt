@@ -1,18 +1,24 @@
 package jt.projects.gbpopularlibs.core.utils
 
+import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
+import jt.projects.gbpopularlibs.App
 
-class NetworkStatus(connectivityManager: ConnectivityManager) : INetworkStatus {
+class NetworkStatus(app: App) : INetworkStatus {
+
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     init {
         statusSubject.onNext(false)
         val request = NetworkRequest.Builder().build()
+        val connectivityManager =
+           app.applicationContext
+                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.registerNetworkCallback(
             request,
             object : ConnectivityManager.NetworkCallback() {

@@ -3,14 +3,11 @@ package jt.projects.gbpopularlibs.presenter.users
 import android.os.Bundle
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.core.nav.AndroidScreens
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.*
 import jt.projects.gbpopularlibs.data.users.IUsersCache
-import jt.projects.gbpopularlibs.data.users.UsersCacheRoomImpl
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.data.users.UsersRepositoryNetworkImpl
+import jt.projects.gbpopularlibs.data.users.UsersRepositoryRetrofitImpl
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
@@ -22,15 +19,16 @@ import javax.inject.Inject
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
 class UsersPresenter : MvpPresenter<UsersView>() {
-    private val cacheSource: IUsersCache = UsersCacheRoomImpl(App.instance.getDatabase())
-    private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
+    @Inject
+    lateinit var usersRepo: IUsersRepository
+
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
     private val compositeDisposable = CompositeDisposable()
-
-    @Inject    lateinit var router: Router
-    @Inject lateinit var screens: IScreens
-
-    private val usersRepo: IUsersRepository = //UsersRepoLocalImpl()
-        UsersRepositoryNetworkImpl(networkStatus, cacheSource)
 
     class UsersListPresenter : IUserListPresenter {
         var users = mutableListOf<UserEntity>()
@@ -47,14 +45,13 @@ class UsersPresenter : MvpPresenter<UsersView>() {
 
     val usersListPresenter = UsersListPresenter()
 
-    /***
-     * открытие карточки пользователя
-     */
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.init()
         loadData()
 
+        /** открытие карточки пользователя */
         usersListPresenter.itemClickListener = { itemView ->
             val currentUser = usersListPresenter.users[itemView.pos]
             val bundle = Bundle()
@@ -97,5 +94,4 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     fun clear() {
         compositeDisposable.dispose()
     }
-
 }

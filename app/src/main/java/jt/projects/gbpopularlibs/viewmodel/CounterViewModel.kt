@@ -10,7 +10,8 @@ class CounterViewModel() : IViewModel {
     val model = CountersRepository()
     val countersData: LiveData<List<Int>> = MutableLiveData()
     val singleEventData: LiveData<String> = SingleEventLiveData()
-    @Inject lateinit var router: Router
+    @Inject
+    lateinit var router: Router
 
     override fun onRefresh() {
         refreshData()

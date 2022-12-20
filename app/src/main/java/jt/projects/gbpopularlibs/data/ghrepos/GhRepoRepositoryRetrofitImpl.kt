@@ -6,7 +6,7 @@ import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
-class GhRepoRepositoryNetworkImpl(
+class GhRepoRepositoryRetrofitImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IGhReposCache
 ) : IGhReposRepository {

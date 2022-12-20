@@ -1,10 +1,12 @@
-package jt.projects.gbpopularlibs.core.nav
+package jt.projects.gbpopularlibs.di
 
 import com.github.terrakok.cicerone.Cicerone
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.Module
 import dagger.Provides
+import jt.projects.gbpopularlibs.core.nav.AndroidScreens
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import javax.inject.Singleton
 
 @Module

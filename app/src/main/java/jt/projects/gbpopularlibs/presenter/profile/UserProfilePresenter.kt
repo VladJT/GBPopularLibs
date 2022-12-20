@@ -2,13 +2,8 @@ package jt.projects.gbpopularlibs.presenter.profile
 
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.Disposable
-import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
-import jt.projects.gbpopularlibs.data.ghrepos.GhReposCacheRoomImpl
-import jt.projects.gbpopularlibs.data.ghrepos.IGhReposCache
-import jt.projects.gbpopularlibs.data.ghrepos.GhRepoRepositoryNetworkImpl
 import jt.projects.gbpopularlibs.data.ghrepos.IGhReposRepository
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
@@ -21,12 +16,14 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>(){
-    private val cacheSource: IGhReposCache = GhReposCacheRoomImpl(App.instance.getDatabase())
-    private val networkStatus: INetworkStatus = App.instance.getNetworkStatus()
-    private var disposable: Disposable? = null
+class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
+    @Inject
+    lateinit var usersGHReposRepo: IGhReposRepository
 
-    @Inject lateinit var router: Router
+    @Inject
+    lateinit var router: Router
+
+    private var disposable: Disposable? = null
 
     private val repos = mutableListOf<GhRepoEntity>()
 
@@ -38,8 +35,6 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
 
     var itemClickListener: ((RepoItemView) -> Unit)? = null
 
-    private val usersGHReposRepo: IGhReposRepository =
-        GhRepoRepositoryNetworkImpl(networkStatus, cacheSource)
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()

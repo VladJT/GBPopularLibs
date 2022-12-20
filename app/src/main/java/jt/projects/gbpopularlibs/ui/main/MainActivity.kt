@@ -11,6 +11,8 @@ import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
@@ -24,7 +26,11 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
     lateinit var navHolder: NavigatorHolder
+    @Inject
+    lateinit var networkStatus: INetworkStatus
+
     private val navigator = AppNavigator(this, R.id.fragment_container)
+
     val presenter by moxyPresenter {
         MainPresenter(this.supportFragmentManager).apply {
             App.instance.appComponent.inject(this)
@@ -42,17 +48,21 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             onOptionsItemSelected(item)
         }
 
-        App.instance.getNetworkStatus().isOnline().subscribe() {
-            // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
-            binding.tvNetworkStatus.text = "🗝️ Internet available: $it"
-        }
-
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
             Toast.makeText(this, "RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
         }
 
         App.instance.appComponent.inject(this)
+        try {
+            networkStatus.isOnline().subscribe() {
+                // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
+                binding.tvNetworkStatus.text = "🗝️ Internet available: $it"
+            }
+        }
+        catch (e: java.lang.Exception){
+            Toast.makeText(this, e.message,Toast.LENGTH_LONG).show()
+        }
     }
 
 

@@ -3,8 +3,6 @@ package jt.projects.gbpopularlibs.presenter.main
 import androidx.fragment.app.FragmentManager
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.Screen
-import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.core.nav.AndroidScreens
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
@@ -13,8 +11,10 @@ import javax.inject.Inject
 class MainPresenter(val fragmentManager: FragmentManager) :
     MvpPresenter<MainView>() {
 
-    @Inject lateinit var router : Router
-    @Inject lateinit var  screens: IScreens
+    @Inject
+    lateinit var router: Router
+    @Inject
+    lateinit var screens: IScreens
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -30,7 +30,7 @@ class MainPresenter(val fragmentManager: FragmentManager) :
     }
 
     fun backClicked() {
-       router.exit()
+        router.exit()
     }
 
     private fun showScreen(screen: Screen) {
