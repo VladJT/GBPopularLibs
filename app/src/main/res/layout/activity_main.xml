@@ -1,56 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_info"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_network_status" />
+        android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_network_status"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#DEE4E4"
-        android:padding="2dp"
-        android:text="network: "
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_network_status" />
 
-    <TextView
-        android:id="@+id/tv_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#2E3030"
-        android:padding="2dp"
-        android:text="info: [ ]"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/tv_network_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#DEE4E4"
+            android:padding="2dp"
+            android:text="network: "
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#2E3030"
+            android:padding="2dp"
+            android:text="info: [ ]"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
+            app:layout_constraintStart_toStartOf="parent" />
 
 
-    <!--
-   LABEL_VISIBILITY=SELECTED — подпись появляется только под выбранным элементом;
-   LABEL_VISIBILITY=LABELED — подпись видна всегда;
-   LABEL_VISIBILITY=UNLABELED — подпись скрыта;
-   LABEL_VISIBILITY=AUTO (поведение по умолчанию) — подпись ведёт себя LABELED для трёх
-   элементов и менее, SELECTED — для четырёх и более.
-   -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:itemHorizontalTranslationEnabled="true"
-        app:labelVisibilityMode="labeled"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu_bottom_navigation_view" />
+        <!--
+       LABEL_VISIBILITY=SELECTED — подпись появляется только под выбранным элементом;
+       LABEL_VISIBILITY=LABELED — подпись видна всегда;
+       LABEL_VISIBILITY=UNLABELED — подпись скрыта;
+       LABEL_VISIBILITY=AUTO (поведение по умолчанию) — подпись ведёт себя LABELED для трёх
+       элементов и менее, SELECTED — для четырёх и более.
+       -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:itemHorizontalTranslationEnabled="true"
+            app:labelVisibilityMode="labeled"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:menu="@menu/menu_bottom_navigation_view" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Обязательно в CoordinatorLayout -->
+    <include layout="@layout/bottom_sheet_layout" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

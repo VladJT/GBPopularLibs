@@ -2,4 +2,14 @@
 <resources>
     <dimen name="rv_item_text_size">18sp</dimen>
     <dimen name="text_size_user_profile">24sp</dimen>
+
+    <dimen name="bottom_navigation_margin">8dp</dimen>
+    <dimen name="bottom_sheet_height">500dp</dimen>
+    <dimen name="bottom_sheet_peek_height">120dp</dimen>
+    <dimen name="text_view_padding_std">10dp</dimen>
+
+    <dimen name="margin_std">10dp</dimen>
+    <dimen name="margin_small">5dp</dimen>
+    <dimen name="margin_medium">20dp</dimen>
+    <dimen name="margin_big">40dp</dimen>
 </resources>

@@ -3,8 +3,10 @@ package jt.projects.gbpopularlibs.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
@@ -36,16 +38,27 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
     }
 
+    //Определим переменную типа BottomSheetBehaviour. В качестве generic передаём тип контейнера
+    //нашего BottomSheet. Этот instance будет управлять нашей нижней панелью.
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        init()
+    }
 
+    fun init() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             onOptionsItemSelected(item)
         }
+
+        bottomSheetBehavior =
+            BottomSheetBehavior.from(findViewById<ConstraintLayout>(R.id.bottom_sheet_container))
+                .apply { state = BottomSheetBehavior.STATE_COLLAPSED }
 
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
@@ -57,7 +70,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         networkStatus.isOnline().subscribe() {
             binding.tvNetworkStatus.text = "⚡ Internet available: $it"
         }
-
     }
 
 
