@@ -1,6 +1,5 @@
 package jt.projects.gbpopularlibs.core.utils
 
-import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
@@ -8,17 +7,18 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import jt.projects.gbpopularlibs.App
+import javax.inject.Inject
 
-class NetworkStatus(app: App) : INetworkStatus {
+class NetworkStatus : INetworkStatus {
+    @Inject
+    lateinit var connectivityManager : ConnectivityManager
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     init {
+        App.instance.appComponent.inject(this)
         statusSubject.onNext(false)
         val request = NetworkRequest.Builder().build()
-        val connectivityManager =
-           app.applicationContext
-                .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         connectivityManager.registerNetworkCallback(
             request,
             object : ConnectivityManager.NetworkCallback() {

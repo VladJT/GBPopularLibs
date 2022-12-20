@@ -13,6 +13,7 @@ class MainPresenter(val fragmentManager: FragmentManager) :
 
     @Inject
     lateinit var router: Router
+
     @Inject
     lateinit var screens: IScreens
 

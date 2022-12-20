@@ -1,6 +1,7 @@
 package jt.projects.gbpopularlibs.di
 
 import dagger.Component
+import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
@@ -21,5 +22,5 @@ interface AppComponent {
     fun inject(userProfilePresenter: UserProfilePresenter)
     fun inject(counterPresenter: CounterPresenter)
     fun inject(counterViewModel: CounterViewModel)
-
+    fun inject(networkStatus: NetworkStatus)
 }

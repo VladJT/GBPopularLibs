@@ -4,7 +4,7 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.core.utils.DB_NAME
+import jt.projects.gbpopularlibs.BuildConfig
 import jt.projects.gbpopularlibs.data.ghrepos.GhReposCacheRoomImpl
 import jt.projects.gbpopularlibs.data.ghrepos.IGhReposCache
 import jt.projects.gbpopularlibs.data.room.AppDatabase
@@ -21,7 +21,7 @@ class CacheModule {
     @Provides
     fun database(app: App): AppDatabase = Room.databaseBuilder(
         app,
-        AppDatabase::class.java, DB_NAME
+        AppDatabase::class.java, BuildConfig.DB_NAME
     ).build()
 
 

@@ -3,7 +3,6 @@ package jt.projects.gbpopularlibs.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -12,7 +11,6 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
-import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
@@ -26,6 +24,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
     lateinit var navHolder: NavigatorHolder
+
     @Inject
     lateinit var networkStatus: INetworkStatus
 
@@ -50,19 +49,15 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
-            Toast.makeText(this, "RxJavaPlugins error: ${it.message}", Toast.LENGTH_LONG).show()
+            binding.tvNetworkStatus.text = "RxJavaPlugins error: ${it.message}"
         }
 
         App.instance.appComponent.inject(this)
-        try {
-            networkStatus.isOnline().subscribe() {
-                // Toast.makeText(this, "Internet available: $it", Toast.LENGTH_LONG).show()
-                binding.tvNetworkStatus.text = "🗝️ Internet available: $it"
-            }
+
+        networkStatus.isOnline().subscribe() {
+            binding.tvNetworkStatus.text = "⚡ Internet available: $it"
         }
-        catch (e: java.lang.Exception){
-            Toast.makeText(this, e.message,Toast.LENGTH_LONG).show()
-        }
+
     }
 
 

@@ -15,10 +15,6 @@ class CounterMVVMActivity : AppCompatActivity() {
         App.instance.appComponent.inject(this)
     }
 
-    companion object {
-        fun newInstance() = CounterMVVMActivity()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -51,9 +47,5 @@ class CounterMVVMActivity : AppCompatActivity() {
         binding.btnCounter1.text = data[0].toString()
         binding.btnCounter2.text = data[1].toString()
         binding.btnCounter3.text = data[2].toString()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 }

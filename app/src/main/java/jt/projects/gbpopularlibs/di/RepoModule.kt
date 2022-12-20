@@ -21,6 +21,9 @@ class RepoModule {
 
     @Singleton
     @Provides
-    fun usersGHReposRepo(networkStatus: INetworkStatus, cacheSource: IGhReposCache): IGhReposRepository =
+    fun usersGHReposRepo(
+        networkStatus: INetworkStatus,
+        cacheSource: IGhReposCache
+    ): IGhReposRepository =
         GhRepoRepositoryRetrofitImpl(networkStatus, cacheSource)
 }
