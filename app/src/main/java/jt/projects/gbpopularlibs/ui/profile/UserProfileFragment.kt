@@ -1,17 +1,19 @@
 package jt.projects.gbpopularlibs.ui.profile
 
 
+import android.R
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
@@ -55,7 +57,31 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonBack.setOnClickListener { presenter.backPressed() }
+        (requireActivity() as MainActivity).supportActionBar?.also {
+            it.setHomeButtonEnabled(true)
+            it.setDisplayHomeAsUpEnabled(true)
+        }
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        setHasOptionsMenu(true)
+        (requireActivity() as MainActivity).supportActionBar?.also {
+            it.setHomeButtonEnabled(true)
+            it.setDisplayHomeAsUpEnabled(true)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
 
     override fun init() {
         adapter = UserProfileRVAdapter(presenter)

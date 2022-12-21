@@ -3,6 +3,7 @@ package jt.projects.gbpopularlibs.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -55,6 +56,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         init()
     }
 
+
+
     fun init() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -73,7 +76,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         App.instance.appComponent.inject(this)
 
         networkStatus.isOnline().subscribe() {
-            binding.tvNetworkStatus.text = "⚡ Internet available: $it"
+            runOnUiThread {
+                printLog("⚡ Internet available: $it")
+            }
         }
     }
 
@@ -146,6 +151,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             R.id.bottom_view_countersVM -> {
                 val myIntent = Intent(this, CounterMVVMActivity::class.java)
                 startActivity(myIntent)
+            }
+            android.R.id.home -> {
+                supportFragmentManager.popBackStack()
+                return true
             }
         }
         return true

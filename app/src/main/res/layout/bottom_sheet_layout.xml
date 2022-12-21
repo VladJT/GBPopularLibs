@@ -5,7 +5,7 @@
     android:id="@+id/bottom_sheet_container"
     android:layout_width="match_parent"
     android:layout_height="@dimen/bottom_sheet_height"
-    android:background="?android:windowBackground"
+    android:background="#CFCFCF"
     app:behavior_hideable="false"
     app:behavior_peekHeight="@dimen/bottom_sheet_peek_height"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="@dimen/margin_small"
         android:id="@+id/rv_log"
         android:layout_width="match_parent"
         android:layout_height="0dp"

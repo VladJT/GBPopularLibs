@@ -45,54 +45,55 @@
         android:id="@+id/tv_repos_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
         android:alpha="0.7"
-        android:text="Repositories on GitHub:"
-        android:textSize="@dimen/text_size_user_profile"
-
+        android:text="Repositories on GitHub"
+        android:textSize="@dimen/rv_item_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view_user_photo" />
 
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_repos"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:background="#D3D1D1"
-            android:clipToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_repos_label"
-            tools:listitem="@layout/item_repo" />
-
-        <FrameLayout
-            android:id="@+id/uv_loading_bar"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:alpha="0.7"
-            android:background="#C2DCE8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_repos_label"
-            android:visibility="visible">
-
-            <ProgressBar
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center" />
-        </FrameLayout>
-
-
-    <com.google.android.material.button.MaterialButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_back"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/purple_700"
         android:text="Назад"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_repos_label"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/image_view_user_photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/tv_repos_label" />
+        app:layout_constraintStart_toStartOf="@+id/guideline" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="#D3D1D1"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/rv_std_h_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repos_label"
+        tools:listitem="@layout/item_repo" />
+
+    <FrameLayout
+        android:id="@+id/uv_loading_bar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:alpha="0.7"
+        android:background="#C2DCE8"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_repos_label">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+    </FrameLayout>
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline"

@@ -15,18 +15,8 @@
             app:layout_constraintBottom_toTopOf="@+id/bottom_navigation_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_network_status" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/tv_network_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#DEE4E4"
-            android:padding="2dp"
-            android:text="network: "
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <!--
        LABEL_VISIBILITY=SELECTED — подпись появляется только под выбранным элементом;

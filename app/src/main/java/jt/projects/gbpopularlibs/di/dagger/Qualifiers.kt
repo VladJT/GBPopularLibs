@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.dagger
+package jt.projects.gbpopularlibs.di.dagger
 
 import dagger.Component
 import dagger.Module

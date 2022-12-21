@@ -1,6 +1,7 @@
 package jt.projects.gbpopularlibs.ui.users
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -44,8 +45,9 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         return binding.root
     }
 
+
     override fun init() {
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
+             adapter = UsersRVAdapter(presenter.usersListPresenter)
         binding.rvUsers.let { rv ->
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = adapter
