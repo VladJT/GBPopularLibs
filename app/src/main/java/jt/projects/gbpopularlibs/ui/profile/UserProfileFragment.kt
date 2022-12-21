@@ -56,26 +56,13 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonBack.setOnClickListener { presenter.backPressed() }
+
         (requireActivity() as MainActivity).supportActionBar?.also {
             it.setHomeButtonEnabled(true)
             it.setDisplayHomeAsUpEnabled(true)
         }
     }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        setHasOptionsMenu(true)
-        (requireActivity() as MainActivity).supportActionBar?.also {
-            it.setHomeButtonEnabled(true)
-            it.setDisplayHomeAsUpEnabled(true)
-        }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-    }
 
     override fun onPause() {
         super.onPause()

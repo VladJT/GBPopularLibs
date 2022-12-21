@@ -18,6 +18,7 @@ import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
@@ -70,14 +71,14 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
         // для ошибки с dispose (UndeliverableException)!!
         RxJavaPlugins.setErrorHandler {
-            printLog("RxJavaPlugins error: ${it.message}")
+            printLog("RxJavaPlugins error: ${it.message}".addTime())
         }
 
         App.instance.appComponent.inject(this)
 
         networkStatus.isOnline().subscribe() {
             runOnUiThread {
-                printLog("⚡ Internet available: $it")
+                printLog("⚡ Internet available: $it".addTime())
             }
         }
     }

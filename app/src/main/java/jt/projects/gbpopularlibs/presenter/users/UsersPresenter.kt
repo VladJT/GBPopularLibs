@@ -84,7 +84,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
         usersListPresenter.users.addAll(data)
         viewState.updateList()
         viewState.showLoading(false)
-        viewState.showInfo("User list успешно загружен".addTime())
+        viewState.showInfo("Список пользователей (${data.size}) загружен".addTime())
     }
 
     fun backPressed(): Boolean {

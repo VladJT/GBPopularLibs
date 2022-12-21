@@ -70,7 +70,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
         repos.clear()
         repos.addAll(data)
         viewState.showLoading(false)
-        viewState.showInfo("Список репозиториев успешно загружен".addTime())
+        viewState.showInfo("Список репозиториев (${data.size}) загружен".addTime())
         viewState.updateList()
     }
 

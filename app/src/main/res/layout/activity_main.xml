@@ -29,6 +29,7 @@
             android:id="@+id/bottom_navigation_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#CFCECE"
             android:layout_marginBottom="@dimen/bottom_sheet_peek_height"
             app:itemHorizontalTranslationEnabled="true"
             app:labelVisibilityMode="labeled"
