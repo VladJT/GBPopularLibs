@@ -13,6 +13,7 @@ import javax.inject.Singleton
 class CiceroneModule {
     private val cicerone: Cicerone<Router> = Cicerone.create()
 
+    @Singleton
     @Provides
     fun cicerone(): Cicerone<Router> = cicerone
 
