@@ -12,6 +12,7 @@ import jt.projects.gbpopularlibs.data.users.IUsersRepository
 import jt.projects.gbpopularlibs.data.users.UsersRepositoryRetrofitImpl
 import javax.inject.Singleton
 
+
 @Module
 class RepoModule {
 

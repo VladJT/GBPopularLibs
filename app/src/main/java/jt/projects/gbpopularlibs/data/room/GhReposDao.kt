@@ -3,6 +3,8 @@ package jt.projects.gbpopularlibs.data.room
 import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 
+
+
 @Dao
 interface GhReposDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)

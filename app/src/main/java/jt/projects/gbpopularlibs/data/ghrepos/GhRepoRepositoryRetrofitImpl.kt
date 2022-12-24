@@ -22,6 +22,7 @@ class GhRepoRepositoryRetrofitImpl(
         }
 
 
+
     private fun fetchReposFromApiByUser(user: UserEntity) =
         api.getRepos(user.login)
             .map { repos ->
