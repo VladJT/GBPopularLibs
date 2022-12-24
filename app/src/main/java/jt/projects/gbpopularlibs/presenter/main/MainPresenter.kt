@@ -3,11 +3,13 @@ package jt.projects.gbpopularlibs.presenter.main
 import androidx.fragment.app.FragmentManager
 import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.Screen
+import dagger.hilt.android.AndroidEntryPoint
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainPresenter(val fragmentManager: FragmentManager) :
     MvpPresenter<MainView>() {
 

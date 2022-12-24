@@ -2,6 +2,7 @@ package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
 import com.github.terrakok.cicerone.Router
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
@@ -19,6 +20,7 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
+@AndroidEntryPoint
 class UsersPresenter : MvpPresenter<UsersView>() {
     @Inject
     lateinit var usersRepo: IUsersRepository

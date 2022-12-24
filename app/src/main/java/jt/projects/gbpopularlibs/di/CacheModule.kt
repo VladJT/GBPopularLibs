@@ -3,6 +3,8 @@ package jt.projects.gbpopularlibs.di
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.BuildConfig
 import jt.projects.gbpopularlibs.data.ghrepos.GhReposCacheRoomImpl
@@ -13,6 +15,7 @@ import jt.projects.gbpopularlibs.data.users.UsersCacheRoomImpl
 import javax.inject.Singleton
 
 @Module
+@InstallIn(SingletonComponent::class)
 class CacheModule {
     /**
      * ROOM DATABASE

@@ -11,6 +11,7 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
@@ -26,7 +27,7 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 
-
+@AndroidEntryPoint
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
 
@@ -43,7 +44,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     val presenter by moxyPresenter {
         MainPresenter(this.supportFragmentManager).apply {
-            App.instance.appComponent.inject(this)
+
         }
     }
 
@@ -73,7 +74,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             printLog("RxJavaPlugins error: ${it.message}".addTime())
         }
 
-        App.instance.appComponent.inject(this)
+    
 
         networkStatus.isOnline().subscribe() {
             runOnUiThread {

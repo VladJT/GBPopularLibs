@@ -1,6 +1,7 @@
 package jt.projects.gbpopularlibs.presenter.profile
 
 import com.github.terrakok.cicerone.Router
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.Disposable
 import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
@@ -18,6 +19,7 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
+@AndroidEntryPoint
 class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
     @Inject
     lateinit var usersGHReposRepo: IGhReposRepository

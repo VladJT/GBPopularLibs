@@ -2,6 +2,8 @@ package jt.projects.gbpopularlibs.di
 
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.data.ghrepos.GhRepoRepositoryRetrofitImpl
 import jt.projects.gbpopularlibs.data.ghrepos.IGhReposCache
@@ -14,6 +16,7 @@ import javax.inject.Singleton
 
 
 @Module
+@InstallIn(SingletonComponent::class)
 class RepoModule {
 
     @Singleton
