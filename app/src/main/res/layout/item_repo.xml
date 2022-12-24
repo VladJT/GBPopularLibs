@@ -10,16 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/repo_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="#DCEDED"
             android:text="Repo name: "
             android:textSize="@dimen/rv_item_text_size_small"
-            android:background="#DCEDED"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

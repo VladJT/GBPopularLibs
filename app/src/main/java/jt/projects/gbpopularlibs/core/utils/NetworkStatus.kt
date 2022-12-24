@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class NetworkStatus : INetworkStatus {
     @Inject
-    lateinit var connectivityManager : ConnectivityManager
+    lateinit var connectivityManager: ConnectivityManager
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 

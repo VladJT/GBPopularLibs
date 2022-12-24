@@ -17,7 +17,11 @@ class RepoModule {
 
     @Singleton
     @Provides
-    fun usersRepo(networkStatus: INetworkStatus, cacheSource: IUsersCache, api: GithubAPI): IUsersRepository =
+    fun usersRepo(
+        networkStatus: INetworkStatus,
+        cacheSource: IUsersCache,
+        api: GithubAPI
+    ): IUsersRepository =
         UsersRepositoryRetrofitImpl(networkStatus, cacheSource, api)
 
     @Singleton

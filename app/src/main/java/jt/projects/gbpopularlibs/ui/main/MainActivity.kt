@@ -3,7 +3,6 @@ package jt.projects.gbpopularlibs.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,7 +55,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         super.onCreate(savedInstanceState)
         init()
     }
-
 
 
     fun init() {

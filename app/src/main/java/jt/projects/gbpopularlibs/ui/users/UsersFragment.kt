@@ -1,17 +1,14 @@
 package jt.projects.gbpopularlibs.ui.users
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import jt.projects.gbpopularlibs.App
-import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
@@ -47,7 +44,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
 
     override fun init() {
-             adapter = UsersRVAdapter(presenter.usersListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter)
         binding.rvUsers.let { rv ->
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = adapter

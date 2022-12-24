@@ -7,7 +7,7 @@ import jt.projects.gbpopularlibs.data.counters.CountersRepository
 import javax.inject.Inject
 
 class CounterViewModel() : IViewModel {
-    val model = CountersRepository()
+    private val model = CountersRepository()
     val countersData: LiveData<List<Int>> = MutableLiveData()
     val singleEventData: LiveData<String> = SingleEventLiveData()
 
