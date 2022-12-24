@@ -20,6 +20,7 @@ import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
+
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!

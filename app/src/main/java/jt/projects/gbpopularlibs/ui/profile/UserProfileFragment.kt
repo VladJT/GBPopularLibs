@@ -64,6 +64,7 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     }
 
 
+
     override fun onPause() {
         super.onPause()
         (requireActivity() as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)

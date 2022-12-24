@@ -10,6 +10,7 @@ import jt.projects.gbpopularlibs.ui.main.MainActivity
 import jt.projects.gbpopularlibs.viewmodel.CounterViewModel
 import javax.inject.Singleton
 
+
 @Singleton
 @Component(
     modules = [AppModule::class, CiceroneModule::class, NetworkModule::class, CacheModule::class,

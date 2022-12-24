@@ -3,6 +3,7 @@ package jt.projects.gbpopularlibs.domain.entities
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
+
 data class UserDTO(
     @Expose
     val avatar_url: String,
