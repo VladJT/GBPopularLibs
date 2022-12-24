@@ -7,7 +7,6 @@ import jt.projects.gbpopularlibs.databinding.ItemRepoBinding
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
 
-
 class UserProfileRVAdapter(val presenter: UserProfilePresenter) :
     RecyclerView.Adapter<UserProfileRVAdapter.ViewHolder>() {
 

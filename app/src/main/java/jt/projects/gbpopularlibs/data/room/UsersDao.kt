@@ -4,6 +4,7 @@ import androidx.room.*
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
 
+
 /**
  *  Dao — это интерфейс, содержащий методы для взаимодействия с конкретной таблицей.
  */

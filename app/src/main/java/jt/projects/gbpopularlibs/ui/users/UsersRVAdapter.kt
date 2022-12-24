@@ -8,7 +8,6 @@ import jt.projects.gbpopularlibs.databinding.ItemUserBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.users.IUserListPresenter
 
-
 class UsersRVAdapter(val presenter: IUserListPresenter) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 

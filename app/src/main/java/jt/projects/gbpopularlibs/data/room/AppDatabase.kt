@@ -6,6 +6,7 @@ import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
 
+
 //Это абстрактный класс, у которого должна быть определена аннотация @Database со всеми
 //табличными объектами. В нашем случае это массив всего с одной таблицей. Версию БД указываем в
 //version. Обязательно увеличиваем версию при изменении структуры БД. Параметр exportSchema

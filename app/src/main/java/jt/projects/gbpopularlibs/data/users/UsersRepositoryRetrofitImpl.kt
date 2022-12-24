@@ -6,6 +6,7 @@ import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.data.retrofit.GithubAPI
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
+
 class UsersRepositoryRetrofitImpl(
     private val networkStatus: INetworkStatus,
     private val cacheImpl: IUsersCache,
