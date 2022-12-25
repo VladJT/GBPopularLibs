@@ -20,7 +20,6 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-@AndroidEntryPoint
 class UsersPresenter : MvpPresenter<UsersView>() {
     @Inject
     lateinit var usersRepo: IUsersRepository

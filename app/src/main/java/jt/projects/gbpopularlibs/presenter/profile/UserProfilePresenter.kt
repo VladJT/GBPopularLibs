@@ -19,7 +19,6 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-@AndroidEntryPoint
 class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
     @Inject
     lateinit var usersGHReposRepo: IGhReposRepository

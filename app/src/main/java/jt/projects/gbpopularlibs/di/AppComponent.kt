@@ -7,7 +7,7 @@ import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
-import jt.projects.gbpopularlibs.viewmodel.CounterViewModel
+import jt.projects.gbpopularlibs.ui.viewmodel.CounterViewModel
 import javax.inject.Singleton
 
 // если в компоненте есть хотя бы 1 Singleton, то и компонент обязаны объявить как Singleton

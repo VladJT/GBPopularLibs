@@ -15,7 +15,6 @@ class CounterPresenter() : MvpPresenter<CounterView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        App.instance.appComponent.inject(this)
     }
 
     fun counter1Click() {

@@ -19,9 +19,5 @@ class NetworkModule {
     @Provides
     fun networkStatus(): INetworkStatus = NetworkStatus()
 
-    @Singleton
-    @Provides
-    fun connectivityManager(app: App): ConnectivityManager =
-        app.applicationContext
-            .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+
 }

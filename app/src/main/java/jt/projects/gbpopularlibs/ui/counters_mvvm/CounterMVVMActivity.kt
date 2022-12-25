@@ -5,14 +5,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.databinding.FragmentCountersMvvmBinding
-import jt.projects.gbpopularlibs.viewmodel.CounterViewModel
+import jt.projects.gbpopularlibs.ui.viewmodel.CounterViewModel
 
 class CounterMVVMActivity : AppCompatActivity() {
 
     private lateinit var binding: FragmentCountersMvvmBinding
 
     private var viewModel: CounterViewModel = CounterViewModel().apply {
-        App.instance.appComponent.inject(this)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

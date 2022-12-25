@@ -10,22 +10,21 @@ import jt.projects.gbpopularlibs.App
 import javax.inject.Inject
 
 class NetworkStatus : INetworkStatus {
-    @Inject
-    lateinit var connectivityManager: ConnectivityManager
+//    @Inject
+//    lateinit var connectivityManager: ConnectivityManager
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
 
     init {
-        App.instance.appComponent.inject(this)
         statusSubject.onNext(false)
         val request = NetworkRequest.Builder().build()
-        connectivityManager.registerNetworkCallback(
-            request,
-            object : ConnectivityManager.NetworkCallback() {
-                override fun onAvailable(network: Network) = statusSubject.onNext(true)
-                override fun onUnavailable() = statusSubject.onNext(false)
-                override fun onLost(network: Network) = statusSubject.onNext(false)
-            })
+//        connectivityManager.registerNetworkCallback(
+//            request,
+//            object : ConnectivityManager.NetworkCallback() {
+//                override fun onAvailable(network: Network) = statusSubject.onNext(true)
+//                override fun onUnavailable() = statusSubject.onNext(false)
+//                override fun onLost(network: Network) = statusSubject.onNext(false)
+//            })
     }
 
     override fun isOnline(): Observable<Boolean> = statusSubject

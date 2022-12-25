@@ -1,4 +1,4 @@
-package jt.projects.gbpopularlibs.viewmodel
+package jt.projects.gbpopularlibs.ui.viewmodel
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
