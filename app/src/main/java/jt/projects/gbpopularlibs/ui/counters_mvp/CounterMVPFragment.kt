@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.databinding.FragmentCountersMvpBinding
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import org.koin.android.ext.android.inject
 
 class CounterMVPFragment : MvpAppCompatFragment(), BackButtonListener, CounterView {
 
     private var _binding: FragmentCountersMvpBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter { CounterPresenter() }
+    private val router : Router by inject()
+
+    val presenter by moxyPresenter { CounterPresenter(router) }
 
     companion object {
         fun newInstance() = CounterMVPFragment()

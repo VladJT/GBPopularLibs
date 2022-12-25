@@ -8,13 +8,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.addTime
@@ -23,18 +24,16 @@ import jt.projects.gbpopularlibs.presenter.main.MainPresenter
 import jt.projects.gbpopularlibs.ui.counters_mvvm.CounterMVVMActivity
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
-import javax.inject.Inject
-
+import org.koin.android.ext.android.inject
 
 
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
 
-    @Inject
-    lateinit var navHolder: NavigatorHolder
-
-    @Inject
-    lateinit var networkStatus: INetworkStatus
+    private val navHolder: NavigatorHolder by inject()
+    private val networkStatus: INetworkStatus by inject()
+    private val router: Router by inject()
+    private val screens: IScreens by inject()
 
     private val navigator = AppNavigator(this, R.id.fragment_container)
 
@@ -42,8 +41,8 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     private var logRecView: RecyclerView? = null
 
     val presenter by moxyPresenter {
-        MainPresenter(this.supportFragmentManager).apply {
-            App.instance.appComponent.inject(this)
+        MainPresenter(router, screens).apply {
+            //     App.instance.appComponent.inject(this)
         }
     }
 
@@ -73,7 +72,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             printLog("RxJavaPlugins error: ${it.message}".addTime())
         }
 
-        App.instance.appComponent.inject(this)
 
         networkStatus.isOnline().subscribe() {
             runOnUiThread {

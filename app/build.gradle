@@ -91,7 +91,11 @@ dependencies {
     kapt 'androidx.room:room-compiler:2.4.3'
     implementation 'androidx.room:room-runtime:2.4.3'
 
-    // DAGGER 2
-    kapt 'com.google.dagger:dagger-compiler:2.40'
-    implementation 'com.google.dagger:dagger:2.40'
+    //implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.5.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
+
+    // Koin
+    implementation 'io.insert-koin:koin-core:3.2.0'
+    implementation 'io.insert-koin:koin-android:3.2.0'
+
 }

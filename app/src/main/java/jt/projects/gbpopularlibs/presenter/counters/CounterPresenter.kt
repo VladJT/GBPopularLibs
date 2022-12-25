@@ -5,17 +5,13 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.data.counters.CountersRepository
 import jt.projects.gbpopularlibs.ui.counters_mvp.CounterView
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class CounterPresenter() : MvpPresenter<CounterView>() {
+class CounterPresenter(private val router: Router) : MvpPresenter<CounterView>() {
     private val model = CountersRepository()
 
-    @Inject
-    lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
-        App.instance.appComponent.inject(this)
     }
 
     fun counter1Click() {

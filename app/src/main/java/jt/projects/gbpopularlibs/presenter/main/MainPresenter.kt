@@ -6,16 +6,10 @@ import com.github.terrakok.cicerone.Screen
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
-import javax.inject.Inject
 
-class MainPresenter(val fragmentManager: FragmentManager) :
+class MainPresenter(private val router: Router, private val screens: IScreens) :
     MvpPresenter<MainView>() {
 
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var screens: IScreens
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -35,9 +29,9 @@ class MainPresenter(val fragmentManager: FragmentManager) :
     }
 
     private fun showScreen(screen: Screen) {
-        val f = fragmentManager.findFragmentByTag(screen.screenKey)
-        if (f == null) {
+       // val f = fragmentManager.findFragmentByTag(screen.screenKey)
+    //    if (f == null) {
             router.navigateTo(screen, true)
-        } else router.backTo(screen)
+     //   } else router.backTo(screen)
     }
 }

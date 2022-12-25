@@ -13,21 +13,16 @@ import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
 import moxy.MvpPresenter
-import javax.inject.Inject
 
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter : MvpPresenter<UsersView>() {
-    @Inject
-    lateinit var usersRepo: IUsersRepository
-
-    @Inject
-    lateinit var router: Router
-
-    @Inject
-    lateinit var screens: IScreens
+class UsersPresenter(
+    private val router: Router,
+    private val screens: IScreens,
+    private val usersRepo: IUsersRepository
+) : MvpPresenter<UsersView>() {
 
     private val compositeDisposable = CompositeDisposable()
 

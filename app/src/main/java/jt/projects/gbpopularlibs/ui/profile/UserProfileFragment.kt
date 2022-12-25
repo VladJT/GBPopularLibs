@@ -9,15 +9,18 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
+import jt.projects.gbpopularlibs.data.ghrepos.IGhReposRepository
 import jt.projects.gbpopularlibs.databinding.FragmentUserProfileBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import org.koin.android.ext.android.inject
 
 
 class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
@@ -26,10 +29,11 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
     private val binding get() = _binding!!
     private var adapter: UserProfileRVAdapter? = null
 
+    private val router : Router by inject()
+    private val usersGHReposRepo : IGhReposRepository by inject()
+
     val presenter by moxyPresenter {
-        UserProfilePresenter(getUserEntity()).apply {
-            App.instance.appComponent.inject(this)
-        }
+        UserProfilePresenter(getUserEntity(), router,  usersGHReposRepo)
     }
 
     private fun getUserEntity(): UserEntity {
