@@ -14,7 +14,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun networkStatus(): INetworkStatus = NetworkStatus()
+    fun networkStatus(appContext: Context): INetworkStatus = NetworkStatus(appContext)
 
     @Singleton
     @Provides

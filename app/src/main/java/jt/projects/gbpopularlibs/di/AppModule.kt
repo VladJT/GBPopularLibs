@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.di
 
+import android.content.Context
 import dagger.Module
 import dagger.Provides
 import jt.projects.gbpopularlibs.App
@@ -14,4 +15,8 @@ class AppModule(val app: App) {
     fun app(): App {
         return app
     }
+
+    @Singleton
+    @Provides
+    fun appContext(app: App): Context = app.applicationContext
 }
