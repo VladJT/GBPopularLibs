@@ -1,6 +1,13 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.GBPopularLibs" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.GBPopularLibs" parent="Theme.AppCompat.Light">
+
+        <!-- 1.Темная тема начиная с Q;
+        2. Экономия батареи;
+        3. Можно игнорировать (DayNight Theme);
+        4. Быстрая имплементация: Force Dark в Developer Settings-->
+        <item name="android:forceDarkAllowed">true</item>
+
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
