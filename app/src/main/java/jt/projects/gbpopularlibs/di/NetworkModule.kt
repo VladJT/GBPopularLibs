@@ -9,6 +9,7 @@ import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import javax.inject.Singleton
 
+
 @Module
 class NetworkModule {
 

@@ -12,6 +12,7 @@ import jt.projects.gbpopularlibs.data.users.IUsersCache
 import jt.projects.gbpopularlibs.data.users.UsersCacheRoomImpl
 import javax.inject.Singleton
 
+
 @Module
 class CacheModule {
     /**
