@@ -7,6 +7,7 @@ import jt.projects.gbpopularlibs.App
 import javax.inject.Singleton
 
 
+
 @Module
 class AppModule(val app: App) {
 

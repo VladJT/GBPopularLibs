@@ -9,6 +9,7 @@ import jt.projects.gbpopularlibs.core.nav.AndroidScreens
 import jt.projects.gbpopularlibs.core.nav.IScreens
 import javax.inject.Singleton
 
+
 @Module
 class CiceroneModule {
     private val cicerone: Cicerone<Router> = Cicerone.create()

@@ -8,7 +8,7 @@ import jt.projects.gbpopularlibs.ui.main.MainView
 import moxy.MvpPresenter
 import javax.inject.Inject
 
-class MainPresenter(val fragmentManager: FragmentManager) :
+class MainPresenter(private val fragmentManager: FragmentManager) :
     MvpPresenter<MainView>() {
 
     @Inject
