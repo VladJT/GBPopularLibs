@@ -1,7 +1,6 @@
 package jt.projects.gbpopularlibs.presenter.profile
 
 import com.github.terrakok.cicerone.Router
-import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.disposables.Disposable
 import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
@@ -12,19 +11,16 @@ import jt.projects.gbpopularlibs.ui.profile.RepoItemView
 import jt.projects.gbpopularlibs.ui.profile.UserProfileRVAdapter
 import jt.projects.gbpopularlibs.ui.profile.UserProfileView
 import moxy.MvpPresenter
-import javax.inject.Inject
-
 
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfileView>() {
-    @Inject
-    lateinit var usersGHReposRepo: IGhReposRepository
-
-    @Inject
-    lateinit var router: Router
+class UserProfilePresenter(
+    val userEntity: UserEntity,
+    private val router: Router,
+    private val usersGHReposRepo: IGhReposRepository
+) : MvpPresenter<UserProfileView>() {
 
     private var disposable: Disposable? = null
 

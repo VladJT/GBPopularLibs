@@ -10,8 +10,8 @@ import javax.inject.Inject
 class CounterPresenter() : MvpPresenter<CounterView>() {
     private val model = CountersRepository()
 
-    @Inject
-    lateinit var router: Router
+//    @Inject
+//    lateinit var router: Router
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
@@ -33,7 +33,7 @@ class CounterPresenter() : MvpPresenter<CounterView>() {
     }
 
     fun backPressed(): Boolean {
-        router.exit()
+ //       router.exit()
         return true
     }
 }

@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import com.github.terrakok.cicerone.androidx.AppNavigator
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
-import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.addTime
@@ -37,15 +38,20 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     @Inject
     lateinit var networkStatus: INetworkStatus
 
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+
     private val navigator = AppNavigator(this, R.id.fragment_container)
 
     private val logAdapter: LogRVAdaper by lazy { LogRVAdaper() }
     private var logRecView: RecyclerView? = null
 
     val presenter by moxyPresenter {
-        MainPresenter(this.supportFragmentManager).apply {
-
-        }
+        MainPresenter(this.supportFragmentManager, router, screens)
     }
 
     //Определим переменную типа BottomSheetBehaviour. В качестве generic передаём тип контейнера
@@ -74,7 +80,7 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             printLog("RxJavaPlugins error: ${it.message}".addTime())
         }
 
-    
+
 
         networkStatus.isOnline().subscribe() {
             runOnUiThread {

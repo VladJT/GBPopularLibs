@@ -5,6 +5,7 @@ import android.net.ConnectivityManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
@@ -17,7 +18,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun networkStatus(): INetworkStatus = NetworkStatus()
+    fun networkStatus(@ApplicationContext appContext: Context): INetworkStatus = NetworkStatus(appContext)
 
 
 }

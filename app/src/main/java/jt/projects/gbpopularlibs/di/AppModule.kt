@@ -14,12 +14,12 @@ import javax.inject.Singleton
 
 
 
-@Module
-@InstallIn(SingletonComponent::class)
-class AppModule //@AssistedInject constructor(@Assisted val app: App) {
-{
-    @Provides
-    fun app(): App {
-        return App.instance
-    }
-}
+//@Module
+//@InstallIn(SingletonComponent::class)
+//class AppModule //@AssistedInject constructor(@Assisted val app: App) {
+//{
+//    @Provides
+//    fun app(): App {
+//        return App.instance
+//    }
+//}

@@ -8,25 +8,37 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.AndroidEntryPoint
-import jt.projects.gbpopularlibs.App
+import dagger.hilt.android.WithFragmentBindings
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
+import jt.projects.gbpopularlibs.core.nav.IScreens
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
+import jt.projects.gbpopularlibs.data.users.IUsersRepository
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
+import javax.inject.Inject
 
 @AndroidEntryPoint
+@WithFragmentBindings
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
-    val presenter by moxyPresenter {
-        UsersPresenter().apply {
+    @Inject
+    lateinit var usersRepo: IUsersRepository
 
-        }
+    @Inject
+    lateinit var router: Router
+
+    @Inject
+    lateinit var screens: IScreens
+
+    val presenter by moxyPresenter {
+        UsersPresenter(router, screens, usersRepo)
     }
 
     var adapter: UsersRVAdapter? = null
