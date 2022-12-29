@@ -8,7 +8,7 @@ import jt.projects.gbpopularlibs.databinding.ItemUserBinding
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.users.IUserListPresenter
 
-class UsersRVAdapter(val presenter: IUserListPresenter) :
+class UsersRVAdapter(val presenter: IUserListPresenter, val viewState: IUsersFragmentView) :
     RecyclerView.Adapter<UsersRVAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -44,7 +44,32 @@ class UsersRVAdapter(val presenter: IUserListPresenter) :
                     .into(binding.ivAvatar)
 
             }
+            binding.buttonUp.setOnClickListener { moveUp() }
+            binding.buttonDown.setOnClickListener { moveDown() }
         }
 
+        private fun moveUp() {
+            val currentPosition = layoutPosition
+            if (currentPosition > 0) {
+                val data = presenter.getData()
+                val curData = data[currentPosition]
+                data.removeAt(currentPosition)
+                data.add(currentPosition - 1, curData)
+                notifyItemMoved(currentPosition, currentPosition - 1)
+                viewState.scrollUsersList(currentPosition - 1)
+            }
+        }
+
+        private fun moveDown() {
+            val currentPosition = layoutPosition
+            if (currentPosition < presenter.getCount() - 1) {
+                val data = presenter.getData()
+                val curData = data[currentPosition]
+                data.removeAt(currentPosition)
+                data.add(currentPosition + 1, curData)
+                notifyItemMoved(currentPosition, currentPosition + 1)
+                viewState.scrollUsersList(currentPosition + 1)
+            }
+        }
     }
 }

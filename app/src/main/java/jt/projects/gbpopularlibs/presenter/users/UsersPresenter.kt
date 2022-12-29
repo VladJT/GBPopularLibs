@@ -37,6 +37,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
         override var itemClickListener: ((UserItemView) -> Unit)? = null
 
         override fun getCount() = users.size
+        override fun getData(): MutableList<UserEntity> = users
 
         override fun bindView(view: UserItemView) {
             val user = users[view.pos]

@@ -17,9 +17,10 @@ import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 
-class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
+class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUsersFragmentView {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
+
 
     val presenter by moxyPresenter {
         UsersPresenter().apply {
@@ -44,7 +45,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
 
     override fun init() {
-        adapter = UsersRVAdapter(presenter.usersListPresenter)
+        adapter = UsersRVAdapter(presenter.usersListPresenter, this)
         binding.rvUsers.let { rv ->
             rv.layoutManager = LinearLayoutManager(context)
             rv.adapter = adapter
@@ -77,6 +78,12 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
         super.onDestroy()
         _binding = null
         presenter.clear()
+    }
+
+    override fun scrollUsersList(position: Int) {
+        adapter?.let {
+            binding.rvUsers.scrollToPosition(position)
+        }
     }
 
 }
