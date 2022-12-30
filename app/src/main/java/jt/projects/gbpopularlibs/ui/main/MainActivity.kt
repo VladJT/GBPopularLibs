@@ -26,7 +26,6 @@ import moxy.ktx.moxyPresenter
 import javax.inject.Inject
 
 
-
 class MainActivity : MvpAppCompatActivity(), MainView {
     private lateinit var binding: ActivityMainBinding
 

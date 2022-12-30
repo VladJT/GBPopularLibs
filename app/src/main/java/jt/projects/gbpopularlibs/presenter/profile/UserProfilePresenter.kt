@@ -14,7 +14,6 @@ import moxy.MvpPresenter
 import javax.inject.Inject
 
 
-
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */

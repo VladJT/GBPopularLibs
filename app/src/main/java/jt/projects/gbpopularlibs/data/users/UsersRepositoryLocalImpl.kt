@@ -5,7 +5,6 @@ import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import java.util.concurrent.TimeUnit
 
 
-
 private const val DATA_LOADING_DELAY = 2_000L
 
 class UsersRepoLocalImpl : IUsersRepository {
