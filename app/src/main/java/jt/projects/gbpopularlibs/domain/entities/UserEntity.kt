@@ -11,5 +11,6 @@ data class UserEntity(
     val login: String = "no_name",
     @PrimaryKey val id: Int = -1,
     val avatar_url: String? = null,
-    val repos_url: String? = null
+    val repos_url: String? = null,
+    val html_url: String? = null
 ) : Parcelable

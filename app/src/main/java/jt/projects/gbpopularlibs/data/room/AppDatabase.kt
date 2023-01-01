@@ -13,7 +13,7 @@ import jt.projects.gbpopularlibs.domain.entities.UserEntity
 //совершенно необязательно, но в коммерческих проектах — практика хорошая. В классе также
 //требуется определить метод, возвращающий объект доступа к данным
 // arrayOf(WeatherEntity::class, WeatherHistoryEntity::class)
-@Database(entities = [UserEntity::class, GhRepoEntity::class], version = 5)
+@Database(entities = [UserEntity::class, GhRepoEntity::class], version = 6)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun usersDao(): UsersDao
     abstract fun ghReposDao(): GhReposDao

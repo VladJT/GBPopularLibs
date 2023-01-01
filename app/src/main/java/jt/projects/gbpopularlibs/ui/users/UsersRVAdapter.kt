@@ -35,8 +35,9 @@ class UsersRVAdapter(val presenter: IUserListPresenter, val viewState: IUsersFra
         override var pos = -1
 
         override fun bind(userEntity: UserEntity) {
-            binding.tvLogin.text = userEntity.login
-            binding.tvUid.text = userEntity.id.toString()
+            binding.tvLogin.text = "${userEntity.login}"
+            binding.tvUid.text = "id = ${userEntity.id}"
+            binding.tvHtmlUrl.text = userEntity.html_url
             userEntity.avatar_url?.let {
                 //    binding.ivAvatar.load(it)
                 Glide.with(binding.root.context)

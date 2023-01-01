@@ -22,7 +22,8 @@ class CacheModule {
     fun database(app: App): AppDatabase = Room.databaseBuilder(
         app,
         AppDatabase::class.java, BuildConfig.DB_NAME
-    ).build()
+    ).fallbackToDestructiveMigration()
+        .build()
 
 
     @Singleton
