@@ -16,7 +16,7 @@ class AppModule(val app: App) {
         return app
     }
 
-    @Singleton
-    @Provides
-    fun appContext(app: App): Context = app.applicationContext
+//    @Singleton
+//    @Provides
+//    fun appContext(app: App): Context = app.applicationContext
 }

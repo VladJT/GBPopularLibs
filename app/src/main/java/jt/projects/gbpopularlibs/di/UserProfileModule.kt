@@ -27,6 +27,9 @@ import javax.inject.Scope
 @Retention(AnnotationRetention.RUNTIME)
 annotation class UserProfileScope
 
+interface IUserProfileScopeContainer {
+    fun userProfileSCRelease()
+}
 
 // Теперь создадим UserProfileModule и вынесем в него то, что требуется только на экране UserProfile
 @Module
@@ -50,14 +53,7 @@ class UserProfileModule {
 
 
 @UserProfileScope
-@Subcomponent(
-    modules = [UserProfileModule::class]
-)
+@Subcomponent(modules = [UserProfileModule::class])
 interface UserProfileSubcomponent {
-    fun inject(usersPresenter: UsersPresenter)
     fun inject(userProfilePresenter: UserProfilePresenter)
-}
-
-interface IUserProfileScopeContainer {
-    fun userProfileScopeContainerRelease()
 }

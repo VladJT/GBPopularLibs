@@ -4,8 +4,6 @@ import dagger.Component
 import jt.projects.gbpopularlibs.core.utils.NetworkStatus
 import jt.projects.gbpopularlibs.presenter.counters.CounterPresenter
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
-import jt.projects.gbpopularlibs.presenter.profile.UserProfilePresenter
-import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
 import jt.projects.gbpopularlibs.viewmodel.CounterViewModel
 import javax.inject.Singleton
@@ -18,7 +16,7 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
-    fun userListSubcomponent() : UserListSubcomponent
+    fun userListSubcomponent() : UsersSubcomponent
 
     fun inject(counterPresenter: CounterPresenter)
     fun inject(counterViewModel: CounterViewModel)

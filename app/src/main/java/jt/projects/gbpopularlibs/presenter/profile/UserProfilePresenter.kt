@@ -6,7 +6,6 @@ import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import jt.projects.gbpopularlibs.data.ghrepos.IGhReposRepository
 import jt.projects.gbpopularlibs.di.IUserProfileScopeContainer
-import jt.projects.gbpopularlibs.di.UserProfileSubcomponent
 import jt.projects.gbpopularlibs.domain.entities.GhRepoEntity
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.profile.RepoItemView
@@ -66,7 +65,6 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
             })
     }
 
-
     private fun onError(e: Throwable) {
         e.message?.let { viewState.showInfo(it.addTime()) }
         viewState.showLoading(false)
@@ -90,7 +88,7 @@ class UserProfilePresenter(val userEntity: UserEntity) : MvpPresenter<UserProfil
     }
 
     override fun onDestroy() {
-        userProfileScopeContainer.userProfileScopeContainerRelease()
+        userProfileScopeContainer.userProfileSCRelease()
         super.onDestroy()
     }
 }

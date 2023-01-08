@@ -1,15 +1,13 @@
 package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
+import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import jt.projects.gbpopularlibs.core.nav.IScreens
-import jt.projects.gbpopularlibs.core.utils.USER_ENTITY_BUNDLE_KEY
-import jt.projects.gbpopularlibs.core.utils.addTime
-import jt.projects.gbpopularlibs.core.utils.disposeBy
-import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
+import jt.projects.gbpopularlibs.core.utils.*
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
-import jt.projects.gbpopularlibs.di.IUserScopeContainer
+import jt.projects.gbpopularlibs.di.IUsersScopeContainer
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
@@ -31,7 +29,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     lateinit var screens: IScreens
 
     @Inject
-    lateinit var userScopeContainer: IUserScopeContainer
+    lateinit var userScopeContainer: IUsersScopeContainer
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -102,7 +100,7 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     }
 
     override fun onDestroy() {
-        userScopeContainer.userScopeContainerRelease()
+        userScopeContainer.usersSCRelease()
         super.onDestroy()
     }
 }

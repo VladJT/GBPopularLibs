@@ -1,5 +1,6 @@
 package jt.projects.gbpopularlibs.di
 
+import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
@@ -17,15 +18,20 @@ import javax.inject.Scope
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class UserScope
+annotation class UsersScope
+
+interface IUsersScopeContainer {
+    fun usersSCRelease()
+}
 
 
 @Module
-class UserListModule {
+class UsersModule {
+    @UsersScope
     @Provides
     fun usersCache(database: AppDatabase): IUsersCache = UsersCacheRoomImpl(database)
 
-    @UserScope
+    @UsersScope
     @Provides
     fun usersRepo(
         networkStatus: INetworkStatus,
@@ -34,23 +40,15 @@ class UserListModule {
     ): IUsersRepository =
         UsersRepositoryRetrofitImpl(networkStatus, cacheSource, api)
 
-    @UserScope
+    @UsersScope
     @Provides
-    open fun scopeContainer(app: App): IUserScopeContainer = app
+    open fun scopeContainer(app: App): IUsersScopeContainer = app
 }
 
-@UserScope
-@Subcomponent(
-    modules = [
-        UserListModule::class
-    ]
-)
-interface UserListSubcomponent {
+
+@UsersScope
+@Subcomponent(modules = [UsersModule::class])
+interface UsersSubcomponent {
     fun userProfileSubcomponent(): UserProfileSubcomponent
     fun inject(usersPresenter: UsersPresenter)
-}
-
-
-interface IUserScopeContainer {
-    fun userScopeContainerRelease()
 }

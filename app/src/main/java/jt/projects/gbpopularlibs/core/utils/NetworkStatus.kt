@@ -9,7 +9,7 @@ import io.reactivex.rxjava3.subjects.BehaviorSubject
 import jt.projects.gbpopularlibs.App
 import javax.inject.Inject
 
-class NetworkStatus() : INetworkStatus {
+class NetworkStatus : INetworkStatus {
     @Inject
     lateinit var connectivityManager: ConnectivityManager
 

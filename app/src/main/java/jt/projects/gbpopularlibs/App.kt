@@ -1,11 +1,14 @@
 package jt.projects.gbpopularlibs
 
 import android.app.Application
+import android.util.Log
+import jt.projects.gbpopularlibs.core.utils.DEBUG_TAG
 import jt.projects.gbpopularlibs.di.*
 
-class App : Application(), IUserScopeContainer, IUserProfileScopeContainer {
-    var userListSubcomponent: UserListSubcomponent? = null
+class App : Application(), IUsersScopeContainer, IUserProfileScopeContainer {
+    var usersSubcomponent: UsersSubcomponent? = null
         private set
+
     var userProfileSubcomponent: UserProfileSubcomponent? = null
         private set
 
@@ -22,21 +25,25 @@ class App : Application(), IUserScopeContainer, IUserProfileScopeContainer {
         appComponent = DaggerAppComponent.builder().appModule(AppModule(this)).build()
     }
 
-    fun initUserListSubcomponent() = appComponent.userListSubcomponent().also {
-        userListSubcomponent = it
+    fun initUsersSubcomponent() = appComponent.userListSubcomponent().also {
+        usersSubcomponent = it
+        Log.d(DEBUG_TAG, "UsersSubcomponent INIT")
     }
 
     fun initUserProfileSubcomponent() =
-        userListSubcomponent?.userProfileSubcomponent().also {
+        usersSubcomponent?.userProfileSubcomponent().also {
             userProfileSubcomponent = it
+            Log.d(DEBUG_TAG, "userProfileSubcomponent INIT")
         }
 
 
-    override fun userScopeContainerRelease() {
-        userListSubcomponent = null
+    override fun usersSCRelease() {
+        usersSubcomponent = null
+        Log.d(DEBUG_TAG, "usersSubcomponent RELEASE")
     }
 
-    override fun userProfileScopeContainerRelease() {
+    override fun userProfileSCRelease() {
         userProfileSubcomponent = null
+        Log.d(DEBUG_TAG, "userProfileSubcomponent RELEASE")
     }
 }

@@ -1,5 +1,8 @@
 package jt.projects.gbpopularlibs.core.utils
 
+// TAGS
+const val DEBUG_TAG = "@@@"
+
 // SCREENS
 enum class SCREENS(val ID: String) {
     USERS("USERS_SCREEN"),
