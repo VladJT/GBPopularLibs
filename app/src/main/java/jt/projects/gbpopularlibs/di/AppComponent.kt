@@ -13,14 +13,13 @@ import javax.inject.Singleton
 // если в компоненте есть хотя бы 1 Singleton, то и компонент обязаны объявить как Singleton
 @Singleton
 @Component(
-    modules = [AppModule::class, CiceroneModule::class, NetworkModule::class, CacheModule::class,
-        RepoModule::class, ApiModule::class]
+    modules = [AppModule::class, CiceroneModule::class, NetworkModule::class, RoomModule::class, ApiModule::class]
 )
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
-    fun inject(usersPresenter: UsersPresenter)
-    fun inject(userProfilePresenter: UserProfilePresenter)
+    fun userListSubcomponent() : UserListSubcomponent
+
     fun inject(counterPresenter: CounterPresenter)
     fun inject(counterViewModel: CounterViewModel)
     fun inject(networkStatus: NetworkStatus)

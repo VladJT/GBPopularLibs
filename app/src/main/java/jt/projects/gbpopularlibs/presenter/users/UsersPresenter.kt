@@ -9,6 +9,7 @@ import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.core.utils.disposeBy
 import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import jt.projects.gbpopularlibs.data.users.IUsersRepository
+import jt.projects.gbpopularlibs.di.IUserScopeContainer
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
@@ -28,6 +29,9 @@ class UsersPresenter : MvpPresenter<UsersView>() {
 
     @Inject
     lateinit var screens: IScreens
+
+    @Inject
+    lateinit var userScopeContainer: IUserScopeContainer
 
     private val compositeDisposable = CompositeDisposable()
 
@@ -95,5 +99,10 @@ class UsersPresenter : MvpPresenter<UsersView>() {
 
     fun clear() {
         compositeDisposable.dispose()
+    }
+
+    override fun onDestroy() {
+        userScopeContainer.userScopeContainerRelease()
+        super.onDestroy()
     }
 }

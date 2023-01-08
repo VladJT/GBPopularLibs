@@ -26,7 +26,8 @@
             android:id="@+id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Test login"
+            android:text="User login"
+            android:textIsSelectable="true"
             android:textSize="@dimen/rv_item_text_size"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
@@ -35,11 +36,18 @@
             android:id="@+id/tv_uid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:alpha="0.7"
-            android:text="user id"
+            android:hint="uid"
             android:textSize="@dimen/rv_item_text_size"
             app:layout_constraintStart_toStartOf="@+id/guideline4"
             app:layout_constraintTop_toBottomOf="@+id/tv_login" />
+
+        <CheckBox
+            android:id="@+id/checkbox"
+            android:button="@drawable/checkbox_selector"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/guideline4"
+            app:layout_constraintTop_toBottomOf="@+id/tv_uid" />
 
         <TextView
             android:id="@+id/tv_html_url"
@@ -47,7 +55,7 @@
             android:layout_height="wrap_content"
             android:alpha="0.7"
             android:autoLink="all"
-            android:text="http://url"
+            android:hint="http://url"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="@+id/iv_avatar"
             app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />

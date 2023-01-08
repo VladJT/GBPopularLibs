@@ -28,7 +28,9 @@ class UserProfileFragment : MvpAppCompatFragment(), UserProfileView,
 
     val presenter by moxyPresenter {
         UserProfilePresenter(getUserEntity()).apply {
-            App.instance.appComponent.inject(this)
+          //  App.instance.appComponent.inject(this)
+            App.instance.initUserProfileSubcomponent()?.inject(this)
+
         }
     }
 

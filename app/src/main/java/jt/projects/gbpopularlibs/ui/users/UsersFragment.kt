@@ -12,6 +12,7 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
 import jt.projects.gbpopularlibs.databinding.FragmentUsersBinding
+import jt.projects.gbpopularlibs.di.UserListSubcomponent
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
@@ -21,10 +22,14 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUs
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
 
+    var userListSubcomponent: UserListSubcomponent? = null
+
+
 
     val presenter by moxyPresenter {
         UsersPresenter().apply {
-            App.instance.appComponent.inject(this)
+            userListSubcomponent = App.instance.initUserListSubcomponent()
+            userListSubcomponent?.inject(this)
         }
     }
 
