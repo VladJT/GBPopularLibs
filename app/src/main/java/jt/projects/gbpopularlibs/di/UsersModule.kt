@@ -42,7 +42,7 @@ class UsersModule {
 
     @UsersScope
     @Provides
-    open fun scopeContainer(app: App): IUsersScopeContainer = app
+    fun scopeContainer(app: App): IUsersScopeContainer = app
 }
 
 

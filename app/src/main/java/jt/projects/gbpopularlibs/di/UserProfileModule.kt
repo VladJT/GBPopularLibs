@@ -48,7 +48,7 @@ class UserProfileModule {
 
     @UserProfileScope
     @Provides
-    open fun scopeContainer(app: App): IUserProfileScopeContainer = app
+    fun scopeContainer(app: App): IUserProfileScopeContainer = app
 }
 
 

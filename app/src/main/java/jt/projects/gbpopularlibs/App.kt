@@ -6,10 +6,10 @@ import jt.projects.gbpopularlibs.core.utils.DEBUG_TAG
 import jt.projects.gbpopularlibs.di.*
 
 class App : Application(), IUsersScopeContainer, IUserProfileScopeContainer {
-    var usersSubcomponent: UsersSubcomponent? = null
+    private var usersSubcomponent: UsersSubcomponent? = null
         private set
 
-    var userProfileSubcomponent: UserProfileSubcomponent? = null
+    private var userProfileSubcomponent: UserProfileSubcomponent? = null
         private set
 
 
