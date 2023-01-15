@@ -7,6 +7,7 @@ import dagger.Provides
 import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.NetworkStatus
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -18,6 +19,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
+    @Named("AndroidConnectivityManager")
     fun connectivityManager(app: App): ConnectivityManager =
         app.applicationContext
             .getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

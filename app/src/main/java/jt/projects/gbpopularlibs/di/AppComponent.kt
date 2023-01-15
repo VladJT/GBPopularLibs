@@ -16,9 +16,9 @@ import javax.inject.Singleton
 interface AppComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(mainPresenter: MainPresenter)
-    fun userListSubcomponent() : UsersSubcomponent
-
     fun inject(counterPresenter: CounterPresenter)
     fun inject(counterViewModel: CounterViewModel)
     fun inject(networkStatus: NetworkStatus)
+
+    fun userListSubcomponent() : UsersSubcomponent
 }

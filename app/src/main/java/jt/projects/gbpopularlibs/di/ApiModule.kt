@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import jt.projects.gbpopularlibs.data.retrofit.GithubAPI
 import jt.projects.gbpopularlibs.data.retrofit.RetrofitDataSourceImpl
+import javax.inject.Named
 import javax.inject.Singleton
 
 

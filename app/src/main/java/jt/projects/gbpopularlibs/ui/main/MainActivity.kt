@@ -16,7 +16,6 @@ import jt.projects.gbpopularlibs.App
 import jt.projects.gbpopularlibs.R
 import jt.projects.gbpopularlibs.core.interfaces.BackButtonListener
 import jt.projects.gbpopularlibs.core.utils.DURATION_ITEM_ANIMATOR
-import jt.projects.gbpopularlibs.core.utils.INetworkStatus
 import jt.projects.gbpopularlibs.core.utils.addTime
 import jt.projects.gbpopularlibs.databinding.ActivityMainBinding
 import jt.projects.gbpopularlibs.presenter.main.MainPresenter
@@ -31,9 +30,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
 
     @Inject
     lateinit var navHolder: NavigatorHolder
-
-    @Inject
-    lateinit var networkStatus: INetworkStatus
 
     private val navigator = AppNavigator(this, R.id.fragment_container)
 
@@ -50,6 +46,10 @@ class MainActivity : MvpAppCompatActivity(), MainView {
     //нашего BottomSheet. Этот instance будет управлять нашей нижней панелью.
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
+    override fun printLog(text: String) {
+        logAdapter.addLog(text)
+        logRecView?.smoothScrollToPosition(0)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,15 +73,9 @@ class MainActivity : MvpAppCompatActivity(), MainView {
         }
 
         App.instance.appComponent.inject(this)
-
-        networkStatus.isOnline().subscribe() {
-            runOnUiThread {
-                printLog("⚡ Internet available: $it".addTime())
-            }
-        }
     }
 
-    fun initBottomSheet() {
+    private fun initBottomSheet() {
         bottomSheetBehavior =
             BottomSheetBehavior.from(findViewById<ConstraintLayout>(R.id.bottom_sheet_container))
                 .apply { state = BottomSheetBehavior.STATE_COLLAPSED }
@@ -98,12 +92,6 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             }
         }
     }
-
-    fun printLog(text: String) {
-        logAdapter.addLog(text)
-        logRecView?.smoothScrollToPosition(0)
-    }
-
 
     /**
      * Навигатор отсоединяется в onPause и присоединяется в onResumeFragments, чтобы при переходе в
@@ -170,4 +158,5 @@ class MainActivity : MvpAppCompatActivity(), MainView {
             .setIcon(R.drawable.ic_baseline_exit_to_app_24)
             .show()
     }
+
 }

@@ -8,9 +8,11 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import jt.projects.gbpopularlibs.App
 import javax.inject.Inject
+import javax.inject.Named
 
 class NetworkStatus : INetworkStatus {
     @Inject
+    @Named("AndroidConnectivityManager")
     lateinit var connectivityManager: ConnectivityManager
 
     private val statusSubject: BehaviorSubject<Boolean> = BehaviorSubject.create()
