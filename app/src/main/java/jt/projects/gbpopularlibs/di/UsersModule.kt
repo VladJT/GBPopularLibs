@@ -15,16 +15,6 @@ import jt.projects.gbpopularlibs.data.users.UsersRepositoryRetrofitImpl
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import javax.inject.Scope
 
-
-@Scope
-@Retention(AnnotationRetention.RUNTIME)
-annotation class UsersScope
-
-interface IUsersScopeContainer {
-    fun usersSCRelease()
-}
-
-
 @Module
 class UsersModule {
     @UsersScope
@@ -43,12 +33,4 @@ class UsersModule {
     @UsersScope
     @Provides
     fun scopeContainer(app: App): IUsersScopeContainer = app
-}
-
-
-@UsersScope
-@Subcomponent(modules = [UsersModule::class])
-interface UsersSubcomponent {
-    fun userProfileSubcomponent(): UserProfileSubcomponent
-    fun inject(usersPresenter: UsersPresenter)
 }
