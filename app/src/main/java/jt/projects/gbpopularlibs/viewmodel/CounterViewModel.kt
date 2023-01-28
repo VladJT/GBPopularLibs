@@ -2,21 +2,22 @@ package jt.projects.gbpopularlibs.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.github.terrakok.cicerone.Router
 import jt.projects.gbpopularlibs.data.counters.CountersRepository
 import javax.inject.Inject
 
-class CounterViewModel() : IViewModel {
+class CounterViewModel() : ViewModel() {
     private val model = CountersRepository()
     val countersData: LiveData<List<Int>> = MutableLiveData()
     val singleEventData: LiveData<String> = SingleEventLiveData()
 
-    @Inject
-    lateinit var router: Router
+//    @Inject
+//    lateinit var router: Router
 
-    override fun onRefresh() {
-        refreshData()
-    }
+//    override fun onRefresh() {
+//        refreshData()
+//    }
 
     private fun refreshData() {
         countersData.postValue(model.getData())
@@ -38,10 +39,10 @@ class CounterViewModel() : IViewModel {
         refreshData()
     }
 
-    fun backPressed(): Boolean {
-        router.exit()
-        return true
-    }
+//    fun backPressed(): Boolean {
+//        router.exit()
+//        return true
+//    }
 
     // Live Data to MutableLiveData
     private fun <T> LiveData<T>.postValue(value: T) {
