@@ -16,7 +16,6 @@ import jt.projects.gbpopularlibs.di.UsersSubcomponent
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.main.MainActivity
 import moxy.MvpAppCompatFragment
-import moxy.ktx.moxyPresenter
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUsersFragmentView {
     private var _binding: FragmentUsersBinding? = null
@@ -25,9 +24,15 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUs
     var userListSubcomponent: UsersSubcomponent? = null
 
 
+//    val presenter by moxyPresenter {
+//        UsersPresenter().apply {
+//            userListSubcomponent = App.instance.initUsersSubcomponent()
+//            userListSubcomponent?.inject(this)
+//        }
+//    }
 
-    val presenter by moxyPresenter {
-        UsersPresenter().apply {
+    val presenter by lazy {
+        UsersPresenter(this).apply {
             userListSubcomponent = App.instance.initUsersSubcomponent()
             userListSubcomponent?.inject(this)
         }
@@ -46,6 +51,11 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUs
     ): View {
         _binding = FragmentUsersBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        presenter.onFirstViewAttach()
     }
 
 

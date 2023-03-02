@@ -1,7 +1,6 @@
 package jt.projects.gbpopularlibs.presenter.users
 
 import android.os.Bundle
-import android.util.Log
 import com.github.terrakok.cicerone.Router
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import jt.projects.gbpopularlibs.core.nav.IScreens
@@ -11,13 +10,13 @@ import jt.projects.gbpopularlibs.di.IUsersScopeContainer
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.ui.users.UserItemView
 import jt.projects.gbpopularlibs.ui.users.UsersView
-import moxy.MvpPresenter
 import javax.inject.Inject
 
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter : MvpPresenter<UsersView>() {
+class UsersPresenter(val viewState: UsersView) {
+
     @Inject
     lateinit var usersRepo: IUsersRepository
 
@@ -49,8 +48,8 @@ class UsersPresenter : MvpPresenter<UsersView>() {
     val usersListPresenter = UsersListPresenter()
 
 
-    override fun onFirstViewAttach() {
-        super.onFirstViewAttach()
+    fun onFirstViewAttach() {
+     //   super.onFirstViewAttach()
         viewState.init()
         loadData()
 
@@ -63,11 +62,11 @@ class UsersPresenter : MvpPresenter<UsersView>() {
         }
     }
 
-    private fun loadData() {
+    fun loadData() {
         viewState.showLoading(true)
 
         usersRepo.getUsers()
-            .subscribeByDefault()
+          //  .subscribeByDefault()
             .subscribe({ data ->
                 onSuccess(data)
             }, { e ->
@@ -76,12 +75,12 @@ class UsersPresenter : MvpPresenter<UsersView>() {
             .disposeBy(compositeDisposable)
     }
 
-    private fun onError(e: Throwable) {
+    fun onError(e: Throwable) {
         e.message?.let { viewState.showInfo(it.addTime()) }
         viewState.showLoading(false)
     }
 
-    private fun onSuccess(data: List<UserEntity>) {
+     fun onSuccess(data: List<UserEntity>) {
         usersListPresenter.users.clear()
         usersListPresenter.users.addAll(data)
         viewState.updateList()
@@ -98,8 +97,8 @@ class UsersPresenter : MvpPresenter<UsersView>() {
         compositeDisposable.dispose()
     }
 
-    override fun onDestroy() {
+    fun onDestroy() {
         userScopeContainer.usersSCRelease()
-        super.onDestroy()
+     //   super.onDestroy()
     }
 }
