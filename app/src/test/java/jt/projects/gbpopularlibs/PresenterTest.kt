@@ -6,8 +6,7 @@ import jt.projects.gbpopularlibs.data.users.IUsersRepository
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 import jt.projects.gbpopularlibs.presenter.users.UsersPresenter
 import jt.projects.gbpopularlibs.ui.users.UsersView
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
@@ -49,35 +48,47 @@ class PresenterTest {
     }
 
     @Test
-    fun checkData_Test() {
+    fun testRepoReturnSuccessData() {
         val result = repository.getUsers()
             .observeOn(Schedulers.io())
             .blockingGet()
         assertTrue(result.isNotEmpty())
     }
 
-    @Test //Проверим вызов метода searchGitHub() у нашего Репозитория
-    fun handleSuccess_Test() {
-        //Запускаем код, функционал которого хотим протестировать
-        presenter.onSuccess(listOf())
-        val inOrder = Mockito.inOrder(viewContract)
+    @Test
+    fun testOnSuccess() {
+        presenter.loadData()
 
-        //Убеждаемся, что все работает как надо
+        // проверяем данные
+        assertArrayEquals(RESPONSE_DATA.toTypedArray(), presenter.usersListPresenter.users.toTypedArray())
+
+        // проверяем вызовы методов viewContract
+        val inOrder = Mockito.inOrder(viewContract)
         inOrder.verify(viewContract, Mockito.times(1)).updateList()
         inOrder.verify(viewContract, Mockito.times(1)).showLoading(false)
         inOrder.verify(viewContract, Mockito.times(1)).showInfo(anyString())
     }
 
-    @Test //Проверяем работу метода handleGitHubError()
-    fun handleError_Test() {
-        //Вызываем у Презентера метод handleGitHubError()
-        presenter.onError(Throwable("some ex"))
-        //Проверяем, что у viewContract вызывается метод displayError()
-        Mockito.verify(viewContract, Mockito.times(1)).showLoading(false)
+    @Test
+    fun testOnError() {
+        val someError = RuntimeException("some Error")
+        Mockito.`when`(repository.getUsers()).thenThrow(someError)
+        try {
+            presenter.loadData()
+        } catch (e: Exception) {
+            // проверяем данные
+            assertSame(someError, e)
+            presenter.onError(e)
+        }
+
+        // проверяем вызовы методов viewContract
+        val inOrder = Mockito.inOrder(viewContract)
+        inOrder.verify(viewContract, Mockito.times(1)).showLoading(true)
+        inOrder.verify(viewContract, Mockito.times(1)).showLoading(false)
     }
 
     @Test
-    fun addition_isCorrect() {
+    fun example() {
         assertEquals(4, 2 + 2)
     }
 }
