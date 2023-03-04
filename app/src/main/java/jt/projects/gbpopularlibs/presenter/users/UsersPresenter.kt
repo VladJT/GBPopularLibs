@@ -66,7 +66,7 @@ class UsersPresenter(val viewState: UsersView) {
         viewState.showLoading(true)
 
         usersRepo.getUsers()
-          //  .subscribeByDefault()
+            //   .subscribeByDefault()
             .subscribe({ data ->
                 onSuccess(data)
             }, { e ->
@@ -76,8 +76,8 @@ class UsersPresenter(val viewState: UsersView) {
     }
 
     fun onError(e: Throwable) {
-        e.message?.let { viewState.showInfo(it.addTime()) }
         viewState.showLoading(false)
+        e.message?.let { viewState.showInfo(it.addTime()) }
     }
 
      fun onSuccess(data: List<UserEntity>) {
