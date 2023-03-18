@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 fun <T> Single<T>.subscribeByDefault(): Single<T> {
-    return this.subscribeOn(Schedulers.io())
+    return this
+        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())// для ANDROID
 }
 

@@ -3,6 +3,7 @@ package jt.projects.gbpopularlibs.data.users
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import jt.projects.gbpopularlibs.core.utils.INetworkStatus
+import jt.projects.gbpopularlibs.core.utils.subscribeByDefault
 import jt.projects.gbpopularlibs.data.retrofit.GithubAPI
 import jt.projects.gbpopularlibs.domain.entities.UserEntity
 
@@ -23,7 +24,8 @@ class UsersRepositoryRetrofitImpl(
             } else {
                 getFromDb()
             }
-        }.subscribeOn(Schedulers.io())
+        }.subscribeOn(Schedulers.io()).subscribeByDefault()
+
 
 
     private fun fetchFromApi() =
