@@ -14,6 +14,7 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.Mockito.times
+import org.mockito.Mockito.verify
 import org.mockito.MockitoAnnotations
 import org.mockito.junit.jupiter.MockitoExtension
 
@@ -36,13 +37,15 @@ class PresenterTest {
     @BeforeEach
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        presenter = UsersPresenter(viewContract)
+        presenter = UsersPresenter(viewContract, ScheduleProviderStub())
         presenter.usersRepo = repository
+
         Mockito.`when`(repository.getUsers()).thenReturn(Single.just(RESPONSE_DATA))
     }
 
     @Test
     fun loadData_Test() {
+
         presenter.loadData()
         Mockito.verify(repository, times(1)).getUsers()
     }
@@ -60,7 +63,10 @@ class PresenterTest {
         presenter.loadData()
 
         // проверяем данные
-        assertArrayEquals(RESPONSE_DATA.toTypedArray(), presenter.usersListPresenter.users.toTypedArray())
+        assertArrayEquals(
+            RESPONSE_DATA.toTypedArray(),
+            presenter.usersListPresenter.users.toTypedArray()
+        )
 
         // проверяем вызовы методов viewContract
         val inOrder = Mockito.inOrder(viewContract)
@@ -72,23 +78,23 @@ class PresenterTest {
     @Test
     fun testOnError() {
         val someError = RuntimeException("some Error")
-        Mockito.`when`(repository.getUsers()).thenThrow(someError)
-        try {
-            presenter.loadData()
-        } catch (e: Exception) {
-            // проверяем данные
-            assertSame(someError, e)
-            presenter.onError(e)
-        }
+
+        Mockito.`when`(repository.getUsers()).thenReturn(
+            Single.error(someError)
+        )
+        presenter.loadData()
 
         // проверяем вызовы методов viewContract
         val inOrder = Mockito.inOrder(viewContract)
         inOrder.verify(viewContract, Mockito.times(1)).showLoading(true)
+        inOrder.verify(viewContract, Mockito.times(1)).showError(someError.message.toString())
         inOrder.verify(viewContract, Mockito.times(1)).showLoading(false)
     }
 
     @Test
-    fun example() {
-        assertEquals(4, 2 + 2)
+    fun test_getData() {
+        presenter.loadData()
+        verify(viewContract, times(1)).showLoading(true)
+        verify(repository, times(1)).getUsers()
     }
 }

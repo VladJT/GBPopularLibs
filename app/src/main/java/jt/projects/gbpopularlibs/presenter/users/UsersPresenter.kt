@@ -15,7 +15,11 @@ import javax.inject.Inject
 /**
  *  формируем UsersPresenter для работы с UsersView и передав в него Router для навигации
  */
-class UsersPresenter(val viewState: UsersView) {
+class UsersPresenter(
+    val viewState: UsersView,
+    val appSchedulerProvider: SchedulerProvider = SearchSchedulerProvider(),
+
+    ) {
 
     @Inject
     lateinit var usersRepo: IUsersRepository
@@ -49,7 +53,7 @@ class UsersPresenter(val viewState: UsersView) {
 
 
     fun onFirstViewAttach() {
-     //   super.onFirstViewAttach()
+        //   super.onFirstViewAttach()
         viewState.init()
         loadData()
 
@@ -66,7 +70,8 @@ class UsersPresenter(val viewState: UsersView) {
         viewState.showLoading(true)
 
         usersRepo.getUsers()
-          //  .subscribeByDefault()
+            .subscribeOn(appSchedulerProvider.io())
+            .observeOn(appSchedulerProvider.ui())
             .subscribe({ data ->
                 onSuccess(data)
             }, { e ->
@@ -77,10 +82,11 @@ class UsersPresenter(val viewState: UsersView) {
 
     fun onError(e: Throwable) {
         e.message?.let { viewState.showInfo(it.addTime()) }
+        viewState.showError(e.message.toString())
         viewState.showLoading(false)
     }
 
-     fun onSuccess(data: List<UserEntity>) {
+    fun onSuccess(data: List<UserEntity>) {
         usersListPresenter.users.clear()
         usersListPresenter.users.addAll(data)
         viewState.updateList()
@@ -99,6 +105,6 @@ class UsersPresenter(val viewState: UsersView) {
 
     fun onDestroy() {
         userScopeContainer.usersSCRelease()
-     //   super.onDestroy()
+        //   super.onDestroy()
     }
 }
