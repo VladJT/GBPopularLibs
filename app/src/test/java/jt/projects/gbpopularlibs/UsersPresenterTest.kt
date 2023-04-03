@@ -81,6 +81,7 @@ class UsersPresenterTest {
     fun testOnSuccess() {
         presenter.loadData()
 
+
         // проверяем данные
         assertArrayEquals(
             RESPONSE_DATA.toTypedArray(),
