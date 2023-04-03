@@ -12,4 +12,5 @@ interface UsersView : MvpView {
 
     fun showLoading(isLoading: Boolean)//show loading frame
     fun showInfo(text: String)//snackbar
+    fun showError(error: String)
 }

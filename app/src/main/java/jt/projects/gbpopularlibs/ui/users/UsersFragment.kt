@@ -86,6 +86,10 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener, IUs
 
     override fun showInfo(text: String) = (requireActivity() as MainActivity).printLog(text)
 
+    override fun showError(error: String) {
+        showInfo(error)
+    }
+
 
     override fun backPressed() = presenter.backPressed()
 
